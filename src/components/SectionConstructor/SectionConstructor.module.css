@@ -1,0 +1,22 @@
+.section {
+  margin-top: 100px;
+}
+.list {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.uplist{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 1130px) {
+  .section {
+    margin-top: 0;
+  }
+}
+

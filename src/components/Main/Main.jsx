@@ -1,7 +1,17 @@
-import Header from '../Header/Header'
+import Header from "../Header/Header";
+import Section from "../Section/Section";
+import SectionConstructor from "../SectionConstructor/SectionConstructor";
+import styles from "./Main.module.css";
 
-export default function Main() {
+export default function Main({ ingredients }) {
+  const firstIngredient = ingredients[Object.keys(ingredients)[0]];
   return (
-    <Header />
-  )
+    <div>
+      <Header />
+      <div className={styles.sections}>
+        <Section ingredients={ingredients} />
+        <SectionConstructor firstIngredient={firstIngredient} />
+      </div>
+    </div>
+  );
 }
