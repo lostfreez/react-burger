@@ -12,6 +12,8 @@ export default function Main({ ingredients }) {
         <Section ingredients={ingredients} />
         <SectionConstructor firstIngredient={firstIngredient} />
       </div>
+      <div id="modal"></div>
+      <div id="modal-overlay"></div>
     </div>
   );
 }

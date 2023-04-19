@@ -2,9 +2,12 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import styles from "./Card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function Card({ ingredient }) {
+export default function Card({ ingredient, onCardClick })  {
+  const handleClick = () => {
+    onCardClick(ingredient);
+  };
   return (
-    <li className={styles.card}>
+    <li className={styles.card} onClick={handleClick}>
       <img src={ingredient.image} alt={ingredient.name} />
       <Counter count={1} size="default" extraClass="m-1" />
       <div className={styles.cardContainer}>
