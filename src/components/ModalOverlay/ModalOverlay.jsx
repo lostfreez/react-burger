@@ -3,15 +3,22 @@ import styles from './ModalOverlay.module.css';
 import ReactDOM from "react-dom";
 
 export default function ModalOverlay({onClose}) {
-    const modalRoot = document.getElementById("modal-overlay");
-    const handleClick = (e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
+    const modalOverlay = document.getElementById("modal-overlay");
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+  
+    React.useEffect(() => {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
       };
+    }, []);
 
   return ReactDOM.createPortal(
-    <div className={styles.overlay} onClick={handleClick}></div>,
-    modalRoot 
+    <div className={styles.overlay} onClick={onClose}></div>,
+    modalOverlay 
   )
 }

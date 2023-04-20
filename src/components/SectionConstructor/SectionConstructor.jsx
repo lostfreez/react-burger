@@ -3,7 +3,7 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Total from "../Total/Total";
 import styles from "./SectionConstructor.module.css";
 
-export default function SectionConstructor({ firstIngredient }) {
+export default function SectionConstructor({ firstIngredient, openModal }) {
   if (!firstIngredient) {
     return null;
   }
@@ -103,7 +103,7 @@ export default function SectionConstructor({ firstIngredient }) {
           />
         </div>
       </div>
-      <Total />
+      <Total openModal={openModal} />
     </div>
   );
 }

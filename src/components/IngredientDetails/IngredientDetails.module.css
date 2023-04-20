@@ -1,0 +1,19 @@
+.list{
+    padding: 0;
+    margin: 0 0 60px;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    color: #8585AD;
+}
+.item{
+    text-align: center;
+    margin-right: 20px;
+}
+.item:last-child{
+    margin-right: 0px;
+}
+.image{
+    width: 480px;
+    height: 240px;
+}

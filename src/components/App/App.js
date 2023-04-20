@@ -25,7 +25,11 @@ export default function App() {
       });
   }, []);
   return (
+    <>
     <Main ingredients={ingredients} />
+    <div id='modal-root'></div>
+    <div id='modal-overlay'></div>
+    </>
   );
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../image/price.svg";
 
-export default function Total() {
+export default function Total({openModal}) {
   return (
     <div
         className={"mt-10 mr-4"}
@@ -11,6 +11,7 @@ export default function Total() {
         <p className="text text_type_main-large mr-2">610</p>
         <img src={price} alt="Изображение цены" />
         <Button
+          onClick={()=>openModal("order")}
           htmlType="button"
           type="primary"
           size="large"
