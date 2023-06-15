@@ -1,10 +1,11 @@
-import Header from "../Header/Header";
 import Section from "../Section/Section";
 import SectionConstructor from "../SectionConstructor/SectionConstructor";
 import styles from "./Main.module.css";
 import React from "react";
 import Modal from "../Modal/Modal";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import OrderDetails from "../OrderDetails/OrderDetails";
+
 
 export default function Main({ ingredients }) {
   const firstIngredient = ingredients[Object.keys(ingredients)[0]];
@@ -20,22 +21,19 @@ export default function Main({ ingredients }) {
     setShowModal(false);
   };
 
-  return (
-    <div>
-      <Header />
+  return (   
       <div className={styles.sections}>
         <Section ingredients={ingredients} openModal={openModal} />
         <SectionConstructor firstIngredient={firstIngredient} openModal={openModal}/>
-      </div>
       {showModal && (
-        <>
-        <Modal
-          onClose={closeModal}
-          showModal={showModal}
-          modalContent={modalContent}
-        />
-        <ModalOverlay onClose={closeModal}/>
-        </>
+        <Modal onClose={closeModal}>
+        {showModal === "ingridient" && (
+          <IngredientDetails ingredient={modalContent} />
+        )}
+        {showModal === "order" && (
+          <OrderDetails />
+        )}
+      </Modal>
       )}
     </div>
   );

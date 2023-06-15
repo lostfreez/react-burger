@@ -1,6 +1,6 @@
 import Main from '../Main/Main';
-import './App.css';
 import React from 'react';
+import Header from "../Header/Header";
 
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
@@ -26,9 +26,9 @@ export default function App() {
   }, []);
   return (
     <>
+    <Header />
     <Main ingredients={ingredients} />
     <div id='modal-root'></div>
-    <div id='modal-overlay'></div>
     </>
   );
 }
