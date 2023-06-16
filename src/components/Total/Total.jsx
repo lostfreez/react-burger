@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import price from "../image/price.svg";
+import price from "../../image/price.svg";
 
 export default function Total({openModal}) {
   return (

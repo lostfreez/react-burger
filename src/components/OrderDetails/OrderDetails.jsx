@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./OrderDetails.module.css";
-import done from '../image/done.png'
+import done from '../../image/done.png'
 
 export default function OrderDetails() {
   return (
