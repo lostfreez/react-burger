@@ -14,6 +14,32 @@
   gap: 10px;
 }
 
+.topElement {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+.constructorElement {
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  margin-right: 4px;
+}
+
+.bottomElement {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+.dragElement {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 1130px) {
   .section {
     margin-top: 0;

@@ -15,7 +15,7 @@ export default function Section({ ingredients, openModal }) {
   return (
     <div className={`${styles.section} custom-scroll`}>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
-      <div style={{ display: "flex" }}>
+      <div className={styles.switcher}>
         <Tab value="one" active={current === "one"} onClick={setCurrent}>
           Булки
         </Tab>

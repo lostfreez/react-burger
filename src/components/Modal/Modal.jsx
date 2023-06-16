@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import OrderDetails from "../OrderDetails/OrderDetails";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 export default function Modal({ onClose, children }) {

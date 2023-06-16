@@ -11,10 +11,7 @@ export default function SectionConstructor({ firstIngredient, openModal }) {
   return (
     <div className={styles.section}>
       <div className={styles.uplist}>
-        <div
-          className="ml-8 mr-4"
-          style={{ display: "flex", alignItems: "center" }}
-        >
+        <div className={styles.topElement}>
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -24,76 +21,20 @@ export default function SectionConstructor({ firstIngredient, openModal }) {
           />
         </div>
         <div className={`${styles.list} custom-scroll`}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon />
-            <div
-              className="ml-2 mr-4"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={firstIngredient.image}
-              />
+          {Array(5).fill().map(() => (
+            <div className={styles.dragElement}>
+              <DragIcon />
+              <div className={styles.constructorElement}>
+                <ConstructorElement
+                  text="Краторная булка N-200i (верх)"
+                  price={50}
+                  thumbnail={firstIngredient.image}
+                />
+              </div>
             </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon />
-            <div
-              className="ml-2 mr-4"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={firstIngredient.image}
-              />
-            </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon />
-            <div
-              className="ml-2 mr-4"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={firstIngredient.image}
-              />
-            </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon />
-            <div
-              className="ml-2 mr-4"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={firstIngredient.image}
-              />
-            </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon />
-            <div
-              className="ml-2 mr-4"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={firstIngredient.image}
-              />
-            </div>
-          </div>
+          ))}
         </div>
-        <div
-          className="ml-8 mr-4"
-          style={{ display: "flex", alignItems: "center" }}
-        >
+        <div className={styles.bottomElement}>
           <ConstructorElement
             type="bottom"
             isLocked={true}

@@ -6,8 +6,7 @@ export default function IngredientDetails({ ingredient }) {
   return (
     <>
       <p
-        className="text text_type_main-large mt-10 ml-10"
-        style={{ alignSelf: "start" }}
+        className={`${styles.cardContainer}text text_type_main-large mt-10 ml-10"`}
       >
         Детали ингридиента
       </p>
