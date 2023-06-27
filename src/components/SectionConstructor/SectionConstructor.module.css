@@ -1,5 +1,6 @@
 .section {
   margin-top: 100px;
+  position: relative;
 }
 .list {
   max-height: 300px;
@@ -38,6 +39,16 @@
 .dragElement {
   display: flex;
   align-items: center;
+}
+.dropHighlight::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  z-index: 2;
 }
 
 @media (max-width: 1130px) {
