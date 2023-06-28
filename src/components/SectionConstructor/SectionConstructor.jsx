@@ -4,8 +4,12 @@ import Total from "../Total/Total";
 import styles from "./SectionConstructor.module.css";
 import { useDrop } from "react-dnd";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { incrementCount } from "../../services/actions/countAction";
+import { decrementCount } from "../../services/actions/countAction";
 
 export default function SectionConstructor({ openModal }) {
+  const dispatch = useDispatch();
   const dropOption = {
     accept: "card",
     drop: (item) => {
@@ -13,9 +17,9 @@ export default function SectionConstructor({ openModal }) {
       if (item.ingredient.type === "bun") {
         setBaseElement(item);
         setHasBaseSelected(true);
-      }
-      if (item.ingredient.type !== "bun") {
-        setMiddleElements((middleElement) => [...middleElement, item]);
+      } else {
+        dispatch(incrementCount(item.ingredient._id));
+        setMiddleElements((state) => [...state, item]);
       }
     },
     collect: (monitor) => ({
@@ -27,6 +31,10 @@ export default function SectionConstructor({ openModal }) {
   const [hasBaseSelected, setHasBaseSelected] = useState(false);
   const [baseElement, setBaseElement] = useState(null);
   const [middleElement, setMiddleElements] = useState([]);
+  const handleRemoveElement = (indexToRemove, ingredientId) => {
+    dispatch(decrementCount(ingredientId));
+    setMiddleElements((state) => state.filter((item, index) => index !== indexToRemove));
+  }
 
   return (
     <div className={`${styles.section} ${dropHighlight}`} ref={dropRef}>
@@ -51,12 +59,13 @@ export default function SectionConstructor({ openModal }) {
           (middleElement.length === 0 ? (
             <span>Выберите ингридиенты для бургера</span>
           ) : (
-            middleElement.map((middleElement) => (
+            middleElement.map((middleElement, index) => (
               <ConstructorElement
-                key={middleElement.ingredient._id}
+                key={`${middleElement.ingredient._id}-${index}`}
                 text={middleElement.ingredient.name}
                 price={middleElement.ingredient.price}
                 thumbnail={middleElement.ingredient.image}
+                handleClose={() => handleRemoveElement(index, middleElement.ingredient._id)}
               />
             ))
           ))}
