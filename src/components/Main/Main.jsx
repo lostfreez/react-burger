@@ -8,8 +8,7 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-
-export default function Main({ ingredients }) {
+export default function Main() {
   const [showModal, setShowModal] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
 
@@ -22,21 +21,19 @@ export default function Main({ ingredients }) {
     setShowModal(false);
   };
 
-  return (   
-      <div className={styles.sections}>
-        <DndProvider backend={HTML5Backend}>
-        <Section ingredients={ingredients} openModal={openModal} />
-        <SectionConstructor openModal={openModal}/>
-        </DndProvider>
+  return (
+    <div className={styles.sections}>
+      <DndProvider backend={HTML5Backend}>
+        <Section openModal={openModal} />
+        <SectionConstructor openModal={openModal} />
+      </DndProvider>
       {showModal && (
         <Modal onClose={closeModal}>
-        {showModal === "ingridient" && (
-          <IngredientDetails ingredient={modalContent} />
-        )}
-        {showModal === "order" && (
-          <OrderDetails />
-        )}
-      </Modal>
+          {showModal === "ingridient" && (
+            <IngredientDetails ingredient={modalContent} />
+          )}
+          {showModal === "order" && <OrderDetails />}
+        </Modal>
       )}
     </div>
   );

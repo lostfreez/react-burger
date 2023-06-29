@@ -1,6 +1,6 @@
 const initialState = {};
 
-export const countReducer = (state = initialState, action) => {
+ const countReducer = (state = initialState, action) => {
   const actionParts = action.type.split('_');
   const actionType = actionParts[0];
   const id = actionParts[1];
@@ -20,3 +20,5 @@ export const countReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default countReducer;
