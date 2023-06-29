@@ -3,8 +3,12 @@ import styles from "./Card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import openModal from "../../services/actions/modalActions";
+import viewIngredient from "../../services/actions/ingredientViewAction";
 
-export default function Card({ ingredient, openModal }) {
+export default function Card({ ingredient }) {
+  const dispatch = useDispatch();
   const dragOptions = {
     type: "card",
     item: { ingredient },
@@ -12,12 +16,17 @@ export default function Card({ ingredient, openModal }) {
       isDrag: monitor.isDragging(),
     }),
   };
-  const [{ isDrag }, dragRef] = useDrag(dragOptions);
+  const [, dragRef] = useDrag(dragOptions);
   const count = useSelector(state => state.counter[ingredient._id] || 0);
+  const handleClick = () => {
+    dispatch(openModal('ingredient'));
+    dispatch(viewIngredient(ingredient));
+  }
+
   return (
     <li
       className={`${styles.card}`}
-      onClick={() => openModal("ingridient", ingredient)}
+      onClick={handleClick}
       ref={dragRef}
     >
       <img src={ingredient.image} alt={ingredient.name} />

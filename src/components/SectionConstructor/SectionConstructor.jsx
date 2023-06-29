@@ -1,5 +1,4 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Total from "../Total/Total";
 import styles from "./SectionConstructor.module.css";
 import { useDrop } from "react-dnd";
@@ -10,7 +9,7 @@ import { decrementCount } from "../../services/actions/countAction";
 import { addIngredient } from "../../services/actions/ingredientsListAction";
 import { removeIngredient } from "../../services/actions/ingredientsListAction";
 
-export default function SectionConstructor({ openModal }) {
+export default function SectionConstructor() {
   const dispatch = useDispatch();
   const dropOption = {
     accept: "card",
@@ -96,7 +95,7 @@ export default function SectionConstructor({ openModal }) {
           )}
         </div>
       </div>
-      <Total openModal={openModal} totalPrice={totalPrice} />
+      <Total totalPrice={totalPrice} />
     </div>
   );
 }

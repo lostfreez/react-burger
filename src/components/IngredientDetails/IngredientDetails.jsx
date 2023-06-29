@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import styles from "../IngredientDetails/IngredientDetails.module.css";
+import { useSelector } from 'react-redux';
 
-export default function IngredientDetails({ ingredient }) {
+export default function IngredientDetails() {
+  const ingredient  = useSelector(state => state.ingredient);
   return (
     <>
       <p

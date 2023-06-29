@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
 

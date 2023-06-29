@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 import { useSelector } from "react-redux";
 import { selectIngredients, selectBuns, selectSauces, selectMains } from "../../services/selectors/ingredientsSelectors";
 
-export default function Section({ openModal }) {
+export default function Section() {
   const [current, setCurrent] = React.useState("one");
   const ingredients = useSelector(selectIngredients);
   const buns = useSelector(selectBuns);
@@ -33,7 +33,6 @@ export default function Section({ openModal }) {
             <Card
               key={ingredient._id}
               ingredient={ingredient}
-              openModal={openModal}
             />
           ))}
         </ul>
@@ -43,7 +42,6 @@ export default function Section({ openModal }) {
             <Card
               key={ingredient._id}
               ingredient={ingredient}
-              openModal={openModal}
             />
           ))}
         </ul>
@@ -53,7 +51,6 @@ export default function Section({ openModal }) {
             <Card
               key={ingredient._id}
               ingredient={ingredient}
-              openModal={openModal}
             />
           ))}
         </ul>
