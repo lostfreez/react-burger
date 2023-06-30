@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './ModalOverlay.module.css';
 
-export default function ModalOverlay() {
+export default function ModalOverlay({handleClose}) {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        
+        handleClose();
       }
     };
   
@@ -16,6 +16,6 @@ export default function ModalOverlay() {
     }, []);
 
   return (
-    <div className={styles.overlay}></div>
+    <div className={styles.overlay} onClick={handleClose}></div>
   );
 }

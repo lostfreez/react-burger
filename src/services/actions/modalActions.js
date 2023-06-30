@@ -1,6 +1,11 @@
-export default function openModal(modalType) {
+export function openModal(modalType) {
   return {
     type: "OPEN_MODAL",
-    payload: modalType
+    payload: modalType,
+  };
+}
+export function closeModal() {
+  return {
+    type: "CLOSE_MODAL",
   };
 }

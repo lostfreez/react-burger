@@ -12,7 +12,7 @@ export default function IngredientDetails() {
       </p>
       <img
         className={`${styles.image} ml-30 mr-30`}
-        src={ingredient.image}
+        src={ingredient.image_large}
         alt={ingredient.name}
       />
       <p className="text text_type_main-medium mt-4 mb-8">{ingredient.name}</p>
