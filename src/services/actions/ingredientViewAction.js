@@ -1,6 +1,8 @@
- const viewIngredient = (ingredient) => ({
-    type: `VIEW_IGREDIENT`, 
-    payload: ingredient,
-  });
+export const viewIngredient = (ingredient) => ({
+  type: `VIEW_INGREDIENT`,
+  payload: ingredient,
+});
 
-  export default viewIngredient;
+export const clearIngredient = () => ({
+  type: `CLEAR_INGREDIENT`,
+});

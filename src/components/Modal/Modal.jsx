@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { closeModal } from "../../services/actions/modalActions";
+import { clearIngredient } from "../../services/actions/ingredientViewAction";
 
 export default function Modal() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function Modal() {
   const { isOpen, modalType } = useSelector((state) => state.modal);
   const handleClose = () => {
     dispatch(closeModal());
+    dispatch(clearIngredient());
   };
   if (!isOpen) {
     return null;

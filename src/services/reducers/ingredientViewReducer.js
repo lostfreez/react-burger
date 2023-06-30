@@ -2,8 +2,10 @@ const initialState = {};
 
 function ingredientViewReducer(state = initialState, action) {
   switch (action.type) {
-    case "VIEW_IGREDIENT":
+    case "VIEW_INGREDIENT":
       return action.payload;
+    case "CLEAR_INGREDIENT":
+      return initialState;
     default:
       return state;
   }
