@@ -1,24 +1,25 @@
-const initialState = {};
+const initialState = {
+  ingredients: [],
+  bun: null,
+};
 
 const ingredientsListReducer = (state = initialState, action) => {
-  const actionParts = action.type.split("_");
-  const actionType = actionParts[0];
-  const id = actionParts[1];
-
-  switch (actionType) {
+  switch (action.type) {
     case "ADD":
+      return { ...state, ingredients: [...state.ingredients, action.payload] };
+    case "ADD_BUN": {
+      const updatedIngredients = state.bun
+        ? state.ingredients.filter((item) => item !== state.bun)
+        : state.ingredients;
       return {
         ...state,
-        id,
+        bun: action.payload,
+        ingredients: [...updatedIngredients, action.payload],
       };
-    case "REMOVE":
-      const index = Object.values(state).indexOf(id);
-      if (index > -1) {
-        const newState = { ...state };
-        delete newState[Object.keys(newState)[index]];
-        return newState;
-      }
-      return state;
+    }
+    case "REMOVE": {
+      return { ...state, ingredients: state.ingredients.filter((item) => item !== action.payload) };
+    }
     default:
       return state;
   }

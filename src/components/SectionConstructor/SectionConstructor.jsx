@@ -8,6 +8,7 @@ import { incrementCount } from "../../services/actions/countAction";
 import { decrementCount } from "../../services/actions/countAction";
 import { addIngredient } from "../../services/actions/ingredientsListAction";
 import { removeIngredient } from "../../services/actions/ingredientsListAction";
+import { addBun } from "../../services/actions/ingredientsListAction";
 
 export default function SectionConstructor() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function SectionConstructor() {
       if (item.ingredient.type === "bun") {
         setBaseElement(item);
         setHasBaseSelected(true);
+        dispatch(addBun(item.ingredient._id));
       } else {
         dispatch(addIngredient(item.ingredient._id));
         dispatch(incrementCount(item.ingredient._id));
@@ -40,7 +42,7 @@ export default function SectionConstructor() {
   const totalPrice = React.useMemo(() => {
     let total = 0;
     if (baseElement) {
-      total += baseElement.ingredient.price * 2; // Учитываются обе булки
+      total += baseElement.ingredient.price; 
     }
     if (middleElement.length) { 
       middleElement.forEach((element) => {
@@ -62,7 +64,7 @@ export default function SectionConstructor() {
                 type="top"
                 isLocked={true}
                 text={baseElement.ingredient.name}
-                price={baseElement.ingredient.price}
+                price={baseElement.ingredient.price / 2}
                 thumbnail={baseElement.ingredient.image}
               />
             )
@@ -89,7 +91,7 @@ export default function SectionConstructor() {
               type="bottom"
               isLocked={true}
               text={baseElement.ingredient.name}
-              price={baseElement.ingredient.price}
+              price={baseElement.ingredient.price / 2}
               thumbnail={baseElement.ingredient.image}
             />
           )}
