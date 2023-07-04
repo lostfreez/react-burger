@@ -18,7 +18,24 @@ const ingredientsListReducer = (state = initialState, action) => {
       };
     }
     case "REMOVE": {
-      return { ...state, ingredients: state.ingredients.filter((item) => item !== action.payload) };
+      return {
+        ...state,
+        ingredients: state.ingredients.filter(
+          (item) => item !== action.payload
+        ),
+      };
+    }
+    case "SWAP_INGREDIENTS": {
+      const bun = state.ingredients[0];
+      const newList = action.payload;
+      const reorderedIngredients = newList.map((item) => {
+        return item.ingredient._id;
+      });
+      console.log(reorderedIngredients);
+      return {
+        ...state,
+        ingredients: [bun, ...reorderedIngredients],
+      };
     }
     default:
       return state;

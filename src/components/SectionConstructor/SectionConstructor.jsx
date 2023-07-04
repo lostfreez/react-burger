@@ -5,13 +5,16 @@ import { useDrop } from "react-dnd";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { incrementCount } from "../../services/actions/countAction";
-import { decrementCount } from "../../services/actions/countAction";
 import { addIngredient } from "../../services/actions/ingredientsListAction";
-import { removeIngredient } from "../../services/actions/ingredientsListAction";
 import { addBun } from "../../services/actions/ingredientsListAction";
+import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
 
 export default function SectionConstructor() {
   const dispatch = useDispatch();
+  const [hasBaseSelected, setHasBaseSelected] = React.useState(false);
+  const [baseElement, setBaseElement] = React.useState(null);
+  const [middleElement, setMiddleElements] = React.useState([]);
+
   const dropOption = {
     accept: "card",
     drop: (item) => {
@@ -29,22 +32,16 @@ export default function SectionConstructor() {
       isOver: monitor.isOver(),
     }),
   };
+
   const [{ isOver }, dropRef] = useDrop(dropOption);
   const dropHighlight = isOver ? styles.dropHighlight : "";
-  const [hasBaseSelected, setHasBaseSelected] = React.useState(false);
-  const [baseElement, setBaseElement] = React.useState(null);
-  const [middleElement, setMiddleElements] = React.useState([]);
-  const handleRemoveElement = (indexToRemove, ingredientId) => {
-    dispatch(decrementCount(ingredientId));
-    dispatch(removeIngredient(ingredientId));
-    setMiddleElements((state) => state.filter((item, index) => index !== indexToRemove));
-  }
+
   const totalPrice = React.useMemo(() => {
     let total = 0;
     if (baseElement) {
-      total += baseElement.ingredient.price; 
+      total += baseElement.ingredient.price;
     }
-    if (middleElement.length) { 
+    if (middleElement.length) {
       middleElement.forEach((element) => {
         total += element.ingredient.price;
       });
@@ -70,21 +67,23 @@ export default function SectionConstructor() {
             )
           )}
         </div>
-        <div className={`${styles.list} custom-scroll`}></div>
-        {hasBaseSelected &&
-          (middleElement.length === 0 ? (
-            <span>Выберите ингридиенты для бургера</span>
-          ) : (
-            middleElement.map((middleElement, index) => (
-              <ConstructorElement
-                key={`${middleElement.ingredient._id}-${index}`}
-                text={middleElement.ingredient.name}
-                price={middleElement.ingredient.price}
-                thumbnail={middleElement.ingredient.image}
-                handleClose={() => handleRemoveElement(index, middleElement.ingredient._id)}
-              />
-            ))
-          ))}
+        <div className={`${styles.list} custom-scroll`}>
+          {hasBaseSelected &&
+            (middleElement.length === 0 ? (
+              <span>Выберите ингридиенты для бургера</span>
+            ) : (
+              middleElement.map((middleElement, index) => {
+                return (
+                  <IngredientsContainer
+                    key={`${middleElement.ingredient._id}-${index}`}
+                    middleElement={middleElement}
+                    index={index}
+                    setMiddleElements={setMiddleElements}
+                  />
+                );
+              })
+            ))}
+        </div>
         <div className={styles.bottomElement}>
           {baseElement && (
             <ConstructorElement

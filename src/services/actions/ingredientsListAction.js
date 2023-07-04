@@ -10,3 +10,7 @@ export const addBun = (id) => ({
   type: `ADD_BUN`,
   payload: id,
 });
+export const swapIngredient = (ingredients) => ({
+  type: `SWAP_INGREDIENTS`,
+  payload: ingredients,
+});
