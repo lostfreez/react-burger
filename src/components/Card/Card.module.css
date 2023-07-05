@@ -11,3 +11,6 @@
 .cardText{
   min-height: 48px;
 }
+.cardPreview {
+  opacity: 1;
+}
