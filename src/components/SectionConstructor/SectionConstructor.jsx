@@ -54,7 +54,7 @@ export default function SectionConstructor() {
       <div className={styles.uplist}>
         <div className={styles.topElement}>
           {!hasBaseSelected ? (
-            <span>Выберите основу для бургера</span>
+            <span className={`${styles.spanElement} text text_type_main-medium`}>Выберите основу для бургера</span>
           ) : (
             baseElement && (
               <ConstructorElement
@@ -70,7 +70,7 @@ export default function SectionConstructor() {
         <div className={`${styles.list} custom-scroll`}>
           {hasBaseSelected &&
             (middleElement.length === 0 ? (
-              <span>Выберите ингридиенты для бургера</span>
+              <span className={`${styles.spanElement} text text_type_main-medium`}>Выберите ингредиенты для бургера</span>
             ) : (
               middleElement.map((middleElement, index) => {
                 return (
@@ -96,7 +96,9 @@ export default function SectionConstructor() {
           )}
         </div>
       </div>
-      <Total totalPrice={totalPrice} />
+      {totalPrice>0 && 
+        <Total totalPrice={totalPrice} />
+      }
     </div>
   );
 }

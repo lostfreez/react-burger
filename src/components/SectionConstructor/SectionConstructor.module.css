@@ -1,7 +1,13 @@
 .section {
   margin-top: 100px;
   position: relative;
+  max-width: 548px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 .list {
   max-height: 300px;
   overflow-y: auto;
@@ -13,6 +19,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 480px;
+  justify-content: space-between;
 }
 
 .topElement {
@@ -20,6 +28,7 @@
   align-items: center;
   margin-left: 8px;
   margin-right: 4px;
+  align-self: center;
 }
 
 .constructorElement {
@@ -49,6 +58,9 @@
   bottom: 0;
   border: 2px solid rgba(255, 255, 255, 0.5);
   z-index: 2;
+}
+.spanElement{
+  align-self: center;
 }
 
 @media (max-width: 1130px) {
