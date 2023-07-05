@@ -16,10 +16,6 @@ export default function Section() {
   const sauces = useSelector(selectSauces);
   const mains = useSelector(selectMains);
 
-  React.useEffect(() => {
-    console.log(current);
-  }, [current]);
-
   React.useLayoutEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

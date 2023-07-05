@@ -22,7 +22,8 @@ export default function SectionConstructor() {
         setBaseElement(item);
         setHasBaseSelected(true);
         dispatch(addBun(item.ingredient._id));
-      } else {
+      }
+      if (baseElement !== null && item.ingredient.type !== "bun") {
         dispatch(addIngredient(item.ingredient._id));
         dispatch(incrementCount(item.ingredient._id));
         setMiddleElements((state) => [...state, item]);
@@ -32,8 +33,7 @@ export default function SectionConstructor() {
       isOver: monitor.isOver(),
     }),
   };
-
-  const [{ isOver }, dropRef] = useDrop(dropOption);
+  const [{ isOver }, ref] = useDrop(dropOption);
   const dropHighlight = isOver ? styles.dropHighlight : "";
 
   const totalPrice = React.useMemo(() => {
@@ -50,13 +50,15 @@ export default function SectionConstructor() {
   }, [baseElement, middleElement]);
 
   return (
-    <div className={`${styles.section} ${dropHighlight}`} ref={dropRef}>
-      <div className={styles.uplist}>
-        <div className={styles.topElement}>
-          {!hasBaseSelected ? (
-            <span className={`${styles.spanElement} text text_type_main-medium`}>Выберите основу для бургера</span>
-          ) : (
-            baseElement && (
+    <div className={`${styles.section} ${dropHighlight}`} ref={ref}>
+      {!hasBaseSelected ? (
+        <span className={`${styles.spanElement} text text_type_main-medium`}>
+          Выберите основу для бургера
+        </span>
+      ) : (
+        baseElement && (
+          <div className={styles.uplist}>
+            <div>
               <ConstructorElement
                 type="top"
                 isLocked={true}
@@ -64,41 +66,44 @@ export default function SectionConstructor() {
                 price={baseElement.ingredient.price / 2}
                 thumbnail={baseElement.ingredient.image}
               />
-            )
-          )}
-        </div>
-        <div className={`${styles.list} custom-scroll`}>
-          {hasBaseSelected &&
-            (middleElement.length === 0 ? (
-              <span className={`${styles.spanElement} text text_type_main-medium`}>Выберите ингредиенты для бургера</span>
-            ) : (
-              middleElement.map((middleElement, index) => {
-                return (
-                  <IngredientsContainer
-                    key={`${middleElement.ingredient._id}-${index}`}
-                    middleElement={middleElement}
-                    index={index}
-                    setMiddleElements={setMiddleElements}
-                  />
-                );
-              })
-            ))}
-        </div>
-        <div className={styles.bottomElement}>
-          {baseElement && (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={baseElement.ingredient.name}
-              price={baseElement.ingredient.price / 2}
-              thumbnail={baseElement.ingredient.image}
-            />
-          )}
-        </div>
-      </div>
-      {totalPrice>0 && 
-        <Total totalPrice={totalPrice} />
-      }
+            </div>
+
+            <div className={`${styles.list} custom-scroll`}>
+              {hasBaseSelected &&
+                (middleElement.length === 0 ? (
+                  <span
+                    className={`${styles.spanElement} text text_type_main-medium`}
+                  >
+                    Выберите ингредиенты для бургера
+                  </span>
+                ) : (
+                  middleElement.map((middleElement, index) => {
+                    return (
+                      <IngredientsContainer
+                        key={`${middleElement.ingredient._id}-${index}`}
+                        middleElement={middleElement}
+                        index={index}
+                        setMiddleElements={setMiddleElements}
+                      />
+                    );
+                  })
+                ))}
+            </div>
+            {baseElement && (
+              <div>
+                <ConstructorElement
+                  type="bottom"
+                  isLocked={true}
+                  text={baseElement.ingredient.name}
+                  price={baseElement.ingredient.price / 2}
+                  thumbnail={baseElement.ingredient.image}
+                />
+              </div>
+            )}
+          </div>
+        )
+      )}
+      {totalPrice > 0 && <Total totalPrice={totalPrice} />}
     </div>
   );
 }

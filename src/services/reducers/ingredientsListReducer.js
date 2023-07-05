@@ -31,7 +31,6 @@ const ingredientsListReducer = (state = initialState, action) => {
       const reorderedIngredients = newList.map((item) => {
         return item.ingredient._id;
       });
-      console.log(reorderedIngredients);
       return {
         ...state,
         ingredients: [bun, ...reorderedIngredients],

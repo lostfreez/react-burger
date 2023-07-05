@@ -12,7 +12,7 @@ export default function OrderDetails() {
   }
   return (
     <div className={styles.modal}>
-      <p className="text text_type_digits-large mt-10">{number}</p>
+      <p className={`${styles.order} text text_type_digits-large`}>{number ? number : ''}</p>
       <p className="text text_type_main-medium mt-8 mb-15">
         идентификатор заказа
       </p>
