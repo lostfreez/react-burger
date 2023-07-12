@@ -1,10 +1,14 @@
+import { BASE_URL } from "../urls/urls";
+
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_FAILED = "CREATE_ORDER_FAILED";
+
+const API_URL = `${BASE_URL}/orders`;
 
 export const createOrder = () => {
   return function (dispatch, getState) {
     const state = getState();
-    fetch("https://norma.nomoreparties.space/api/orders", {
+    fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
