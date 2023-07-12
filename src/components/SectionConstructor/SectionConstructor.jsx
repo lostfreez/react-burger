@@ -60,7 +60,7 @@ export default function SectionConstructor() {
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={baseElement.ingredient.name}
+                text={`${baseElement.ingredient.name} (верх)`}
                 price={baseElement.ingredient.price / 2}
                 thumbnail={baseElement.ingredient.image}
               />
@@ -92,7 +92,7 @@ export default function SectionConstructor() {
                 <ConstructorElement
                   type="bottom"
                   isLocked={true}
-                  text={baseElement.ingredient.name}
+                  text={`${baseElement.ingredient.name} (низ)`}
                   price={baseElement.ingredient.price / 2}
                   thumbnail={baseElement.ingredient.image}
                 />
