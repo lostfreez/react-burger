@@ -1,3 +1,5 @@
+import { REMOVE, SWAP_INGREDIENTS, ADD_BUN, ADD } from "../actions/actionsTypes";
+
 const initialState = {
   ingredients: [],
   bun: null,
@@ -5,9 +7,9 @@ const initialState = {
 
 const ingredientsListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD":
+    case ADD:
       return { ...state, ingredients: [...state.ingredients, action.payload] };
-    case "ADD_BUN": {
+    case ADD_BUN: {
       const updatedIngredients = state.bun
         ? state.ingredients.filter((item) => item !== state.bun)
         : state.ingredients;
@@ -17,7 +19,7 @@ const ingredientsListReducer = (state = initialState, action) => {
         ingredients: [...updatedIngredients, action.payload],
       };
     }
-    case "REMOVE": {
+    case REMOVE: {
       return {
         ...state,
         ingredients: state.ingredients.filter(
@@ -25,7 +27,7 @@ const ingredientsListReducer = (state = initialState, action) => {
         ),
       };
     }
-    case "SWAP_INGREDIENTS": {
+    case SWAP_INGREDIENTS: {
       const bun = state.ingredients[0];
       const newList = action.payload;
       const reorderedIngredients = newList.map((item) => {

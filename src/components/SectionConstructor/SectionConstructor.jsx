@@ -4,9 +4,7 @@ import styles from "./SectionConstructor.module.css";
 import { useDrop } from "react-dnd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { incrementCount } from "../../services/actions/countAction";
-import { addIngredient } from "../../services/actions/ingredientsListAction";
-import { addBun } from "../../services/actions/ingredientsListAction";
+import { incrementCount, addIngredient, addBun } from "../../services/actions/actionsTypes";
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
 
 export default function SectionConstructor() {

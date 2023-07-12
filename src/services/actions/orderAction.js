@@ -1,3 +1,6 @@
+export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
+export const CREATE_ORDER_FAILED = "CREATE_ORDER_FAILED";
+
 export const createOrder = () => {
   return function (dispatch, getState) {
     const state = getState();
@@ -12,7 +15,7 @@ export const createOrder = () => {
       .then((data) => {
         if (data.success) {
           dispatch({
-            type: "CREATE_ORDER_SUCCESS",
+            type: CREATE_ORDER_SUCCESS,
             payload: { number: data.order.number, name: data.name}
           });
         } else {
@@ -21,7 +24,7 @@ export const createOrder = () => {
       })
       .catch((error) => {
         console.log(error);
-        dispatch({ type: "CREATE_ORDER_FAILED" });
+        dispatch({ type: CREATE_ORDER_FAILED });
       });
   };
 };

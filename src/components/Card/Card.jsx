@@ -4,8 +4,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modalActions";
-import { viewIngredient } from "../../services/actions/ingredientViewAction";
+import { viewIngredient, openModal } from "../../services/actions/actionsTypes";
 
 export default function Card({ ingredient }) {
   const dispatch = useDispatch();

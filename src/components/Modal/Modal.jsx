@@ -5,9 +5,11 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import { closeModal } from "../../services/actions/modalActions";
-import { clearIngredient } from "../../services/actions/ingredientViewAction";
-import { clearOder } from "../../services/actions/clearOderAction";
+import {
+  clearOder,
+  clearIngredient,
+  closeModal,
+} from "../../services/actions/actionsTypes";
 
 export default function Modal() {
   const dispatch = useDispatch();

@@ -1,20 +1,20 @@
+import { INCREMENT, DECREMENT } from "../actions/actionsTypes";
+
 const initialState = {};
 
- const countReducer = (state = initialState, action) => {
-  const actionParts = action.type.split('_');
-  const actionType = actionParts[0];
-  const id = actionParts[1];
+const countReducer = (state = initialState, action) => {
+  const id = action.payload;
 
-  switch (actionType) {
-    case 'INCREMENT':
+  switch (action.type) {
+    case INCREMENT:
       return {
         ...state,
-        [id]: (state[id] || 0) + 1
+        [id]: (state[id] || 0) + 1,
       };
-    case 'DECREMENT':
+    case DECREMENT:
       return {
         ...state,
-        [id]: (state[id] || 0) - 1
+        [id]: (state[id] || 0) - 1,
       };
     default:
       return state;

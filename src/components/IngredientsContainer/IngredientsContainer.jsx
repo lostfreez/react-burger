@@ -1,10 +1,12 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { decrementCount } from "../../services/actions/countAction";
-import { removeIngredient } from "../../services/actions/ingredientsListAction";
 import { useDispatch } from "react-redux";
 import { useDrag } from "react-dnd";
 import { useDrop } from "react-dnd";
-import { swapIngredient } from "../../services/actions/ingredientsListAction";
+import {
+  swapIngredient,
+  removeIngredient,
+  decrementCount,
+} from "../../services/actions/actionsTypes";
 import React from "react";
 
 export default function IngredientsContainer({
@@ -27,16 +29,19 @@ export default function IngredientsContainer({
       isDrag: monitor.isDragging(),
     }),
   };
-  const moveElement = React.useCallback((dragIndex, hoverIndex) => {
-    setMiddleElements((prevElements) => {
-      const newElements = [...prevElements];
-      let temp = newElements[dragIndex];
-      newElements[dragIndex] = newElements[hoverIndex];
-      newElements[hoverIndex] = temp;
-      dispatch(swapIngredient(newElements));
-      return newElements;
-    });
-  }, [setMiddleElements, dispatch]);
+  const moveElement = React.useCallback(
+    (dragIndex, hoverIndex) => {
+      setMiddleElements((prevElements) => {
+        const newElements = [...prevElements];
+        let temp = newElements[dragIndex];
+        newElements[dragIndex] = newElements[hoverIndex];
+        newElements[hoverIndex] = temp;
+        dispatch(swapIngredient(newElements));
+        return newElements;
+      });
+    },
+    [setMiddleElements, dispatch]
+  );
   const dropOption = {
     accept: "ingredient",
     drop: (item) => {

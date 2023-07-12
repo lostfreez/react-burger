@@ -1,7 +1,7 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modalActions";
+import { openModal } from "../../services/actions/actionsTypes";
 import { createOrder } from "../../services/actions/orderAction";
 import  styles  from "./Total.module.css";
 
