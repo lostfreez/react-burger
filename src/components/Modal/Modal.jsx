@@ -3,7 +3,7 @@ import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import { modalComponent } from "../../services/modalContent/modalContent";
+import { modalComponent } from "../../services/modalComponent/modalComponent";
 import {
   clearOder,
   clearIngredient,
