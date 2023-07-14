@@ -5,6 +5,7 @@ import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { viewIngredient, openModal } from "../../services/actions/actionsTypes";
+import PropTypes from "prop-types";
 
 export default function Card({ ingredient }) {
   const dispatch = useDispatch();
@@ -18,8 +19,17 @@ export default function Card({ ingredient }) {
   const [, dragRef] = useDrag(dragOptions);
   const count = useSelector((state) => state.counter[ingredient._id] || 0);
   const handleClick = () => {
-    dispatch(openModal('IngredientDetails'));
+    dispatch(openModal("IngredientDetails"));
     dispatch(viewIngredient(ingredient));
+  };
+
+  Card.propTypes = {
+    ingredient: PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      image: PropTypes.string,
+    }).isRequired,
   };
 
   return (
@@ -38,3 +48,12 @@ export default function Card({ ingredient }) {
     </li>
   );
 }
+
+Card.propTypes = {
+  ingredient: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    image: PropTypes.string,
+  }).isRequired,
+};
