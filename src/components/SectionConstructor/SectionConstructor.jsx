@@ -106,7 +106,7 @@ export default function SectionConstructor() {
           </div>
         )
       )}
-      {totalPrice > 0 && <Total totalPrice={totalPrice} />}
+      {totalPrice > 0 && <Total totalPrice={totalPrice} setHasBaseSelected={setHasBaseSelected} setMiddleElements={setMiddleElements} setBaseElement={setBaseElement}/>}
     </div>
   );
 }

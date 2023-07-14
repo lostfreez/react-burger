@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT } from "../actions/actionsTypes";
+import { INCREMENT, DECREMENT, CLEAR_COUNT } from "../actions/actionsTypes";
 
 const initialState = {};
 
@@ -16,6 +16,9 @@ const countReducer = (state = initialState, action) => {
         ...state,
         [id]: (state[id] || 0) - 1,
       };
+    case CLEAR_COUNT:
+      return initialState;
+
     default:
       return state;
   }

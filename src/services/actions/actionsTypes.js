@@ -9,6 +9,8 @@ export const VIEW_INGREDIENT = "VIEW_INGREDIENT";
 export const CLEAR_INGREDIENT = "CLEAR_INGREDIENT";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const CLEAR_COUNT = "CLEAR_COUNT";
+export const CLEAR_LIST = "CLEAR_LIST";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -26,6 +28,12 @@ export const decrementCount = (id) => {
     payload: id,
   };
 };
+export const clearCount = () => {
+  return {
+    type: CLEAR_COUNT,
+  };
+};
+
 export const addIngredient = (id) => ({
   type: ADD,
   payload: id,
@@ -37,6 +45,9 @@ export const removeIngredient = (id) => ({
 export const addBun = (id) => ({
   type: ADD_BUN,
   payload: id,
+});
+export const clearIngredients = () => ({
+  type: CLEAR_LIST,
 });
 export const swapIngredient = (ingredients) => ({
   type: SWAP_INGREDIENTS,
@@ -61,4 +72,3 @@ export function closeModal() {
     type: CLOSE_MODAL,
   };
 }
-

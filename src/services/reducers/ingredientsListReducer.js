@@ -1,4 +1,4 @@
-import { REMOVE, SWAP_INGREDIENTS, ADD_BUN, ADD } from "../actions/actionsTypes";
+import { REMOVE, SWAP_INGREDIENTS, ADD_BUN, ADD, CLEAR_LIST } from "../actions/actionsTypes";
 
 const initialState = {
   ingredients: [],
@@ -33,11 +33,14 @@ const ingredientsListReducer = (state = initialState, action) => {
       const reorderedIngredients = newList.map((item) => {
         return item.ingredient._id;
       });
+      
       return {
         ...state,
         ingredients: [bun, ...reorderedIngredients],
       };
     }
+    case CLEAR_LIST:
+        return initialState;
     default:
       return state;
   }
