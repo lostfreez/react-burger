@@ -13,7 +13,6 @@ export default function App() {
     <>
       <Header />
       <Main />
-      <div id="modal-root"></div>
     </>
   );
 }
