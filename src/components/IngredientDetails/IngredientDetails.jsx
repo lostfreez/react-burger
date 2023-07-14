@@ -1,12 +1,16 @@
 import styles from "../IngredientDetails/IngredientDetails.module.css";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function IngredientDetails() {
-  const ingredient  = useSelector(state => state.ingredient);
+export default function IngredientDetails({ handleClose }) {
+  const ingredient = useSelector((state) => state.ingredient);
   return (
     <>
+      <button className={styles.close} onClick={handleClose}>
+        <CloseIcon type="primary" />
+      </button>
       <p
-        className={`${styles.cardContainer}text text_type_main-large mt-10 ml-10"`}
+        className={`${styles.text} text text_type_main-large  ml-10 mt-10`}
       >
         Детали ингридиента
       </p>

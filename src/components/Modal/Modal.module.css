@@ -15,11 +15,4 @@
     flex-direction: column;
     z-index: 2;
   }
-  .close {
-    position: absolute;
-    top: 50px;
-    right: 40px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
+  

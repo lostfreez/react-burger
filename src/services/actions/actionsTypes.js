@@ -9,7 +9,6 @@ export const VIEW_INGREDIENT = "VIEW_INGREDIENT";
 export const CLEAR_INGREDIENT = "CLEAR_INGREDIENT";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
-export const SWITCH_LOADER = "SWITCH_LOADER";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -62,9 +61,4 @@ export function closeModal() {
     type: CLOSE_MODAL,
   };
 }
-export function switchLoader(loader) {
-  return {
-    type: SWITCH_LOADER,
-    payload: loader,
-  };
-}
+

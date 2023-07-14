@@ -1,10 +1,6 @@
-import {
-  OPEN_MODAL,
-  CLOSE_MODAL,
-  SWITCH_LOADER,
-} from "../actions/actionsTypes";
+import { OPEN_MODAL, CLOSE_MODAL } from "../actions/actionsTypes";
 
-const initialState = { isOpen: false, children: null, loader: false };
+const initialState = { isOpen: false, children: null };
 
 function modalReducers(state = initialState, action) {
   switch (action.type) {
@@ -15,11 +11,6 @@ function modalReducers(state = initialState, action) {
       };
     case CLOSE_MODAL:
       return initialState;
-    case SWITCH_LOADER:
-      return {
-        isOpen: true,
-        loader: true,
-      };
     default:
       return state;
   }

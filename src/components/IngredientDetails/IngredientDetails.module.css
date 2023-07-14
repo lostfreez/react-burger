@@ -20,3 +20,14 @@
 .text{
     align-self: start;
 }
+.close {
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .cardContainer{
+    text-align: start;
+  }

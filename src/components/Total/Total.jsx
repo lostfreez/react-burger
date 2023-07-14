@@ -1,20 +1,16 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal, switchLoader } from "../../services/actions/actionsTypes";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/actionsTypes";
 import { createOrder } from "../../services/actions/orderAction";
 import styles from "./Total.module.css";
 
 export default function Total({ totalPrice }) {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(switchLoader(true));
+    dispatch(openModal("OrderDetails"));
     dispatch(createOrder());
   };
-  const order = useSelector((state) => state.order);
-  if (order.orderNumber) {
-    dispatch(openModal("OrderDetails"));
-  }
 
   return (
     <div className={styles.total}>
