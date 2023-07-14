@@ -15,19 +15,23 @@ export const createOrder = () => {
       },
       body: JSON.stringify({ ingredients: state.ingredientsList.ingredients }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          dispatch({
-            type: CREATE_ORDER_SUCCESS,
-            payload: { number: data.order.number, name: data.name}
-          });
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          throw new Error("Ошибка создания заказа");
+          let error = new Error("Ошибка создания заказа");
+          error.response = response;
+          throw error;
         }
       })
+      .then((data) =>
+        dispatch({
+          type: CREATE_ORDER_SUCCESS,
+          payload: { number: data.order.number, name: data.name },
+        })
+      )
       .catch((error) => {
-        console.log(error);
+        console.log(`${error.message} ${error.response}`);
         dispatch({ type: CREATE_ORDER_FAILED });
       });
   };

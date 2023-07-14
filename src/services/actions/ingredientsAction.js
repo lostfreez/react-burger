@@ -14,11 +14,14 @@ export const fetchIngredients = () => (dispatch) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Ошибка при получении данных с API");
+        let error = new Error("Ошибка при получении данных с API");
+        error.response = response;
+        throw error;
       }
     })
     .then((data) => dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: data }))
-    .catch((error) =>
-      dispatch({ type: GET_INGREDIENTS_ERROR, payload: error })
-    );
+    .catch((error) => {
+      console.log(`${error.message} ${error.response}`);
+      dispatch({ type: GET_INGREDIENTS_ERROR, payload: error });
+    });
 };
