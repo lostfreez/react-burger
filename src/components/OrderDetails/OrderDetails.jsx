@@ -4,15 +4,12 @@ import { useSelector } from "react-redux";
 
 export default function OrderDetails() {
   const order = useSelector((state) => state.order);
-  let number;
-  if (!order.orderNumber) {
-    number = "";
-  } else {
-    number = order.orderNumber;
-  }
+
   return (
     <div className={styles.modal}>
-      <p className={`${styles.order} text text_type_digits-large`}>{number ? number : ''}</p>
+      <p className={`${styles.order} text text_type_digits-large`}>
+        {order.orderNumber}
+      </p>
       <p className="text text_type_main-medium mt-8 mb-15">
         идентификатор заказа
       </p>

@@ -9,11 +9,12 @@ import {
   clearIngredient,
   closeModal,
 } from "../../services/actions/actionsTypes";
+import Loader from "../Loader/Loader";
 
 export default function Modal() {
   const dispatch = useDispatch();
   const modalRoot = document.getElementById("modal-root");
-  const { isOpen, children } = useSelector((state) => state.modal);
+  const { isOpen, children, loader } = useSelector((state) => state.modal);
   const handleClose = () => {
     dispatch(closeModal());
     dispatch(clearIngredient());
@@ -27,12 +28,16 @@ export default function Modal() {
   return ReactDOM.createPortal(
     <>
       <ModalOverlay handleClose={handleClose} />
-      <div className={styles.modal}>
-        <button className={styles.close} onClick={handleClose}>
-          <CloseIcon type="primary" />
-        </button>
-        <RenderModal />
-      </div>
+      {loader ? (
+        <Loader />
+      ) : (
+        <div className={styles.modal}>
+          <button className={styles.close} onClick={handleClose}>
+            <CloseIcon type="primary" />
+          </button>
+          <RenderModal />
+        </div>
+      )}
     </>,
     modalRoot
   );
