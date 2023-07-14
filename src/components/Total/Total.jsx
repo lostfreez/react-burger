@@ -8,7 +8,7 @@ import  styles  from "./Total.module.css";
 export default function Total({ totalPrice }) {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(openModal("order"));
+    dispatch(openModal("OrderDetails"));
     dispatch(createOrder());
   };
 

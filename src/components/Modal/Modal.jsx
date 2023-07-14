@@ -3,8 +3,7 @@ import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import OrderDetails from "../OrderDetails/OrderDetails";
+import { modalComponent } from "../../services/modalContent/modalContent";
 import {
   clearOder,
   clearIngredient,
@@ -14,7 +13,7 @@ import {
 export default function Modal() {
   const dispatch = useDispatch();
   const modalRoot = document.getElementById("modal-root");
-  const { isOpen, modalType } = useSelector((state) => state.modal);
+  const { isOpen, children } = useSelector((state) => state.modal);
   const handleClose = () => {
     dispatch(closeModal());
     dispatch(clearIngredient());
@@ -23,13 +22,7 @@ export default function Modal() {
   if (!isOpen) {
     return null;
   }
-  let children;
-  if (modalType === "ingredient") {
-    children = <IngredientDetails />;
-  }
-  if (modalType === "order") {
-    children = <OrderDetails />;
-  }
+  const RenderModal = modalComponent[children];
 
   return ReactDOM.createPortal(
     <>
@@ -38,7 +31,7 @@ export default function Modal() {
         <button className={styles.close} onClick={handleClose}>
           <CloseIcon type="primary" />
         </button>
-        {children}
+        <RenderModal />
       </div>
     </>,
     modalRoot

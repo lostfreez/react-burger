@@ -50,10 +50,10 @@ export const viewIngredient = (ingredient) => ({
 export const clearIngredient = () => ({
   type: CLEAR_INGREDIENT,
 });
-export function openModal(modalType) {
+export function openModal(children) {
   return {
     type: OPEN_MODAL,
-    payload: modalType,
+    payload: children,
   };
 }
 export function closeModal() {

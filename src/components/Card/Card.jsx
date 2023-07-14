@@ -18,7 +18,7 @@ export default function Card({ ingredient }) {
   const [, dragRef] = useDrag(dragOptions);
   const count = useSelector((state) => state.counter[ingredient._id] || 0);
   const handleClick = () => {
-    dispatch(openModal("ingredient"));
+    dispatch(openModal('IngredientDetails'));
     dispatch(viewIngredient(ingredient));
   };
 
