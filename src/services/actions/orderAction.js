@@ -1,4 +1,5 @@
 import { BASE_URL } from "../urls/urls";
+import { checkResponse } from "../checkResponse/checkResponse";
 
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_FAILED = "CREATE_ORDER_FAILED";
@@ -15,15 +16,7 @@ export const createOrder = () => {
       },
       body: JSON.stringify({ ingredients: state.ingredientsList.ingredients }),
     })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          let error = new Error("Ошибка создания заказа");
-          error.response = response;
-          throw error;
-        }
-      })
+      .then((response) => checkResponse(response))
       .then((data) =>
         dispatch({
           type: CREATE_ORDER_SUCCESS,

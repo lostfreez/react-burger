@@ -1,4 +1,5 @@
 import { BASE_URL } from "../urls/urls";
+import { checkResponse } from "../checkResponse/checkResponse";
 
 export const GET_INGREDIENTS_PENDING = "GET_INGREDIENTS_PENDING";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -10,15 +11,7 @@ export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_PENDING });
 
   return fetch(API_URL)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        let error = new Error("Ошибка при получении данных с API");
-        error.response = response;
-        throw error;
-      }
-    })
+    .then((response) => checkResponse(response))
     .then((data) => dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: data }))
     .catch((error) => {
       console.log(`${error.message} ${error.response}`);
