@@ -4,8 +4,13 @@ import styles from "./SectionConstructor.module.css";
 import { useDrop } from "react-dnd";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { incrementCount, addIngredient, addBun } from "../../services/actions/actionsTypes";
+import {
+  incrementCount,
+  addIngredient,
+  addBun,
+} from "../../services/actions/actionsTypes";
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
+import { v4 as uuidv4 } from "uuid";
 
 export default function SectionConstructor() {
   const dispatch = useDispatch();
@@ -24,7 +29,7 @@ export default function SectionConstructor() {
       if (baseElement !== null && item.ingredient.type !== "bun") {
         dispatch(addIngredient(item.ingredient._id));
         dispatch(incrementCount(item.ingredient._id));
-        setMiddleElements((state) => [...state, item]);
+        setMiddleElements((state) => [...state, { ...item, uuid: uuidv4() }]);
       }
     },
     collect: (monitor) => ({
@@ -78,7 +83,7 @@ export default function SectionConstructor() {
                   middleElement.map((middleElement, index) => {
                     return (
                       <IngredientsContainer
-                        key={`${middleElement.ingredient._id}-${index}`}
+                        key={middleElement.uuid}
                         middleElement={middleElement}
                         index={index}
                         setMiddleElements={setMiddleElements}
