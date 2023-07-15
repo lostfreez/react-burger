@@ -1,6 +1,14 @@
-import { INCREMENT, DECREMENT, CLEAR_COUNT } from "../actions/actionsTypes";
+import {
+  INCREMENT,
+  INCREMENT_BUN,
+  DECREMENT,
+  CLEAR_COUNT,
+} from "../actions/actionsTypes";
 
-const initialState = {};
+const initialState = {
+  ingredients: {},
+  bun: null,
+};
 
 const countReducer = (state = initialState, action) => {
   const id = action.payload;
@@ -9,12 +17,38 @@ const countReducer = (state = initialState, action) => {
     case INCREMENT:
       return {
         ...state,
-        [id]: (state[id] || 0) + 1,
+        ingredients: {
+          ...state.ingredients,
+          [id]: (state.ingredients[id] || 0) + 1,
+        },
+      };
+    case INCREMENT_BUN:
+      if (state.bun !== null) {
+        const { [state.bun]: _, ...ingredients } = state.ingredients;
+        return {
+          ...state,
+          bun: id,
+          ingredients: {
+            ...ingredients,
+            [id]: 1,
+          },
+        };
+      }
+      return {
+        ...state,
+        bun: id,
+        ingredients: {
+          ...state.ingredients,
+          [id]: 1,
+        },
       };
     case DECREMENT:
       return {
         ...state,
-        [id]: (state[id] || 0) - 1,
+        ingredients: {
+          ...state.ingredients,
+          [id]: (state.ingredients[id] || 0) - 1,
+        },
       };
     case CLEAR_COUNT:
       return initialState;

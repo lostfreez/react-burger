@@ -8,6 +8,7 @@ import {
   incrementCount,
   addIngredient,
   addBun,
+  incrementBun
 } from "../../services/actions/actionsTypes";
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +26,7 @@ export default function SectionConstructor() {
         setBaseElement(item);
         setHasBaseSelected(true);
         dispatch(addBun(item.ingredient._id));
+        dispatch(incrementBun(item.ingredient._id));
       }
       if (baseElement !== null && item.ingredient.type !== "bun") {
         dispatch(addIngredient(item.ingredient._id));

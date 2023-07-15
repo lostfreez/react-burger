@@ -11,6 +11,7 @@ export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 export const CLEAR_COUNT = "CLEAR_COUNT";
 export const CLEAR_LIST = "CLEAR_LIST";
+export const INCREMENT_BUN = "INCREMENT_BUN";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -19,6 +20,12 @@ export const clearOder = () => ({
 export const incrementCount = (id) => {
   return {
     type: INCREMENT,
+    payload: id,
+  };
+};
+export const incrementBun = (id) => {
+  return {
+    type: INCREMENT_BUN,
     payload: id,
   };
 };
