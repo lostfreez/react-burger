@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { viewIngredient, openModal } from "../../services/actions/actionsTypes";
 import PropTypes from "prop-types";
 
+
 export default function Card({ ingredient }) {
   const dispatch = useDispatch();
   const dragOptions = {
@@ -21,17 +22,8 @@ export default function Card({ ingredient }) {
     (state) => state.counter.ingredients[ingredient._id] || 0
   );
   const handleClick = () => {
-    dispatch(openModal("IngredientDetails"));
+    dispatch(openModal('ingredient'));
     dispatch(viewIngredient(ingredient));
-  };
-
-  Card.propTypes = {
-    ingredient: PropTypes.shape({
-      _id: PropTypes.string,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      image: PropTypes.string,
-    }).isRequired,
   };
 
   return (

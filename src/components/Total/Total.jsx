@@ -19,7 +19,7 @@ export default function Total({
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(switchLoading());
-    dispatch(openModal("OrderDetails"));
+    dispatch(openModal("order"));
     dispatch(createOrder());
     setHasBaseSelected(false);
     setMiddleElements([]);
