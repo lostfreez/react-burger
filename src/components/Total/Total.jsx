@@ -1,7 +1,12 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
 import { useDispatch } from "react-redux";
-import { openModal, clearCount, clearIngredients } from "../../services/actions/actionsTypes";
+import {
+  openModal,
+  clearCount,
+  clearIngredients,
+  switchLoading,
+} from "../../services/actions/actionsTypes";
 import { createOrder } from "../../services/actions/orderAction";
 import styles from "./Total.module.css";
 
@@ -9,10 +14,11 @@ export default function Total({
   totalPrice,
   setMiddleElements,
   setBaseElement,
-  setHasBaseSelected
+  setHasBaseSelected,
 }) {
   const dispatch = useDispatch();
   const handleClick = () => {
+    dispatch(switchLoading());
     dispatch(openModal("OrderDetails"));
     dispatch(createOrder());
     setHasBaseSelected(false);

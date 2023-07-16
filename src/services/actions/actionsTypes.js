@@ -12,6 +12,7 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const CLEAR_COUNT = "CLEAR_COUNT";
 export const CLEAR_LIST = "CLEAR_LIST";
 export const INCREMENT_BUN = "INCREMENT_BUN";
+export const SWITCH_LOADING = "SWITCH_LOADING";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -77,5 +78,10 @@ export function openModal(children) {
 export function closeModal() {
   return {
     type: CLOSE_MODAL,
+  };
+}
+export function switchLoading() {
+  return {
+    type: SWITCH_LOADING,
   };
 }

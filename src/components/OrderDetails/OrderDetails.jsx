@@ -1,20 +1,25 @@
 import styles from "./OrderDetails.module.css";
 import done from "../../image/done.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { switchLoading } from "../../services/actions/actionsTypes";
+import React from "react";
 
-export default function OrderDetails({ handleClose }) {
+export default function OrderDetails() {
+  const dispatch = useDispatch();
   const order = useSelector((state) => state.order);
+  React.useEffect(() => {
+    if (order.orderNumber) {
+      dispatch(switchLoading());
+    }
+  }, [order, dispatch]);
+  
   if (!order.orderNumber) {
     return <Loader />;
   }
 
   return (
     <div className={styles.modal}>
-      <button className={styles.close} onClick={handleClose}>
-        <CloseIcon type="primary" />
-      </button>
       <p className={`${styles.order} text text_type_digits-large mt-30`}>
         {order.orderNumber}
       </p>

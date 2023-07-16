@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { modalComponent } from "../../services/modalComponent/modalComponent";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
   clearOder,
   clearIngredient,
@@ -12,7 +13,7 @@ import {
 export default function Modal() {
   const dispatch = useDispatch();
   const modalRoot = document.getElementById("modal-root");
-  const { isOpen, children } = useSelector((state) => state.modal);
+  const { isOpen, children, isLoading } = useSelector((state) => state.modal);
   const handleClose = () => {
     dispatch(closeModal());
     dispatch(clearIngredient());
@@ -27,7 +28,12 @@ export default function Modal() {
     <>
       <ModalOverlay handleClose={handleClose} />
       <div className={styles.modal}>
-        <RenderModal handleClose={handleClose} />
+        {isLoading && (
+          <button className={styles.close} onClick={handleClose}>
+            <CloseIcon type="primary" />
+          </button>
+        )}
+        <RenderModal />
       </div>
     </>,
     modalRoot
