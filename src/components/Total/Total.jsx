@@ -6,6 +6,7 @@ import {
   clearCount,
   clearIngredients,
   switchLoading,
+  clearOder,
 } from "../../services/actions/actionsTypes";
 import { createOrder } from "../../services/actions/orderAction";
 import styles from "./Total.module.css";
@@ -18,6 +19,7 @@ export default function Total({
 }) {
   const dispatch = useDispatch();
   const handleClick = () => {
+    dispatch(clearOder());
     dispatch(switchLoading());
     dispatch(openModal("order"));
     dispatch(createOrder());

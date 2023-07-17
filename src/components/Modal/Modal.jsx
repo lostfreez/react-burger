@@ -3,11 +3,7 @@ import styles from "./Modal.module.css";
 import ReactDOM from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  clearOder,
-  clearIngredient,
-  closeModal,
-} from "../../services/actions/actionsTypes";
+import { closeModal } from "../../services/actions/actionsTypes";
 
 export default function Modal({ children }) {
   const dispatch = useDispatch();
@@ -15,8 +11,6 @@ export default function Modal({ children }) {
   const { isOpen, isLoading } = useSelector((state) => state.modal);
   const handleClose = () => {
     dispatch(closeModal());
-    dispatch(clearIngredient());
-    dispatch(clearOder());
   };
   if (!isOpen) {
     return null;

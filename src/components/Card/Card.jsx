@@ -4,7 +4,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { viewIngredient, openModal } from "../../services/actions/actionsTypes";
+import { viewIngredient, openModal, clearIngredient } from "../../services/actions/actionsTypes";
 import PropTypes from "prop-types";
 
 
@@ -22,6 +22,7 @@ export default function Card({ ingredient }) {
     (state) => state.counter.ingredients[ingredient._id] || 0
   );
   const handleClick = () => {
+    dispatch(clearIngredient());
     dispatch(openModal('ingredient'));
     dispatch(viewIngredient(ingredient));
   };
