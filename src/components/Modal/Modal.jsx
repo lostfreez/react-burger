@@ -26,7 +26,7 @@ export default function Modal({ children }) {
     <>
       <ModalOverlay handleClose={handleClose} />
       <div className={styles.modal}>
-        {isLoading && (
+        {!isLoading && (
           <button className={styles.close} onClick={handleClose}>
             <CloseIcon type="primary" />
           </button>

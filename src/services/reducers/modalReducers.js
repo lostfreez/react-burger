@@ -8,6 +8,7 @@ function modalReducers(state = initialState, action) {
       return {
         isOpen: true,
         children: action.payload,
+        isLoading: state.isLoading
       };
       case SWITCH_LOADING:
       return {
