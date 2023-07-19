@@ -1,38 +1,18 @@
-import Main from '../Main/Main';
-import React from 'react';
+import Main from "../Main/Main";
+import React from "react";
 import Header from "../Header/Header";
-
-const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+import { fetchIngredients } from "../../services/actions/ingredientsAction";
+import { useDispatch } from "react-redux";
 
 export default function App() {
-  const [ingredients, setIngredients] = React.useState([]);
-
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    fetch(API_URL)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Ошибка при получении данных с API');
-        }
-      })
-      .then((response) => {
-        setIngredients(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('Ошибка при получении данных с API:', error);
-      });
-  }, []);
+    dispatch(fetchIngredients());
+  }, [dispatch]);
   return (
     <>
-    <Header />
-    <Main ingredients={ingredients} />
-    <div id='modal-root'></div>
+      <Header />
+      <Main />
     </>
   );
 }
-
-
-
-

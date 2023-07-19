@@ -7,7 +7,7 @@ import Link from "../Link/Link";
 
 export default function Header() {
   return (
-    <div className={styles.Header}>
+    <header className={styles.Header}>
       <div className={styles.Header__container}>
         <Link
           IconComponent={BurgerIcon}
@@ -29,6 +29,6 @@ export default function Header() {
         linkText="Личный&nbsp;кабинет"
         className={"text text_type_main-default text_color_inactive ml-2"}
       />
-    </div>
+    </header>
   );
 }
