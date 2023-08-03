@@ -2,8 +2,9 @@ export function checkResponse(response) {
   if (response.ok) {
     return response.json();
   } else {
-    let error = new Error("Ошибка создания заказа");
-    error.response = response;
-    throw error;
+    return response.json().then((response) => {
+      let error = new Error(response.message);
+      throw error;
+    });
   }
 }

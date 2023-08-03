@@ -13,6 +13,8 @@ export const CLEAR_COUNT = "CLEAR_COUNT";
 export const CLEAR_LIST = "CLEAR_LIST";
 export const INCREMENT_BUN = "INCREMENT_BUN";
 export const SWITCH_LOADING = "SWITCH_LOADING";
+export const AUTHORISATE_SUCCESS = "AUTHORISATION_SUCCESS";
+export const AUTHENTIFICATE = "AUTHENTIFICATE";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -83,5 +85,17 @@ export function closeModal() {
 export function switchLoading() {
   return {
     type: SWITCH_LOADING,
+  };
+}
+
+export function authSuccess() {
+  return {
+    type: AUTHORISATE_SUCCESS,
+  };
+}
+
+export function authentificate() {
+  return {
+    type: AUTHENTIFICATE,
   };
 }
