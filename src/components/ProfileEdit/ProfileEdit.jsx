@@ -1,14 +1,7 @@
 import styles from "./ProfileEdit.module.css";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getProfile } from "../../services/actions/getProfileAction";
-import React from "react";
-import { useDispatch } from "react-redux";
 
 export default function ProfileEdit() {
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
   return (
     <div className={styles.page}>
       <div className={styles.profile}>
