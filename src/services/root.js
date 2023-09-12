@@ -6,6 +6,7 @@ import modalReducers from "./reducers/modalReducers";
 import ingredientViewReducer from "./reducers/ingredientViewReducer";
 import orderReducer from "./reducers/orderReducer";
 import authentificateReducer from "./reducers/authentificateReducer";
+import burgerReducer from "./reducers/burgerReducer";
 
 const rootReducer = combineReducers({
   counter: countReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   ingredient: ingredientViewReducer,
   order: orderReducer,
   authentificate: authentificateReducer,
+  burger: burgerReducer,
 });
 
 export default rootReducer;

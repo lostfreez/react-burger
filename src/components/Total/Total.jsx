@@ -15,7 +15,7 @@ export default function Total({
   totalPrice,
   setMiddleElements,
   setBaseElement,
-  setHasBaseSelected,
+  hasBaseSelected,
 }) {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -23,7 +23,7 @@ export default function Total({
     dispatch(switchLoading());
     dispatch(openModal("order"));
     dispatch(createOrder());
-    setHasBaseSelected(false);
+    hasBaseSelected(false);
     setMiddleElements([]);
     setBaseElement(null);
     dispatch(clearCount());

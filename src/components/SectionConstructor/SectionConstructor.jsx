@@ -3,35 +3,40 @@ import Total from "../Total/Total";
 import styles from "./SectionConstructor.module.css";
 import { useDrop } from "react-dnd";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   incrementCount,
   addIngredient,
   addBun,
-  incrementBun
+  incrementBun,
+  setBaseSelected,
+  setBaseElement,
+  setMiddleElements,
 } from "../../services/actions/actionsTypes";
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
 import { v4 as uuidv4 } from "uuid";
 
 export default function SectionConstructor() {
   const dispatch = useDispatch();
-  const [hasBaseSelected, setHasBaseSelected] = React.useState(false);
-  const [baseElement, setBaseElement] = React.useState(null);
-  const [middleElement, setMiddleElements] = React.useState([]);
+  const { hasBaseSelected, baseElement, middleElement } = useSelector(
+    (state) => state.burger
+  );
 
   const dropOption = {
     accept: "card",
     drop: (item) => {
       if (item.ingredient.type === "bun") {
-        setBaseElement(item);
-        setHasBaseSelected(true);
+        dispatch(setBaseElement(item));
+        dispatch(setBaseSelected(true));
         dispatch(addBun(item.ingredient._id));
         dispatch(incrementBun(item.ingredient._id));
       }
       if (baseElement !== null && item.ingredient.type !== "bun") {
         dispatch(addIngredient(item.ingredient._id));
         dispatch(incrementCount(item.ingredient._id));
-        setMiddleElements((state) => [...state, { ...item, uuid: uuidv4() }]);
+        dispatch(
+          setMiddleElements([...middleElement, { ...item, uuid: uuidv4() }])
+        );
       }
     },
     collect: (monitor) => ({
@@ -82,13 +87,12 @@ export default function SectionConstructor() {
                     Выберите ингредиенты для бургера
                   </span>
                 ) : (
-                  middleElement.map((middleElement, index) => {
+                  middleElement.map((element, index) => {
                     return (
                       <IngredientsContainer
-                        key={middleElement.uuid}
-                        middleElement={middleElement}
+                        key={element.uuid}
+                        element={element}
                         index={index}
-                        setMiddleElements={setMiddleElements}
                       />
                     );
                   })
@@ -108,7 +112,14 @@ export default function SectionConstructor() {
           </div>
         )
       )}
-      {totalPrice > 0 && <Total totalPrice={totalPrice} setHasBaseSelected={setHasBaseSelected} setMiddleElements={setMiddleElements} setBaseElement={setBaseElement}/>}
+      {totalPrice > 0 && (
+        <Total
+          totalPrice={totalPrice}
+          hasBaseSelected={hasBaseSelected}
+          setMiddleElements={setMiddleElements}
+          setBaseElement={setBaseElement}
+        />
+      )}
     </div>
   );
 }

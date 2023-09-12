@@ -99,3 +99,17 @@ export function authentificate() {
     type: AUTHENTIFICATE,
   };
 }
+export const setBaseSelected = (value) => ({
+  type: 'SET_BASE_SELECTED',
+  payload: value,
+});
+
+export const setBaseElement = (element) => ({
+  type: 'SET_BASE_ELEMENT',
+  payload: element,
+});
+
+export const setMiddleElements = (elements) => ({
+  type: 'SET_MIDDLE_ELEMENTS',
+  payload: elements,
+});
