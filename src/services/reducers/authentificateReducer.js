@@ -1,25 +1,30 @@
-import { REGISTER_SUCCESS } from "../actions/registerAction";
-import { AUTHENTIFICATE } from "../actions/actionsTypes";
-import Cookies from "js-cookie";
-
 const initialState = {
   sign: false,
+  token: null,
+  name: null,
+  email: null,
 };
 
 const authentificateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REGISTER_SUCCESS:
-      Cookies.set("accessToken", action.payload.accessToken);
-      Cookies.set("refreshToken", action.payload.refreshToken);
+    case "SIGN_SUCCESS":
       return {
         ...state,
         sign: true,
       };
-    case AUTHENTIFICATE:
+    case "SET_TOKEN":
       return {
         ...state,
-        sign: true,
+        token: action.payload,
       };
+    case "SET_USER":
+      return {
+        ...state,
+        name: action.payload.name,
+        email: action.payload.email,
+      };
+    case "LOGOUT_SUCCESS":
+      return initialState;
     default:
       return state;
   }

@@ -13,9 +13,7 @@ export default function Sign() {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const handleClick = () => {
-    dispatch(authorisation(email, password))
-      .then(() => navigate("/"))
-      .catch((error) => console.error("Authorization failed", error));
+    dispatch(authorisation(email, password, navigate));
   };
   return (
     <div className={styles.sign}>

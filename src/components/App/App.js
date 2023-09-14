@@ -13,17 +13,18 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/"  element={<ProtectedRoute element={<BurgerConstructor />}/>}/>
+        <Route path="/" element={<BurgerConstructor />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute element={<Profile />} />}
+        />
         <Route path="/ingredients" element={<IngredientPage />} />
-        <Route path="*" element={<NotFound404/>}/>
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>
   );
 }
-
-

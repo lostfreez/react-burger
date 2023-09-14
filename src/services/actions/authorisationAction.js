@@ -1,15 +1,16 @@
 import { BASE_URL } from "../urls/urls";
 import { checkResponse } from "../checkResponse/checkResponse";
-
-export const AUTH_SUCCES = "AUTH_SUCCES";
-export const AUTH_FAILED = "AUTH_FAILED";
+import { signSuccess } from "./actionsTypes";
+import { setToken } from "./actionsTypes";
+import { setUser } from "./actionsTypes";
+import Cookies from "js-cookie";
 
 const API_URL = `${BASE_URL}/auth/login`;
 
-export const authorisation = (email, password) => {
+export const authorisation = (email, password, navigate) => {
   return function (dispatch) {
     return fetch(API_URL, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -17,15 +18,18 @@ export const authorisation = (email, password) => {
     })
       .then((response) => checkResponse(response))
       .then((response) => {
-        console.log(response);
         if (response.success) {
-          dispatch({
-            type: AUTH_SUCCES,
-          });
-          return Promise.resolve();
-        } else {
-          return Promise.reject();
+          const { accessToken, refreshToken } = response;
+          const { name, email } = response.user;
+          Cookies.set("refreshToken", refreshToken);
+          dispatch(signSuccess());
+          dispatch(setToken(accessToken));
+          dispatch(setUser(name, email));
+          navigate("/");
         }
+      })
+      .catch((error) => {
+        console.error("Error during authentication: ", error);
       });
   };
 };

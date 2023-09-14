@@ -1,7 +1,20 @@
 import styles from "./ProfileEdit.module.css";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { logoutUser } from "../../services/actions/logoutAction";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useSelector } from 'react-redux';
+
 
 export default function ProfileEdit() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userData = useSelector(state => state.authentificate);
+  const [value, setValue] = React.useState(userData.email)
+  const onChange = e => {
+    setValue(e.target.value)
+  }
   return (
     <div className={styles.page}>
       <div className={styles.profile}>
@@ -13,7 +26,10 @@ export default function ProfileEdit() {
             История заказов
           </p>
           <p
-            className={`${styles.text} text text_type_main-medium text_color_inactive`}
+            className={`${styles.text} ${styles.link} text text_type_main-medium text_color_inactive`}
+            onClick={() => {
+              dispatch(logoutUser(navigate));
+            }}
           >
             Выход
           </p>
@@ -23,10 +39,12 @@ export default function ProfileEdit() {
         </div>
         <div>
           <EmailInput
+            onChange={onChange}
             name={"email"}
             isIcon={false}
             placeholder={"Имя"}
             icon={"EditIcon"}
+            value={value}
           />
           <EmailInput
             name={"email"}

@@ -1,32 +1,22 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Cookies from "js-cookie";
-import { authentificate } from "../../services/actions/actionsTypes";
-
 
 function ProtectedRoute({ element }) {
-  const dispatch = useDispatch();
+  const [isAuthorized, setIsAuthorized] = React.useState(false);
   const navigate = useNavigate();
   const auth = useSelector((state) => state.authentificate.sign);
 
   React.useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
-    if (accessToken) {
-      const authentificateAsync = async () => {
-        await dispatch(authentificate());
-      };
-      authentificateAsync();
+    if (auth) {
+      setIsAuthorized(true);
     } else {
+      setIsAuthorized(false);
       navigate("/login");
     }
-  }, [dispatch, navigate]);
+  }, [navigate, auth]);
 
-  if (!auth) {
-    return null;
-  }
-  return element;
+  return isAuthorized ? element : null;
 }
 
 export default ProtectedRoute;
