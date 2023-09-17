@@ -1,17 +1,12 @@
 const initialState = {
-  sign: false,
   token: null,
   name: null,
   email: null,
+  recovery: false,
 };
 
 const authentificateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SIGN_SUCCESS":
-      return {
-        ...state,
-        sign: true,
-      };
     case "SET_TOKEN":
       return {
         ...state,
@@ -22,6 +17,11 @@ const authentificateReducer = (state = initialState, action) => {
         ...state,
         name: action.payload.name,
         email: action.payload.email,
+      };
+    case "REQUEST_RECOVERY":
+      return {
+        ...state,
+        recovery: true,
       };
     case "LOGOUT_SUCCESS":
       return initialState;

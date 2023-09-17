@@ -1,8 +1,6 @@
 import { BASE_URL } from "../urls/urls";
 import { checkResponse } from "../checkResponse/checkResponse";
-
-export const RECOVERY_SUCCES = "RECOVERY_SUCCES";
-export const RECOVERY_FAILED = "RECOVERY_FAILED";
+import { requestRecovery } from "./actionsTypes";
 
 const API_URL = `${BASE_URL}/password-reset`;
 
@@ -17,15 +15,14 @@ export const recoverPassword = (email) => {
     })
       .then((response) => checkResponse(response))
       .then((response) => {
-        console.log(response);
         if (response.success) {
-          dispatch({
-            type: RECOVERY_SUCCES,
-          });
-          return Promise.resolve();
-        } else {
-          return Promise.reject();
+          dispatch(requestRecovery());
+          return { success: true };
         }
+      })
+      .catch((error) => {
+        console.error("Error during forgot: ", error);
+        return { success: false };
       });
   };
 };

@@ -6,14 +6,18 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import { authorisation } from "../../services/actions/authorisationAction";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 export default function Sign() {
+  const location = useLocation();
+  const { redirect } = queryString.parse(location.search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const handleClick = () => {
-    dispatch(authorisation(email, password, navigate));
+    dispatch(authorisation(email, password, navigate, redirect));
   };
   return (
     <div className={styles.sign}>

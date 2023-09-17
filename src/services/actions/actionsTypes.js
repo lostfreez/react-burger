@@ -15,13 +15,13 @@ export const INCREMENT_BUN = "INCREMENT_BUN";
 export const SWITCH_LOADING = "SWITCH_LOADING";
 export const AUTHORISATE_SUCCESS = "AUTHORISATION_SUCCESS";
 export const AUTHENTIFICATE = "AUTHENTIFICATE";
-export const SIGN_SUCCESS = "SIGN_SUCCESS";
 export const SET_TOKEN = "SET_TOKEN";
 export const SET_USER = "SET_USER";
 export const SET_BASE_SELECTED = "SET_BASE_SELECTED";
 export const SET_BASE_ELEMENT = "SET_BASE_ELEMENT";
 export const SET_MIDDLE_ELEMENTS = "SET_MIDDLE_ELEMENTS";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const REQUEST_RECOVERY ="REQUEST_RECOVERY";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -114,11 +114,6 @@ export const setToken = (accessToken) => ({
   type: SET_TOKEN,
   payload: accessToken,
 });
-export function signSuccess() {
-  return {
-    type: SIGN_SUCCESS,
-  };
-}
 export function setUser(name, email) {
   return {
     type: SET_USER,
@@ -133,3 +128,10 @@ export function logoutSuccess() {
     type: LOGOUT_SUCCESS,
   };
 }
+export function requestRecovery(){
+  return {
+    type: REQUEST_RECOVERY
+  }
+}
+
+

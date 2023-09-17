@@ -1,20 +1,45 @@
 import styles from "./ProfileEdit.module.css";
-import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  EmailInput,
+  PasswordInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { logoutUser } from "../../services/actions/logoutAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { useSelector } from 'react-redux';
-
+import { useSelector } from "react-redux";
+import { getUserData } from "../../services/actions/getUserDataAction";
+import Loader from "../Loader/Loader";
 
 export default function ProfileEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector(state => state.authentificate);
-  const [value, setValue] = React.useState(userData.email)
-  const onChange = e => {
-    setValue(e.target.value)
+  const userData = useSelector((state) => state.authentificate);
+  const [name, setName] = React.useState(userData.name || "");
+  const [email, setEmail] = React.useState(userData.email || "");
+  const [password, setPassword] = React.useState("");
+  const [isLoading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const updateUserData = async () => {
+      if (!name && !email) {
+        setLoading(true);
+        await dispatch(getUserData());
+        setLoading(false);
+      }
+    };
+    updateUserData();
+  }, [dispatch, name, email]);
+
+  React.useEffect(() => {
+    setName(userData.name);
+    setEmail(userData.email);
+  }, [userData]);
+
+  if (isLoading) {
+    return <Loader />;
   }
+
   return (
     <div className={styles.page}>
       <div className={styles.profile}>
@@ -39,26 +64,27 @@ export default function ProfileEdit() {
         </div>
         <div>
           <EmailInput
-            onChange={onChange}
             name={"email"}
-            isIcon={false}
             placeholder={"Имя"}
             icon={"EditIcon"}
-            value={value}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <EmailInput
             name={"email"}
-            isIcon={false}
             extraClass={`mt-6`}
             placeholder={"Логин"}
             icon={"EditIcon"}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <EmailInput
-            name={"email"}
-            isIcon={false}
+          <PasswordInput
+            value={password}
+            name={"password"}
             extraClass={`mt-6`}
             placeholder={"Пароль"}
             icon={"EditIcon"}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>

@@ -4,19 +4,21 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePassword } from "../../services/actions/savePasswordAction";
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function PasswordConfirm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [password, setPassword] = React.useState("");
   const [token, setToken] = React.useState("");
-  const handleClick = () => {
-    dispatch(savePassword(password, token))
-      .then(() => navigate("/reset-password"))
-      .catch((error) => console.error("Confirm new password failed", error));
+  const handleClick = async() => {
+    const result = await dispatch(savePassword(password, token));
+    if (result.success === true) {
+      navigate("/login");
+    }
   };
+
   return (
     <div className={styles.sign}>
       <p className={`text text_type_main-medium`}>Восстановление пароля</p>

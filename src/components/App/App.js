@@ -14,10 +14,30 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<BurgerConstructor />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/login"
+          element={<ProtectedRoute isAuth={true} element={<Login />} />}
+        />
+        <Route
+          path="/register"
+          element={<ProtectedRoute isAuth={true} element={<Register />} />}
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <ProtectedRoute isAuth={true} element={<ForgotPassword />} />
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <ProtectedRoute
+              isAuth={true}
+              allowReset={true}
+              element={<ResetPassword />}
+            />
+          }
+        />
         <Route
           path="/profile"
           element={<ProtectedRoute element={<Profile />} />}

@@ -9,6 +9,8 @@ import {
   selectSauces,
   selectMains,
 } from "../../services/selectors/ingredientsSelectors";
+
+
 export default function Section() {
   const [current, setCurrent] = React.useState("one");
   const ingredients = useSelector(selectIngredients);
@@ -46,7 +48,7 @@ export default function Section() {
   const bunsRef = React.useRef(null);
   const saucesRef = React.useRef(null);
   const mainsRef = React.useRef(null);
-  return ingredients.length ? (
+  return (
     <div className={`${styles.section} custom-scroll`} id="scroll">
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <div className={styles.switcher}>
@@ -81,7 +83,5 @@ export default function Section() {
         </ul>
       </div>
     </div>
-  ) : (
-    "Загрузка..."
   );
 }

@@ -11,10 +11,12 @@ export default function PasswordRecovery() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState("");
-  const handleClick = () => {
-    dispatch(recoverPassword(email))
-      .then(() => navigate("/reset-password"))
-      .catch((error) => console.error("Recovery failed", error));
+  const handleClick = async () => {
+    const result = await dispatch(recoverPassword(email));
+    if (result && result.success) {
+      localStorage.setItem("allowResetPassword", true);
+      navigate("/reset-password");
+    }
   };
 
   return (
