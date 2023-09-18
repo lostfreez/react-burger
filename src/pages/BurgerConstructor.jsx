@@ -10,7 +10,7 @@ export default function BurgerConstructor() {
   React.useEffect(() => {
     dispatch(fetchIngredients());
   }, [dispatch]);
-  const ingredients = useSelector((state) => state.getIngredients.ingredients);
+  const ingredients = useSelector((state) => state.getIngredients.ingredients.data);
 
   return (
     <>

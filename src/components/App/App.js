@@ -5,9 +5,9 @@ import Register from "../../pages/Register";
 import ForgotPassword from "../../pages/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword";
 import Profile from "../../pages/Profile";
-import IngredientPage from "../../pages/IngredientPage";
 import NotFound404 from "../../pages/NotFound404";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import IngredientPage from "../../pages/IngredientPage";
 
 export default function App() {
   return (
@@ -42,7 +42,7 @@ export default function App() {
           path="/profile"
           element={<ProtectedRoute element={<Profile />} />}
         />
-        <Route path="/ingredients" element={<IngredientPage />} />
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>

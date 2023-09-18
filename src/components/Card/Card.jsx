@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { viewIngredient, openModal, clearIngredient } from "../../services/actions/actionsTypes";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Card({ ingredient }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const dragOptions = {
     type: "card",
@@ -25,6 +27,7 @@ export default function Card({ ingredient }) {
     dispatch(clearIngredient());
     dispatch(openModal('ingredient'));
     dispatch(viewIngredient(ingredient));
+    navigate(`/ingredients/${ingredient._id}`, { state: { modal: true } });
   };
 
   return (

@@ -1,16 +1,20 @@
 import React from "react";
 import styles from "./IngredientWindow.module.css";
 
-export default function IngredientWindow() {
+export default function IngredientWindow({ ingredient }) {
   return (
     <div className={styles.page}>
       <div className={styles.ingredient}>
         <p className={`${styles.text} text text_type_main-large`}>
           Детали ингредиента
         </p>
-        <img src="" alt="" className={styles.image} />
+        <img
+          src={ingredient.image_large}
+          alt={ingredient.name}
+          className={styles.image}
+        />
         <p className="text text_type_main-medium mt-4 mb-8">
-          Биокотлета из марсианской Магнолии
+          {ingredient.name}
         </p>
         <ul className={styles.foot}>
           <li className={styles.section}>
@@ -18,7 +22,7 @@ export default function IngredientWindow() {
               Калории,ккал
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              244,4
+              {ingredient.calories}
             </p>
           </li>
           <li className={styles.section}>
@@ -26,7 +30,7 @@ export default function IngredientWindow() {
               Белки, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              12,2
+              {ingredient.proteins}
             </p>
           </li>
           <li className={styles.section}>
@@ -34,7 +38,7 @@ export default function IngredientWindow() {
               Жиры, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              17,2
+              {ingredient.fat}
             </p>
           </li>
           <li className={styles.section}>
@@ -42,7 +46,7 @@ export default function IngredientWindow() {
               Углеводы, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              10,2
+              {ingredient.carbohydrates}
             </p>
           </li>
         </ul>
