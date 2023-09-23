@@ -1,60 +1,44 @@
 import Header from "../components/Header/Header";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import IngredientWindow from "../components/IngredientWindow/IngredientWindow";
 import { fetchIngredients } from "../services/actions/ingredientsAction";
 import React from "react";
-import Loader from "../components/Loader/Loader";
-import Modal from "../components/Modal/Modal";
-import IngredientDetails from "../components/IngredientDetails/IngredientDetails";
 import { AppDispatch } from "../services/store";
 import { IngredientsState } from "../services/types/types";
+import NotFound404 from "./NotFound404";
 
 const IngredientPage: React.FC = () => {
-  const { id } = useParams();
   const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
-
+  const { id } = useParams();
   const ingredientsData = useSelector(
     (state: { getIngredients: IngredientsState }) =>
       state.getIngredients.ingredients?.data
   );
-  const ingredients = ingredientsData || [];
-  
-  React.useEffect(() => {
-    if (!ingredients || ingredients.length === 0) {
-      dispatch(fetchIngredients());
-    }
-  }, [dispatch, ingredients]);
-
-  const ingredient = ingredients
-    ? ingredients.find((item) => item._id === id)
-    : null;
-  const isModal = useLocation().state?.modal;
+  const ingredient = ingredientsData.find((item) => item._id === id);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (ingredients && !ingredient) {
-      navigate("*");
+    if (ingredientsData.length === 0) {
+      dispatch(fetchIngredients()).then(() => {
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
     }
-  }, [ingredients, ingredient, navigate]);
+  }, [ingredientsData, dispatch]);
 
-  if (!ingredients) {
-    return <Loader />;
-  }
-
-  if (!ingredient) {
+  if (isLoading) {
     return null;
   }
 
   return (
     <>
       <Header />
-      {isModal ? (
-        <Modal>
-          <IngredientDetails />
-        </Modal>
-      ) : (
+      {ingredient ? (
         <IngredientWindow ingredient={ingredient} />
+      ) : (
+        <NotFound404 />
       )}
     </>
   );

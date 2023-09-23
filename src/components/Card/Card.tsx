@@ -4,7 +4,6 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, DragSourceMonitor } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { viewIngredient } from "../../services/reducers/ingredientViewReducer";
 import { openModal } from "../../services/reducers/modalReducers";
 import { clearIngredient } from "../../services/reducers/ingredientViewReducer";
@@ -15,7 +14,6 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ ingredient }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const dragOptions = {
     type: "card",
@@ -32,9 +30,9 @@ const Card: React.FC<Props> = ({ ingredient }) => {
 
   const handleClick = () => {
     dispatch(clearIngredient());
-    dispatch(openModal("ingredient"));
     dispatch(viewIngredient(ingredient));
-    navigate(`/ingredients/${ingredient._id}`, { state: { modal: true } });
+    dispatch(openModal("ingredient"));
+    window.history.pushState(null, '', `/ingredients/${ingredient._id}`);
   };
 
   return (

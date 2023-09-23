@@ -1,6 +1,7 @@
 import styles from "../IngredientDetails/IngredientDetails.module.css";
 import { useSelector } from "react-redux";
 import { Ingredient } from "../../services/types/types";
+import React from "react";
 
 const IngredientDetails: React.FC = () => {
   const ingredient = useSelector(
