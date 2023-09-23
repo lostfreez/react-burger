@@ -13,6 +13,15 @@ export const CLEAR_COUNT = "CLEAR_COUNT";
 export const CLEAR_LIST = "CLEAR_LIST";
 export const INCREMENT_BUN = "INCREMENT_BUN";
 export const SWITCH_LOADING = "SWITCH_LOADING";
+export const AUTHORISATE_SUCCESS = "AUTHORISATION_SUCCESS";
+export const AUTHENTIFICATE = "AUTHENTIFICATE";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_USER = "SET_USER";
+export const SET_BASE_SELECTED = "SET_BASE_SELECTED";
+export const SET_BASE_ELEMENT = "SET_BASE_ELEMENT";
+export const SET_MIDDLE_ELEMENTS = "SET_MIDDLE_ELEMENTS";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const REQUEST_RECOVERY ="REQUEST_RECOVERY";
 
 export const clearOder = () => ({
   type: CLEAR_ORDER,
@@ -85,3 +94,44 @@ export function switchLoading() {
     type: SWITCH_LOADING,
   };
 }
+
+export const setBaseSelected = (value) => ({
+  type: SET_BASE_SELECTED,
+  payload: value,
+});
+
+export const setBaseElement = (element) => ({
+  type: SET_BASE_ELEMENT,
+  payload: element,
+});
+
+export const setMiddleElements = (elements) => ({
+  type: SET_MIDDLE_ELEMENTS,
+  payload: elements,
+});
+
+export const setToken = (accessToken) => ({
+  type: SET_TOKEN,
+  payload: accessToken,
+});
+export function setUser(name, email) {
+  return {
+    type: SET_USER,
+    payload: {
+      name,
+      email,
+    },
+  };
+}
+export function logoutSuccess() {
+  return {
+    type: LOGOUT_SUCCESS,
+  };
+}
+export function requestRecovery(){
+  return {
+    type: REQUEST_RECOVERY
+  }
+}
+
+

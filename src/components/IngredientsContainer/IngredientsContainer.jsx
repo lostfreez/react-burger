@@ -1,26 +1,25 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import { useDrop } from "react-dnd";
 import {
   swapIngredient,
   removeIngredient,
   decrementCount,
+  setMiddleElements,
 } from "../../services/actions/actionsTypes";
 import React from "react";
 
-export default function IngredientsContainer({
-  middleElement,
-  index,
-  setMiddleElements,
-}) {
+export default function IngredientsContainer({ element, index }) {
   const dispatch = useDispatch();
+  const { middleElement } = useSelector((state) => state.burger);
   const handleRemove = (indexToRemove, ingredientId) => {
     dispatch(decrementCount(ingredientId));
     dispatch(removeIngredient(ingredientId));
-    setMiddleElements((state) =>
-      state.filter((item, index) => index !== indexToRemove)
+    const updateMiddleElement = middleElement.filter(
+      (item, index) => index !== indexToRemove
     );
+    dispatch(setMiddleElements(updateMiddleElement));
   };
   const moveOption = {
     type: "ingredient",
@@ -29,19 +28,14 @@ export default function IngredientsContainer({
       isDrag: monitor.isDragging(),
     }),
   };
-  const moveElement = React.useCallback(
-    (dragIndex, hoverIndex) => {
-      setMiddleElements((prevElements) => {
-        const newElements = [...prevElements];
-        let temp = newElements[dragIndex];
-        newElements[dragIndex] = newElements[hoverIndex];
-        newElements[hoverIndex] = temp;
-        dispatch(swapIngredient(newElements));
-        return newElements;
-      });
-    },
-    [setMiddleElements, dispatch]
-  );
+  const moveElement = (dragIndex, hoverIndex) => {
+    const newElements = [...middleElement];
+    let temp = newElements[dragIndex];
+    newElements[dragIndex] = newElements[hoverIndex];
+    newElements[hoverIndex] = temp;
+    dispatch(setMiddleElements(newElements));
+    dispatch(swapIngredient(newElements));
+  };
   const dropOption = {
     accept: "ingredient",
     drop: (item) => {
@@ -62,10 +56,10 @@ export default function IngredientsContainer({
   return (
     <div ref={ref}>
       <ConstructorElement
-        text={middleElement.ingredient.name}
-        price={middleElement.ingredient.price}
-        thumbnail={middleElement.ingredient.image}
-        handleClose={() => handleRemove(index, middleElement.ingredient._id)}
+        text={element.ingredient.name}
+        price={element.ingredient.price}
+        thumbnail={element.ingredient.image}
+        handleClose={() => handleRemove(index, element.ingredient._id)}
       />
     </div>
   );

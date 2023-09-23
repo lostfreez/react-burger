@@ -4,30 +4,28 @@ import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Header.module.css";
 import Link from "../Link/Link";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <header className={styles.Header}>
       <div className={styles.Header__container}>
         <Link
+          onClick={() => navigate("/")}
           IconComponent={BurgerIcon}
-          type={"primary"}
           linkText="Конструктор"
-          className={"text text_type_main-default text_color_primary ml-2"}
         />
-        <Link
-          IconComponent={ListIcon}
-          type={"secondary"}
-          linkText="Лента&nbsp;заказов"
-          className={"text text_type_main-default text_color_inactive ml-2"}
-        />
+        <Link IconComponent={ListIcon} linkText="Лента&nbsp;заказов" />
       </div>
       <Logo />
       <Link
+        onClick={() => {
+          navigate("/profile");
+        }}
         IconComponent={ProfileIcon}
-        type={"secondary"}
         linkText="Личный&nbsp;кабинет"
-        className={"text text_type_main-default text_color_inactive ml-2"}
       />
     </header>
   );

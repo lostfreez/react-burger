@@ -1,0 +1,281 @@
+[33mcommit 0e37530821abcb8e6d954e9e28c8828f95c03472[m[33m ([m[1;36mHEAD -> [m[1;32mrouter[m[33m)[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Sep 14 20:50:08 2023 +0700
+
+    refactor: переработаны экшены авторизации и логаута, переботан рекдуктор хранения данных об авторизованном пользователе
+
+[33mcommit 0f9fef0ab534889d0ba766244298a8e31f0c5884[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Tue Sep 12 21:00:10 2023 +0700
+
+    refactor: переработана сборка бургера/используется store для хранения данных о бургере
+
+[33mcommit a8020ed60029099ccf344428b695fe917b8b0ead[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Mon Sep 11 22:27:19 2023 +0700
+
+    fix: сброс элементов конструктора при переходе на страницу профиля
+
+[33mcommit 4771fdc5eb2a249d85fa42c7a6a435063bab42ed[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Mon Sep 11 16:25:44 2023 +0700
+
+    feat: добавлены маршруты в header на профиль и бургер конструктор
+
+[33mcommit d6e4d1003827d0d8fa50a4f06eb220dee2577103[m[33m ([m[1;31morigin/router[m[33m)[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Aug 3 21:28:09 2023 +0700
+
+    feat: доработать ProtectedRoute
+
+[33mcommit be30285333364d762cc26a8b3c0fdd65c34525c1[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Wed Jul 19 06:11:54 2023 +0700
+
+    feat: верстка страниц директории pages
+
+[33mcommit fec58eb5098b12ce0e8143bc0cd6b13ea56d1953[m[33m ([m[1;32msprint-12[m[33m)[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Tue Jul 18 00:13:36 2023 +0700
+
+    refactor: убраны экшены clearOrder и clearIngredient из modal
+
+[33mcommit 690bc89b4e07c3ffd8ded0ffa3a202bf16d7eb06[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Mon Jul 17 23:52:12 2023 +0700
+
+    fix: исправлено появление крестика
+
+[33mcommit c28b5b470bd852a00a88847eaf591a64026dc4fc[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Mon Jul 17 01:38:16 2023 +0700
+
+    refactor: реализовано открытие модального окна через children компонента modal
+
+[33mcommit 415c23dfe14800d945a61fb5ed65a0e0ff196d2b[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sun Jul 16 20:26:50 2023 +0700
+
+    refactor: иконка закрытия возвращена в modal, использован хук для отрисовки крестика после получения ответа от сервера номера заказа
+
+[33mcommit 952b93abfd9fb1b3531cd5a10d22bfe6f27fce86[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 21:06:59 2023 +0700
+
+    feat: добавлен функционал изменения count для элементов типа bun, переработан state для countReducer
+
+[33mcommit bf02206dcd62dd129a8ad6d8aaeaca4bd7fd11c9[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 20:38:40 2023 +0700
+
+    refactor: modal-root перенсен в index.html
+
+[33mcommit 321c5fc2ed719cfe2b2d3366e74434adebc3fc76[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 06:22:57 2023 +0700
+
+    feat: реализован функционал очистки списка ингредиентов после создания закака(добавлены новые экшены, изменена механика некоторых редюсеров)
+
+[33mcommit 4f64283b1392b859551522a8308c5de1b8ab14c7[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 05:52:10 2023 +0700
+
+    fix: небольшие изменения по верстке модальных окон/feat: добавлен экран загрузки при создании заказа на событие пока номер заказа не получен
+
+[33mcommit 0e48589ae64174ca922af9aeae8890507c7086d4[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 03:41:05 2023 +0700
+
+    feat: добавлен loader на событие - создание заказа/обращение к api
+
+[33mcommit 95cc9bdeb4223389ec74ea55a1a4f1f567823feb[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:31:01 2023 +0700
+
+    refactor: добавил типизацию пропса ingredient в компоненте card с использованием библеотеки prop-types
+
+[33mcommit 08a3dd905c923285cf841345eb72360ab3c2214c[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:20:56 2023 +0700
+
+    refactor: использована библиотека uuid для генерации уникального key
+
+[33mcommit a4642d8910baa1a01a8b9b126c198bad019d1804[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:12:35 2023 +0700
+
+    refactor: в функ. компонент Header изменен блок div на <Header> для более правильного соответствия семантике
+
+[33mcommit 9fc24739d605042772f7db70a4a6571370a2b51b[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:09:50 2023 +0700
+
+    refactor: div modal root перенесен в index.tsx
+
+[33mcommit a4c2beba9e347c45ae9982f60436f60f1871915e[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:05:44 2023 +0700
+
+    fix: rename modalComponent
+
+[33mcommit 21379915d0682cfd52365d76a7fab2f9d54398bd[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Sat Jul 15 01:02:53 2023 +0700
+
+    refactor: изменен подход открытия модальных окон
+
+[33mcommit 7ca6ef70ab1f819016d2083f189aedd08e0c5748[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jul 14 21:05:41 2023 +0700
+
+    refactor: добавлена универсальная функция отлова ошибок для запросов api
+
+[33mcommit 0aff07a06d99868da0d8e77c6f9abc7855a8a55e[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jul 14 20:53:42 2023 +0700
+
+    refactor: при обращении к api добавлено отлавливание ошибок от сервера
+
+[33mcommit a4df961efaaf85b390d02ac176602923a4df621e[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jul 13 04:43:37 2023 +0700
+
+    refactor: Добавлен текст верхней и нижней булке
+
+[33mcommit 123423a623a142e282075321e55ddc914d22b1d7[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jul 13 04:29:56 2023 +0700
+
+    refactor: Использован каталог для унифицирования констант для url адресов
+
+[33mcommit 2853f607f770be4d76113fbe8ba1ca335aff8672[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jul 13 04:22:49 2023 +0700
+
+    refactor: Сделан рефакторинг типов экшенов и их констант
+
+[33mcommit 242346fdf8b6bfb7e51fcd62f37efb4e9859fc89[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Wed Jul 5 22:38:36 2023 +0700
+
+    refactor: произведена дополнительная верстка элементов, немного переработана функция добавления ингредиентов
+
+[33mcommit fee4ea759892559ad6cfec0b06d7f53ca5ff70e8[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Wed Jul 5 20:04:36 2023 +0700
+
+    refacot:работа над версткой
+
+[33mcommit 387226a3d48a206dad1149337941d15ea23242a1[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Wed Jul 5 01:36:06 2023 +0700
+
+    feat: добавлена сортировка ингредиентов функционал/рефактор с учетом сортировки/обновление функций хранилища для сортировки
+
+[33mcommit 6d2154a40c4139fda9ccd0732cd0a9d57d89278f[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 30 19:52:39 2023 +0700
+
+    fix: очистка данных ингредиента после закрытия модального окна
+
+[33mcommit cfb8c9a8050c6514f9f8762656dc146d137acbe7[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 30 18:13:42 2023 +0700
+
+    fix: Исправлно закрытие модального окна по нажатию клавиши esc/функция закрытия передается через пропс в модал оверлей
+
+[33mcommit ecd128f40532f15c10f1efbbcf77e759e538d05c[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 30 17:58:23 2023 +0700
+
+    fix: исправлено теперь корретно отображается цена у добавляемых половинок булок, так-же теперь ингредиенты корректно заносятся в хранилище учитывая уникальность булки
+
+[33mcommit 99e6e5698e8b096bc9b0ca18f3c7befa6379c8b8[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 30 02:23:21 2023 +0700
+
+    feat: реализована функциональность открытия модальных окон используя хранилище redux
+
+[33mcommit 2f435aedcf3a25377aa6598b2fa925009fc7eead[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jun 29 18:52:26 2023 +0700
+
+    feat:список ингредиентов заказа из burger конструктор теперь хранится в хранилище
+
+[33mcommit af6b6b412d6475bc66ab4fca1d26ee3643da25a7[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jun 29 16:46:20 2023 +0700
+
+    feat:Реализовано получение данных ингредиентов по api через хранилище редукс/добавлена мемоизация для селектора ингридиентов
+
+[33mcommit bf2c423b083505975ed72cd635eea9ce2956ef35[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jun 29 01:58:34 2023 +0700
+
+    feat:Добавлено хранилище, rootreducer, countreducer/реализован функционал с подсчетом добавленных игридиентов dnd
+
+[33mcommit 6b0ba87104faf552b6a4afa72c78ba3615a8105f[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Wed Jun 28 02:16:05 2023 +0700
+
+    feat/dnd
+
+[33mcommit 23d6ad8a6e23d18b82265d3568bb7bb01ff8cfe0[m[33m ([m[1;31morigin/sprint_11[m[33m)[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 16 19:20:55 2023 +0700
+
+    refactor: убраны inline стили/стили перенесены в модули css
+
+[33mcommit 91ce84acb14fcadf1e6e206f122e61da872b8861[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Fri Jun 16 18:32:30 2023 +0700
+
+    refactor: папка image вынесена в src
+
+[33mcommit 51132410e8b42ab9535ab5a7e9fe0762a18b73ca[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Thu Jun 15 17:44:22 2023 +0700
+
+    refactor: header перемещен в начало по семантике. Верстка попапов произведена в один портал
+
+[33mcommit 5731a57487c342e357fd0f66fc78c805b14578ce[m
+Author: Anton <lostfreez@yandex.ry>
+Date:   Tue Jun 13 17:28:54 2023 +0700
+
+    fix: удалена папка app.test
+
+[33mcommit 59606b1f7737200ba28973438a067e63270d7f77[m
+Author: Anton <lostfreez@yandex.ru>
+Date:   Thu Apr 20 16:02:16 2023 +0300
+
+    feat: функционал/верстка модальных окон
+
+[33mcommit 10cfd08041d16e2d56b0b3b48fb66d3b48691e5c[m
+Author: Anton Troickiy <lostfreez@yandex.ru>
+Date:   Wed Apr 19 22:29:30 2023 +0300
+
+    feat: modal
+
+[33mcommit 238ed85f21f51fc08ec0c71282d680bb9f1d9810[m
+Author: Anton Troickiy <lostfreez@yandex.ru>
+Date:   Wed Apr 19 15:47:57 2023 +0300
+
+    feat: верстка главной страницы
+
+[33mcommit e747829310036f6bad93d18565cca8d6b588f180[m
+Author: Anton Troickiy <lostfreez@yandex.ru>
+Date:   Fri Apr 14 13:53:24 2023 +0300
+
+    feat: Стрктура
+
+[33mcommit 7eb1d3633d788b2ec2484fe87276bb92a4e71822[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Anton Troickiy <lostfreez@yandex.ru>
+Date:   Thu Apr 6 05:59:49 2023 +0300
+
+    Изнаяальное состояние
+
+[33mcommit a0a15fd2723e9b5ed2768434d05c6b4a85c4a525[m
+Author: Anton Troickiy <lostfreez@yandex.ru>
+Date:   Thu Apr 6 05:54:03 2023 +0300
+
+    Initialize project using Create React App
