@@ -5,13 +5,8 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { closeModal } from "../../services/reducers/modalReducers";
 import { useNavigate } from "react-router-dom";
+import { ModalState } from "../../services/types/types";
 
-
-
-interface ModalState{
-  isOpen: boolean;
-  isLoading: boolean;
-}
 interface Props {
   children: React.ReactNode;
 }
@@ -19,7 +14,9 @@ interface Props {
 const Modal: React.FC<Props> = ({ children }) => {
   const dispatch = useDispatch();
   const modalRoot = document.getElementById("modal-root");
-  const { isOpen, isLoading } = useSelector((state: {modal: ModalState}) => state.modal);
+  const { isOpen, isLoading } = useSelector(
+    (state: { modal: ModalState }) => state.modal
+  );
   const navigate = useNavigate();
   const handleClose = () => {
     dispatch(closeModal());
@@ -43,6 +40,6 @@ const Modal: React.FC<Props> = ({ children }) => {
     </>,
     modalRoot!
   );
-}
+};
 
 export default Modal;
