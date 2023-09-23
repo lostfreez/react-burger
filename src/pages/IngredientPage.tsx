@@ -8,37 +8,27 @@ import Loader from "../components/Loader/Loader";
 import Modal from "../components/Modal/Modal";
 import IngredientDetails from "../components/IngredientDetails/IngredientDetails";
 import { AppDispatch } from "../services/store";
-
-interface IngredientsState {
-  data: Data[];
-}
-interface Data {
-  _id: string;
-  image_large: string;
-  name: string;
-  calories: number;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-}
+import { IngredientsState } from "../services/types/types";
 
 const IngredientPage: React.FC = () => {
   const { id } = useParams();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  const ingredients = useSelector(
-    (state: { getIngredients: { ingredients: IngredientsState } }) =>
-      state.getIngredients.ingredients.data
+  const ingredientsData = useSelector(
+    (state: { getIngredients: IngredientsState }) =>
+      state.getIngredients.ingredients?.data
   );
+  const ingredients = ingredientsData || [];
+  
   React.useEffect(() => {
     if (!ingredients || ingredients.length === 0) {
-        dispatch(fetchIngredients());
+      dispatch(fetchIngredients());
     }
-}, [dispatch, ingredients]);
+  }, [dispatch, ingredients]);
 
   const ingredient = ingredients
-    ? ingredients.find((item: Data) => item._id === id)
+    ? ingredients.find((item) => item._id === id)
     : null;
   const isModal = useLocation().state?.modal;
 

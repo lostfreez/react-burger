@@ -12,39 +12,33 @@ import { getUserData } from "../../services/actions/getUserDataAction";
 import Loader from "../Loader/Loader";
 import { AppDispatch } from "../../services/store";
 
-interface AuthentificateState {
-  name: string;
-  email: string;
-}
+import { AuthState } from "../../services/types/types";
 
 const ProfileEdit: React.FC<{}> = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector(
-    (state: { authentificate: AuthentificateState }) => state.authentificate
+    (state: { authentificate: AuthState }) => state.authentificate
   );
   const [name, setName] = React.useState(userData.name || "");
   const [email, setEmail] = React.useState(userData.email || "");
   const [password, setPassword] = React.useState("");
-  const [isLoading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    const updateUserData = async () => {
-      if (!name && !email) {
-        setLoading(true);
-        await dispatch(getUserData());
-        setLoading(false);
-      }
+    const fetchData = async () => {
+      await dispatch(getUserData());
     };
-    updateUserData();
-  }, [dispatch, name, email]);
+    if (!userData.name || !userData.email) {
+      fetchData();
+    }
+  }, [dispatch, userData]);
 
   React.useEffect(() => {
-    setName(userData.name);
-    setEmail(userData.email);
+    setName(userData.name || "");
+    setEmail(userData.email || "");
   }, [userData]);
 
-  if (isLoading) {
+  if (!name && !email) {
     return <Loader />;
   }
 
@@ -74,7 +68,6 @@ const ProfileEdit: React.FC<{}> = () => {
           <EmailInput
             name={"email"}
             placeholder={"Имя"}
-            
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -82,7 +75,6 @@ const ProfileEdit: React.FC<{}> = () => {
             name={"email"}
             extraClass={`mt-6`}
             placeholder={"Логин"}
-            
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

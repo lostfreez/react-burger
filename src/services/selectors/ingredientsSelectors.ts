@@ -3,7 +3,7 @@ import { Ingredient } from "../types/types";
 import { RootState } from "../root";
 
 export const selectIngredients = createSelector(
-  (state: RootState) => state.getIngredients.ingredients.data,
+  (state: RootState) => state.getIngredients.ingredients?.data,
   (ingredients: Ingredient[]) => ingredients || []
 );
 export const selectBuns = createSelector(selectIngredients, (ingredients) =>

@@ -1,14 +1,7 @@
 import React from "react";
 import styles from "./IngredientWindow.module.css";
+import { Ingredient } from "../../services/types/types";
 
-interface Ingredient {
-  image_large: string;
-  name: string;
-  calories: number;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-}
 interface Props {
   ingredient: Ingredient;
 }

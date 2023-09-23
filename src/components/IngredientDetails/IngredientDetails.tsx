@@ -1,13 +1,6 @@
 import styles from "../IngredientDetails/IngredientDetails.module.css";
 import { useSelector } from "react-redux";
-interface Ingredient {
-  image_large: string;
-  name: string;
-  calories: number;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-}
+import { Ingredient } from "../../services/types/types";
 
 const IngredientDetails: React.FC = () => {
   const ingredient = useSelector(

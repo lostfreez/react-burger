@@ -13,6 +13,11 @@ export interface Ingredient {
   image: string;
   _id: string;
   type: string;
+  calories: number;
+  image_large: string;
+  proteins: number;
+  carbohydrates: number;
+  fat: number;
 }
 export interface MiddleElement {
   ingredient: Ingredient;
@@ -36,6 +41,7 @@ export type IngredientsListState = {
 export type IngredientsState = {
   ingredients: {
     data: Ingredient[];
+    success: boolean;
   };
   isLoading: boolean;
   error: Error | null;

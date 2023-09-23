@@ -13,15 +13,12 @@ import {
 import { decrementCount } from "../../services/reducers/countReducer";
 import { BurgerState } from "../../services/types/types";
 
-interface BurgerProps {
-  ingredient: Ingredient;
-}
 interface DropItem {
   index: number;
 }
 
 interface Props {
-  element: BurgerProps;
+  element: { ingredient: Ingredient };
   index: number;
 }
 
