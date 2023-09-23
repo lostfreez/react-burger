@@ -25,8 +25,8 @@ export interface MiddleElement {
 }
 export type AuthState = {
   token: string | null;
-  name: string | null;
-  email: string | null;
+  name: string;
+  email: string;
   recovery: boolean;
 };
 export type CountState = {

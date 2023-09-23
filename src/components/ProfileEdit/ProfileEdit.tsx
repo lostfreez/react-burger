@@ -20,8 +20,8 @@ const ProfileEdit: React.FC<{}> = () => {
   const userData = useSelector(
     (state: { authentificate: AuthState }) => state.authentificate
   );
-  const [name, setName] = React.useState(userData.name || "");
-  const [email, setEmail] = React.useState(userData.email || "");
+  const [name, setName] = React.useState(userData.name);
+  const [email, setEmail] = React.useState(userData.email);
   const [password, setPassword] = React.useState("");
 
   React.useEffect(() => {
@@ -34,8 +34,8 @@ const ProfileEdit: React.FC<{}> = () => {
   }, [dispatch, userData]);
 
   React.useEffect(() => {
-    setName(userData.name || "");
-    setEmail(userData.email || "");
+    setName(userData.name);
+    setEmail(userData.email);
   }, [userData]);
 
   if (!name && !email) {

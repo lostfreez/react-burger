@@ -3,8 +3,8 @@ import { AuthState } from "../types/types";
 
 const initialState: AuthState = {
   token: null,
-  name: null,
-  email: null,
+  name: "",
+  email: "",
   recovery: false,
 };
 
