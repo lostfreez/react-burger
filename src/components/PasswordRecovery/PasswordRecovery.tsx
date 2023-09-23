@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { AppDispatch } from "../../services/store";
 
-const PasswordRecovery: React.FC =() => {
+const PasswordRecovery: React.FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [email, setEmail] = React.useState("");
-  const handleClick = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     const result = await dispatch(recoverPassword(email));
     if (result?.success) {
       localStorage.setItem("allowResetPassword", "true");
@@ -23,25 +24,26 @@ const PasswordRecovery: React.FC =() => {
   return (
     <div className={styles.sign}>
       <p className={`text text_type_main-medium`}>Восстановление пароля</p>
-      <Input
-        type={"email"}
-        placeholder={"Укажите e-mail"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        extraClass={`mt-6`}
-        onClick={handleClick}
-      >
-        Восстановить
-      </Button>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <Input
+          type={"email"}
+          placeholder={"Укажите e-mail"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass={`mt-6`}
+        >
+          Восстановить
+        </Button>
+      </form>
       <div className={`${styles.registration} mt-20`}>
         <p className="text text_type_main-default text_color_inactive mr-4">
           Вспомнили пароль?
@@ -59,6 +61,6 @@ const PasswordRecovery: React.FC =() => {
       </div>
     </div>
   );
-}
+};
 
 export default PasswordRecovery;

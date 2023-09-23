@@ -16,53 +16,55 @@ const Registration: React.FC = () => {
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
 
-  const handleClick = () => {
+  const handeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     dispatch(register(userName, password, email, navigate));
   };
 
   return (
     <div className={styles.sign}>
       <p className={`text text_type_main-medium`}>Регистрация</p>
-      <Input
-        type={"text"}
-        placeholder={"Имя"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        value={userName}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        type={"email"}
-        placeholder={"E-mail"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type={"password"}
-        placeholder={"Пароль"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        icon={"ShowIcon"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        extraClass={`mt-6`}
-        onClick={handleClick}
-      >
-        Зарегистрироваться
-      </Button>
+      <form onSubmit={handeSubmit} className={styles.form}>
+        <Input
+          type={"text"}
+          placeholder={"Имя"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          value={userName}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type={"email"}
+          placeholder={"E-mail"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type={"password"}
+          placeholder={"Пароль"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          icon={"ShowIcon"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass={`mt-6`}
+        >
+          Зарегистрироваться
+        </Button>
+      </form>
       <div className={`${styles.registration} mt-20`}>
         <p className="text text_type_main-default text_color_inactive mr-4">
           Уже зарегистрированы?

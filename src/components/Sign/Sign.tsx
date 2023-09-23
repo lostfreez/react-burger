@@ -12,48 +12,52 @@ import { AppDispatch } from "../../services/store";
 
 const Sign: React.FC = () => {
   const location = useLocation();
-  const { redirect } = queryString.parse(location.search) as { redirect: string };
+  const { redirect } = queryString.parse(location.search) as {
+    redirect: string;
+  };
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const handleClick = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     dispatch(authorisation(email, password, navigate, redirect));
   };
   return (
     <div className={styles.sign}>
       <p className={`text text_type_main-medium`}>Вход</p>
-      <Input
-        type={"text"}
-        placeholder={"E-mail"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type={"text"}
-        placeholder={"Пароль"}
-        name={"name"}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="mt-6"
-        icon={"ShowIcon"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <form onSubmit={handleSubmit} className={styles.form}> 
+        <Input
+          type={"text"}
+          placeholder={"E-mail"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type={"text"}
+          placeholder={"Пароль"}
+          name={"name"}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass="mt-6"
+          icon={"ShowIcon"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        extraClass={`mt-6`}
-        onClick={handleClick}
-      >
-        Войти
-      </Button>
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass={`mt-6`}
+        >
+          Войти
+        </Button>
+      </form>
 
       <div className={`${styles.registration} mt-20`}>
         <p className="text text_type_main-default text_color_inactive mr-4">
@@ -87,6 +91,6 @@ const Sign: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Sign;
