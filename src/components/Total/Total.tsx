@@ -1,33 +1,26 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
 import { useDispatch } from "react-redux";
-import { createOrder } from "../../services/actions/orderAction";
 import styles from "./Total.module.css";
+import { makeOrder } from "../../services/actions/makeOrderAction";
+import { updateToken } from "../../services/actions/updateTokenAction";
 import { AppDispatch } from "../../services/store";
-import { clearBurger } from "../../services/reducers/burgerReducer";
-import {
-  openModal,
-  switchLoading,
-} from "../../services/reducers/modalReducers";
-import { clearCount } from "../../services/reducers/countReducer";
-import { clearIngredients } from "../../services/reducers/ingredientsListReducer";
-import { clearOrder } from "../../services/reducers/orderReducer";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   totalPrice: number;
 }
 
 const Total: React.FC<Props> = ({ totalPrice }) => {
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const handleClick =async() => {
-    dispatch(clearOrder());
-    dispatch(switchLoading());
-    dispatch(openModal("order"));
-    await dispatch(createOrder());
-    dispatch(switchLoading());
-    dispatch(clearCount());
-    dispatch(clearIngredients());
-    dispatch(clearBurger());
+  const handleClick = async () => {
+    const result = await dispatch(updateToken());
+    if (result && result.success === true) {
+      makeOrder(dispatch);
+    } else {
+      navigate(`/login`);
+    }
   };
 
   return (
