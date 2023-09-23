@@ -1,13 +1,7 @@
-import Header from "../components/Header/Header";
 import PasswordRecovery from "../components/PasswordRecovery/PasswordRecovery";
 
 const ForgotPassword: React.FC = () => {
-  return (
-    <>
-      <Header />
-      <PasswordRecovery />
-    </>
-  );
+  return <PasswordRecovery />;
 };
 
 export default ForgotPassword;

@@ -8,10 +8,12 @@ import Profile from "../../pages/Profile";
 import NotFound404 from "../../pages/NotFound404";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import IngredientPage from "../../pages/IngredientPage";
+import Header from "../Header/Header";
 
 const App: React.FC = () => {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<BurgerConstructor />} />
         <Route

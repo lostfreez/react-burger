@@ -1,6 +1,5 @@
 import Main from "../components/Main/Main";
 import React from "react";
-import Header from "../components/Header/Header";
 import { fetchIngredients } from "../services/actions/ingredientsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
@@ -17,14 +16,13 @@ const BurgerConstructor: React.FC = () => {
     if (!response.success) {
       dispatch(fetchIngredients());
     }
-  }, [dispatch, response]);
+  }, [dispatch, response.success]);
 
-  return (
-    <>
-      <Header />
-      {!response.success ? null : <Main />}
-    </>
-  );
+  if (!response.success) {
+    return null;
+  }
+
+  return <Main />;
 };
 
 export default BurgerConstructor;
