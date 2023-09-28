@@ -1,0 +1,13 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  background-image: url("../../image/oval.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
