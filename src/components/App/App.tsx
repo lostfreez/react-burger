@@ -9,6 +9,7 @@ import NotFound404 from "../../pages/NotFound404";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import IngredientPage from "../../pages/IngredientPage";
 import Header from "../Header/Header";
+import OrderFeed from "../../OrderFeed/OrderFeed";
 
 const App: React.FC = () => {
   return (
@@ -45,6 +46,7 @@ const App: React.FC = () => {
           element={<ProtectedRoute element={<Profile />} />}
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path="/feed" element={<OrderFeed />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>

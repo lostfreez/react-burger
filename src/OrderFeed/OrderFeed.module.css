@@ -1,0 +1,42 @@
+.feed {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.window {
+  display: flex;
+  gap: 0 60px;
+}
+.head {
+  max-width: 1240px;
+  width: 100%;
+}
+.orders {
+  width: 608px;
+  height: 852px;
+  border: 1px solid red;
+}
+.stats {
+  width: 580px;
+  height: 626px;
+  border: 1px solid red;
+}
+.order {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 0;
+  border: 1px solid red;
+}
+.burgerName {
+  grid-column: span 2;
+  border: 1px solid red;
+}
+.components {
+  border: 1px solid red;
+  grid-column: 2fr;
+}
+.price {
+  grid-column: 1fr;
+  border: 1px solid red;
+}

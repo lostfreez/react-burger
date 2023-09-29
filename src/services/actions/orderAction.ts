@@ -17,7 +17,6 @@ export const createOrder = () => {
     const bun = state.ingredientsList.bun!._id;
     const orderList = [bun, ...ingredients]
     dispatch(createOrderPending());
-    console.log(orderList);
     fetch(API_URL, {
       method: "POST",
       headers: {
