@@ -1,0 +1,57 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10vh;
+}
+.text {
+  color: #00cccc;
+}
+.head {
+  display: flex;
+  justify-content: center;
+}
+.date {
+  color: #8585ad;
+  width: 100%;
+}
+.datePrice {
+  display: flex;
+  margin-top: 40px;
+}
+.priceContainer {
+  display: flex;
+}
+.price {
+  margin-right: 8px;
+}
+.ingredient{
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.ingredient:last-child{
+    margin-bottom: 0;
+}
+.img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: black;
+  }
+  .imgWrap {
+    width: 64px;
+    height: 64px;
+    padding: 2px;
+    background: linear-gradient(#801ab2, #4c4cff);
+    border-radius: 50%;
+  }
+ .name{
+    width: 100%;
+ }
+ .ingredients{
+    overflow-y: auto;
+    max-height: 25vh;
+ }

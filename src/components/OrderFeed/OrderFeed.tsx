@@ -1,7 +1,7 @@
 import styles from "./OrderFeed.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
-import { IngredientsState } from "../services/types/types";
+import { IngredientsState } from "../../services/types/types";
 
 function OrderFeed() {
   const ingredientsData = useSelector(
