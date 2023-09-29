@@ -10,8 +10,28 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import IngredientPage from "../../pages/IngredientPage";
 import Header from "../Header/Header";
 import OrderFeed from "../../OrderFeed/OrderFeed";
+import { AppDispatch } from "../../services/store";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { IngredientsState } from "../../services/types/types";
+import { fetchIngredients } from "../../services/actions/ingredientsAction";
 
 const App: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const response = useSelector(
+    (state: { getIngredients: IngredientsState }) => state.getIngredients.ingredients
+  );
+
+  React.useEffect(() => {
+    if (!response.success) {
+      dispatch(fetchIngredients());
+    }
+  }, [dispatch, response.success]);
+
+  if (!response.success) {
+    return null; 
+  }
   return (
     <Router>
       <Header />

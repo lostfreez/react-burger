@@ -18,6 +18,7 @@ export interface Ingredient {
   proteins: number;
   carbohydrates: number;
   fat: number;
+  image_mobile: string
 }
 export interface MiddleElement {
   ingredient: Ingredient;

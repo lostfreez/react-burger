@@ -55,7 +55,7 @@ const Section: React.FC = () => {
   const saucesRef = React.useRef(null);
   const mainsRef = React.useRef(null);
   return (
-    <div className={`${styles.section} custom-scroll`} id="scroll">
+    <div className={styles.section}>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <div className={styles.switcher}>
         <Tab
@@ -80,7 +80,7 @@ const Section: React.FC = () => {
           Начинки
         </Tab>
       </div>
-      <div className={`${styles.list} custom-scroll`}>
+      <div className={`${styles.list} custom-scroll`} id="scroll">
         <p className="text text_type_main-medium mt-10 mb-6">Булки</p>
         <ul ref={bunsRef} className={styles.table}>
           {buns.map((ingredient: Ingredient) => (
