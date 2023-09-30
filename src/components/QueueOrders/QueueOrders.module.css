@@ -1,0 +1,7 @@
+.queueText {
+    color: #00cccc;
+    margin: 0 0 8px;
+  }
+  .queueText:last-child {
+    margin: 0;
+  }

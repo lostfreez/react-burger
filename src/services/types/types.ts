@@ -58,3 +58,19 @@ export type OrderState = {
   orderFailed: boolean;
   isLoading: boolean;
 };
+export interface Order {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+}
+
+export interface FeedState {
+  orders: Order[];
+  total: number;
+  totalToday: number;
+  error: string | null;
+}

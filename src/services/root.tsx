@@ -7,6 +7,7 @@ import ingredientViewReducer from "./reducers/ingredientViewReducer";
 import orderReducer from "./reducers/orderReducer";
 import authentificateReducer from "./reducers/authentificateReducer";
 import burgerReducer from "./reducers/burgerReducer";
+import feedReducer from "./reducers/feedReducer";
 
 const rootReducer = combineReducers({
   counter: countReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   authentificate: authentificateReducer,
   burger: burgerReducer,
+  feed: feedReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

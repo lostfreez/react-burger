@@ -1,72 +1,39 @@
 import styles from "./OrderFeed.module.css";
-import OrderMyOrder from "../OrderMyOrder/OrderMyOrder";
+import React from "react";
+import {
+  closeWebSocket,
+  initWebSocket,
+} from "../../services/reducers/feedReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../services/store";
+import { FeedState } from "../../services/types/types";
+import FeedStat from "../FeedStat/FeedStat";
+import Loader from "../Loader/Loader";
+import Feed from "../Feed/Feed";
+
 
 function OrderFeed() {
+  const dispatch: AppDispatch = useDispatch();
+  const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
+  React.useEffect(() => {
+    dispatch(initWebSocket());
+    return () => {
+      dispatch(closeWebSocket());
+    };
+  }, [dispatch]);
+
+  if (orders.length === 0) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.feed}>
       <div className={`${styles.head} text text_type_main-large mb-5 mt-10`}>
         Лента заказов
       </div>
       <div className={styles.windowOrders}>
-        <OrderMyOrder />
-        <div className={styles.stats}>
-          <div className={styles.windowStats}>
-            <div className="text ttext text_type_main-medium">Готовы:</div>
-            <div className="text ttext text_type_main-medium">В работе:</div>
-            <div className={styles.queueEnd}>
-              <p
-                className={`${styles.queueText} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-            </div>
-            <div className={styles.queue}>
-              <p
-                className={`${styles.queueText} ${styles.queueTextWork} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} ${styles.queueTextWork} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} ${styles.queueTextWork} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-              <p
-                className={`${styles.queueText} ${styles.queueTextWork} text text_type_digits-default`}
-              >
-                3425435
-              </p>
-            </div>
-          </div>
-          <div className="text text_type_main-medium mt-15">
-            Выполнено за все время:
-          </div>
-          <div className="text text_type_digits-large">28 752</div>
-          <div className="text text_type_main-medium mt-15">
-            Выполнено за сегодня:
-          </div>
-          <div className="text text_type_digits-large">158</div>
-        </div>
+        <Feed />
+        <FeedStat />
       </div>
     </div>
   );

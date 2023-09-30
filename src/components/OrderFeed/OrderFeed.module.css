@@ -18,24 +18,3 @@
   padding: 0 24px 0;
   box-sizing: border-box;
 }
-.stats {
-  max-width: 580px;
-  width: 100%;
-  border: 1px solid red;
-}
-.windowStats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  gap: 24px 36px;
-}
-.queueText {
-  color: #00cccc;
-  margin: 0 0 8px;
-}
-.queueText:last-child {
-  margin: 0;
-}
-.queueTextWork {
-  color: white;
-}
