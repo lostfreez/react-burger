@@ -1,0 +1,14 @@
+.window {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+.text {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  height: 64px;
+}
+.link {
+    cursor: pointer;
+  }
