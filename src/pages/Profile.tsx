@@ -1,7 +1,8 @@
-import ProfileEdit from "../components/MyProfile/MyProfile";
+import MyProfile from "../components/MyProfile/MyProfile";
+
 
 const Profile: React.FC = () => {
-  return <ProfileEdit />;
+  return <MyProfile />;
 };
 
 export default Profile;
