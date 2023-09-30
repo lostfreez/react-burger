@@ -54,7 +54,7 @@ const SectionConstructor: React.FC = () => {
   const totalPrice = React.useMemo(() => {
     let total = 0;
     if (baseElement) {
-      total += baseElement.ingredient.price;
+      total += baseElement.ingredient.price*2;
     }
     if (middleElement.length) {
       middleElement.forEach((element) => {
@@ -78,7 +78,7 @@ const SectionConstructor: React.FC = () => {
                 type="top"
                 isLocked={true}
                 text={`${baseElement.ingredient.name} (верх)`}
-                price={baseElement.ingredient.price / 2}
+                price={baseElement.ingredient.price}
                 thumbnail={baseElement.ingredient.image}
               />
             </div>
@@ -109,7 +109,7 @@ const SectionConstructor: React.FC = () => {
                   type="bottom"
                   isLocked={true}
                   text={`${baseElement.ingredient.name} (низ)`}
-                  price={baseElement.ingredient.price / 2}
+                  price={baseElement.ingredient.price}
                   thumbnail={baseElement.ingredient.image}
                 />
               </div>
