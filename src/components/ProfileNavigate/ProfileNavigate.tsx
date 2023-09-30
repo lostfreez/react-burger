@@ -16,7 +16,7 @@ function ProfileNavigate() {
   return (
     <div className={`${styles.window} mr-15`}>
       <p
-        className={`${styles.text} ${
+        className={`${styles.link} ${
           isActiveRoute("/profile")
             ? "text_color_primary"
             : "text_color_inactive"
@@ -28,7 +28,7 @@ function ProfileNavigate() {
         Профиль
       </p>
       <p
-        className={`${styles.text} ${
+        className={`${styles.link} ${
           isActiveRoute("/profile/orders")
             ? "text_color_primary"
             : "text_color_inactive"
@@ -40,7 +40,7 @@ function ProfileNavigate() {
         История заказов
       </p>
       <p
-        className={`${styles.text} ${styles.link}  text text_type_main-medium text_color_inactive`}
+        className={`${styles.link}   text text_type_main-medium text_color_inactive`}
         onClick={() => {
           dispatch(logoutUser(navigate));
         }}

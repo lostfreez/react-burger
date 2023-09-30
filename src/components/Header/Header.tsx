@@ -18,7 +18,12 @@ const Header: React.FC = () => {
           linkText="Конструктор"
           route="/"
         />
-        <Link IconComponent={ListIcon} linkText="Лента&nbsp;заказов" />
+        <Link
+          IconComponent={ListIcon}
+          linkText="Лента&nbsp;заказов"
+          onClick={() => navigate("/feed")}
+          route="/feed"
+        />
       </div>
       <Logo />
       <Link
