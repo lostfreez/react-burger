@@ -17,6 +17,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { IngredientsState } from "../../services/types/types";
 import { fetchIngredients } from "../../services/actions/ingredientsAction";
 import FeedDetails from "../FeedDetails/FeedDetails";
+import MyOrder from "../MyOrder/MyOrder";
 
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -68,6 +69,7 @@ const App: React.FC = () => {
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="/feed" element={<OrderFeed />} />
+        <Route path="/profile/orders" element={<MyOrder />} />
         <Route path="/feedtest" element={<FeedDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
