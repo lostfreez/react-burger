@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+}
+@media (max-width: 900px) {
+  .profile {
+    flex-direction: column-reverse;
+  }
+}

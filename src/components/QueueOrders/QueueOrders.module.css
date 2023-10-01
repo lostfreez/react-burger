@@ -1,0 +1,12 @@
+.queueEnd {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+}
+
+.firstColumn {
+  grid-column: 1;
+}
+
+.secondColumn {
+  grid-column: 2;
+}

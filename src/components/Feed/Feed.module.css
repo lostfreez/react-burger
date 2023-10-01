@@ -1,0 +1,105 @@
+.orders {
+  width: 100%;
+  overflow-y: auto;
+  max-height: 75vh;
+  padding-right: 8px;
+}
+.order {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  grid-template-areas:
+    "id id id date date date"
+    "name name name name name name"
+    "status status status status status status"
+    "components components components components components price";
+  background-color: #1c1c21;
+  border-radius: 40px;
+  padding: 24px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.order:last-child {
+  margin-bottom: 0;
+}
+
+.burgerName {
+  grid-area: name;
+  display: flex;
+  align-items: center;
+}
+.components {
+  grid-area: components;
+  display: flex;
+}
+.status {
+  grid-area: status;
+}
+.price {
+  grid-area: price;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.date {
+  grid-area: date;
+  color: #8585ad;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.id {
+  grid-area: id;
+  display: flex;
+  align-items: center;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: black;
+}
+.imgWrap {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding: 2px;
+  background: linear-gradient(#801ab2, #4c4cff);
+  border-radius: 50%;
+}
+.components > *:not(:first-child) {
+  margin-left: -20px;
+}
+.extraCount {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+.darkOverlay {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding: 2px;
+  background: linear-gradient(#801ab2, #4c4cff);
+  border-radius: 50%;
+}
+.darkOverlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.textDone {
+  color: #00cccc;
+}
