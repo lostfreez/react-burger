@@ -73,4 +73,5 @@ export interface FeedState {
   total: number;
   totalToday: number;
   error: string | null;
+  isWebSocketInitialized: boolean;
 }

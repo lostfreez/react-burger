@@ -14,13 +14,18 @@ import Feed from "../Feed/Feed";
 
 function OrderFeed() {
   const dispatch: AppDispatch = useDispatch();
-  const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
+  const { orders, isWebSocketInitialized  } = useSelector((state: { feed: FeedState }) => state.feed);
   React.useEffect(() => {
-    dispatch(initWebSocket());
+    if (!isWebSocketInitialized) {
+      dispatch(initWebSocket());
+    }
+
     return () => {
-      dispatch(closeWebSocket());
+      if (isWebSocketInitialized) {
+        dispatch(closeWebSocket());
+      }
     };
-  }, [dispatch]);
+  }, [dispatch, isWebSocketInitialized]);
 
   if (orders.length === 0) {
     return <Loader />;

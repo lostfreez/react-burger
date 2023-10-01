@@ -28,7 +28,7 @@ export const websocketMiddleware: Middleware =
 
       ws.onclose = (event) => {
         if (!event.wasClean) {
-          console.error("WebSocket connection closed unexpectedly");
+          console.error("WebSocket connection closed unexpectedly:", event.code);
         }
       };
     } else if (action.type === closeWebSocket.type) {

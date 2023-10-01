@@ -6,14 +6,19 @@ const initialState: FeedState = {
   total: 0,
   totalToday: 0,
   error: null,
+  isWebSocketInitialized: false,
 };
 
 const feedReducer = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    initWebSocket: () => {},
-    closeWebSocket: () => {},
+    initWebSocket: (state) => {
+      state.isWebSocketInitialized = true;
+    },
+    closeWebSocket: (state) => {
+      state.isWebSocketInitialized = false;
+    },
     setOrders: (state, action: PayloadAction<FeedState>) => {
       state.orders = action.payload.orders;
       state.total = action.payload.total;
