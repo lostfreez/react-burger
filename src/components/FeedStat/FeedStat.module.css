@@ -8,13 +8,9 @@
   grid-template-rows: auto;
   gap: 24px 36px;
 }
-.queueText {
+.queueDone {
   color: #00cccc;
-  margin: 0 0 8px;
 }
-.queueText:last-child {
-  margin: 0;
-}
-.queueTextWork {
+.queueProcess {
   color: white;
 }

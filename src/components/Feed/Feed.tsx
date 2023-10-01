@@ -8,8 +8,12 @@ import { Ingredient } from "../../services/types/types";
 import extraIngredientsImage from "../../image/cheese.svg";
 import truncateText from "../../services/format/formatText";
 import formatDate from "../../services/format/formatDate";
+import { useLocation } from "react-router-dom";
+import { formatStatus } from "../../services/format/formatStatus";
 
 const Feed: React.FC = () => {
+  const location = useLocation();
+  const isProfileOrdersPath = location.pathname === "/profile/orders";
   const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
   const ingredientsData = useSelector(
     (state: { getIngredients: IngredientsState }) =>
@@ -34,17 +38,29 @@ const Feed: React.FC = () => {
         const extraIngredientsCount = matchedIngredients.length - 5;
 
         return (
-          <div className={styles.order} key={order._id}>
+          <div
+            className={`${styles.order}`}
+            key={order._id}
+          >
             <div className={`${styles.id} text text_type_main-medium `}>
               {order.number}
             </div>
             <div className={`${styles.date} text text_type_main-default  `}>
-             {formatDate(order.updatedAt)}
+              {formatDate(order.updatedAt)}
             </div>
-            <div className={`${styles.burgerName} text text_type_main-medium `}>
-            {truncateText(order.name, 34)}
+            <div
+              className={`${styles.burgerName} text text_type_main-medium mt-6`}
+            >
+              {truncateText(order.name, 34)}
             </div>
-            <div className={styles.components}>
+            {isProfileOrdersPath && (
+              <div
+                className={`${styles.orderStatus} ${order.status === "done" ? styles.textDone : ''} text text_type_main-default mt-2`}
+              >
+                {formatStatus(order.status)}
+              </div>
+            )}
+            <div className={`${styles.components} mt-6`}>
               {displayedIngredients.map((ingredient, index) => (
                 <div
                   style={{ zIndex: displayedIngredients.length - index }}

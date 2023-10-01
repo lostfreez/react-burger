@@ -13,8 +13,10 @@ const FeedStat = () => {
       <div className={styles.windowStats}>
         <div className="text ttext text_type_main-medium">Готовы:</div>
         <div className="text ttext text_type_main-medium">В работе:</div>
-        <LastOrders />
-        <div className={styles.queue}>
+        <div className={styles.queueDone}>
+          <LastOrders />
+        </div>
+        <div className={styles.queueProcess}>
           <QueueOrders />
         </div>
       </div>

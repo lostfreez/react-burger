@@ -12,16 +12,18 @@
   grid-template-areas:
     "id id id date date date"
     "name name name name name name"
+    "status status status status status status"
     "components components components components components price";
-  gap: 24px 0;
   background-color: #1c1c21;
   border-radius: 40px;
   padding: 24px;
   margin-bottom: 16px;
 }
+
 .order:last-child {
   margin-bottom: 0;
 }
+
 .burgerName {
   grid-area: name;
   display: flex;
@@ -30,6 +32,9 @@
 .components {
   grid-area: components;
   display: flex;
+}
+.status {
+  grid-area: status;
 }
 .price {
   grid-area: price;
@@ -93,4 +98,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
+}
+.textDone {
+  color: #00cccc;
 }
