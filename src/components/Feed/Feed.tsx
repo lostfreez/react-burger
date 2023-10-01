@@ -7,6 +7,7 @@ import { IngredientsState } from "../../services/types/types";
 import { Ingredient } from "../../services/types/types";
 import extraIngredientsImage from "../../image/cheese.svg";
 import truncateText from "../../services/format/formatText";
+import formatDate from "../../services/format/formatDate";
 
 const Feed: React.FC = () => {
   const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
@@ -38,7 +39,7 @@ const Feed: React.FC = () => {
               {order.number}
             </div>
             <div className={`${styles.date} text text_type_main-default  `}>
-              Сегодня, 16:20 i-GMT+3
+             {formatDate(order.updatedAt)}
             </div>
             <div className={`${styles.burgerName} text text_type_main-medium `}>
             {truncateText(order.name, 34)}
