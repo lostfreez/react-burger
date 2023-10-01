@@ -5,6 +5,7 @@ import { Order } from "../../services/types/types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IngredientsState } from "../../services/types/types";
 import { Ingredient } from "../../services/types/types";
+import extraIngredientsImage from "../../image/cheese.svg";
 
 const Feed: React.FC = () => {
   const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
@@ -16,14 +17,19 @@ const Feed: React.FC = () => {
   return (
     <div className={`${styles.orders} custom-scroll`}>
       {orders.map((order: Order) => {
-        
-        const matchedIngredients = order.ingredients.map(ingredientId =>
-          ingredientsData.find(ingredient => ingredient._id === ingredientId)
-        ).filter(Boolean) as Ingredient[]; 
+        const matchedIngredients = order.ingredients
+          .map((ingredientId) =>
+            ingredientsData.find(
+              (ingredient) => ingredient._id === ingredientId
+            )
+          )
+          .filter(Boolean) as Ingredient[];
         const orderTotalPrice = matchedIngredients.reduce(
-          (acc, ingredient) => acc + ingredient.price, 
+          (acc, ingredient) => acc + ingredient.price,
           0
         );
+        const displayedIngredients = matchedIngredients.slice(0, 5);
+        const extraIngredientsCount = matchedIngredients.length - 5;
 
         return (
           <div className={styles.order} key={order._id}>
@@ -37,8 +43,12 @@ const Feed: React.FC = () => {
               {order.name}
             </div>
             <div className={styles.components}>
-              {matchedIngredients.map(ingredient => (
-                <div className={styles.imgWrap} key={ingredient._id}>
+              {displayedIngredients.map((ingredient, index) => (
+                <div
+                  style={{ zIndex: displayedIngredients.length - index }}
+                  className={styles.imgWrap}
+                  key={ingredient._id}
+                >
                   <img
                     className={styles.img}
                     alt={ingredient.name}
@@ -46,9 +56,26 @@ const Feed: React.FC = () => {
                   />
                 </div>
               ))}
+
+              {extraIngredientsCount > 0 && (
+                <div className={styles.darkOverlay}>
+                  <img
+                    className={styles.img}
+                    alt="Extra ingredients"
+                    src={extraIngredientsImage}
+                  />
+                  <div
+                    className={`${styles.extraCount} text text_type_digits-default`}
+                  >
+                    +{extraIngredientsCount}
+                  </div>
+                </div>
+              )}
             </div>
             <div className={styles.price}>
-              <div className="text text_type_digits-default mr-2">{orderTotalPrice}</div>
+              <div className="text text_type_digits-default mr-2">
+                {orderTotalPrice}
+              </div>
               <CurrencyIcon type="primary" />
             </div>
           </div>
