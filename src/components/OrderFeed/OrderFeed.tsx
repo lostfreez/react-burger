@@ -3,6 +3,7 @@ import React from "react";
 import {
   closeWebSocket,
   initWebSocket,
+  clearFeed,
 } from "../../services/reducers/feedReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../services/store";
@@ -11,10 +12,11 @@ import FeedStat from "../FeedStat/FeedStat";
 import Loader from "../Loader/Loader";
 import Feed from "../Feed/Feed";
 
-
 function OrderFeed() {
   const dispatch: AppDispatch = useDispatch();
-  const { orders, isWebSocketInitialized  } = useSelector((state: { feed: FeedState }) => state.feed);
+  const { connection, isWebSocketInitialized, orders } = useSelector(
+    (state: { feed: FeedState }) => state.feed
+  );
   React.useEffect(() => {
     if (!isWebSocketInitialized) {
       dispatch(initWebSocket());
@@ -23,11 +25,12 @@ function OrderFeed() {
     return () => {
       if (isWebSocketInitialized) {
         dispatch(closeWebSocket());
+        dispatch(clearFeed());
       }
     };
   }, [dispatch, isWebSocketInitialized]);
 
-  if (orders.length === 0) {
+  if (!connection) {
     return <Loader />;
   }
 
@@ -37,7 +40,11 @@ function OrderFeed() {
         Лента заказов
       </div>
       <div className={styles.windowOrders}>
-        <Feed />
+        {orders.length !== 0 ? (
+          <Feed />
+        ) : (
+          <p className="text_type_main-large">Заказы отсутствуют :(</p>
+        )}
         <FeedStat />
       </div>
     </div>

@@ -22,7 +22,8 @@ import MyOrder from "../MyOrder/MyOrder";
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const response = useSelector(
-    (state: { getIngredients: IngredientsState }) => state.getIngredients.ingredients
+    (state: { getIngredients: IngredientsState }) =>
+      state.getIngredients.ingredients
   );
 
   React.useEffect(() => {
@@ -32,7 +33,7 @@ const App: React.FC = () => {
   }, [dispatch, response.success]);
 
   if (!response.success) {
-    return null; 
+    return null;
   }
   return (
     <Router>
@@ -69,7 +70,10 @@ const App: React.FC = () => {
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="/feed" element={<OrderFeed />} />
-        <Route path="/profile/orders" element={<MyOrder />} />
+        <Route
+          path="/profile/orders"
+          element={<ProtectedRoute element={<MyOrder />} />}
+        />
         <Route path="/feedtest" element={<FeedDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>

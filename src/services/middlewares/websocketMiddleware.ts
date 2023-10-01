@@ -4,14 +4,27 @@ import {
   setOrders,
   closeWebSocket,
   initWebSocket,
+  initWebSocketPrivate,
 } from "../reducers/feedReducer";
 
 let ws: WebSocket | null = null;
 
 export const websocketMiddleware: Middleware =
   (store) => (next) => (action) => {
-    if (action.type === initWebSocket.type) {
-      ws = new WebSocket("wss://norma.nomoreparties.space/orders/all");
+    if (
+      action.type === initWebSocket.type ||
+      action.type === initWebSocketPrivate.type
+    ) {
+      if (action.type === initWebSocketPrivate.type) {
+        const token = store.getState().authentificate.token;
+        const accessToken = token.split(" ")[1];
+        console.log(accessToken);
+        ws = new WebSocket(
+          `wss://norma.nomoreparties.space/orders?token=${accessToken}`
+        );
+      } else {
+        ws = new WebSocket("wss://norma.nomoreparties.space/orders/all");
+      }
 
       ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -28,7 +41,10 @@ export const websocketMiddleware: Middleware =
 
       ws.onclose = (event) => {
         if (!event.wasClean) {
-          console.error("WebSocket connection closed unexpectedly:", event.code);
+          console.error(
+            "WebSocket connection closed unexpectedly:",
+            event.code
+          );
         }
       };
     } else if (action.type === closeWebSocket.type) {
