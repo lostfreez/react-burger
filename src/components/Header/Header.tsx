@@ -25,7 +25,9 @@ const Header: React.FC = () => {
           route="/feed"
         />
       </div>
-      <Logo />
+      <div className={styles.pointer} onClick={() => navigate("/")}>
+        <Logo />
+      </div>
       <Link
         onClick={() => {
           navigate("/profile");
