@@ -8,10 +8,11 @@ import { Ingredient } from "../../services/types/types";
 import extraIngredientsImage from "../../image/cheese.svg";
 import truncateText from "../../services/format/formatText";
 import formatDate from "../../services/format/formatDate";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { formatStatus } from "../../services/format/formatStatus";
 
 const Feed: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const isProfileOrdersPath = location.pathname === "/profile/orders";
   const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
@@ -41,6 +42,13 @@ const Feed: React.FC = () => {
           <div
             className={`${styles.order}`}
             key={order._id}
+            onClick={() =>
+              navigate(
+                isProfileOrdersPath
+                  ? `/profile/orders/${order._id}`
+                  : `/feed/${order._id}`
+              )
+            }
           >
             <div className={`${styles.id} text text_type_main-medium `}>
               {order.number}
@@ -55,7 +63,9 @@ const Feed: React.FC = () => {
             </div>
             {isProfileOrdersPath && (
               <div
-                className={`${styles.orderStatus} ${order.status === "done" ? styles.textDone : ''} text text_type_main-default mt-2`}
+                className={`${styles.orderStatus} ${
+                  order.status === "done" ? styles.textDone : ""
+                } text text_type_main-default mt-2`}
               >
                 {formatStatus(order.status)}
               </div>

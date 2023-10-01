@@ -5,6 +5,7 @@ import {
   closeWebSocket,
   initWebSocket,
   initWebSocketPrivate,
+  disconnectWebSocket,
 } from "../reducers/feedReducer";
 
 let ws: WebSocket | null = null;
@@ -18,7 +19,6 @@ export const websocketMiddleware: Middleware =
       if (action.type === initWebSocketPrivate.type) {
         const token = store.getState().authentificate.token;
         const accessToken = token.split(" ")[1];
-        console.log(accessToken);
         ws = new WebSocket(
           `wss://norma.nomoreparties.space/orders?token=${accessToken}`
         );
@@ -47,7 +47,10 @@ export const websocketMiddleware: Middleware =
           );
         }
       };
-    } else if (action.type === closeWebSocket.type) {
+    } else if (
+      action.type === closeWebSocket.type ||
+      action.type === disconnectWebSocket.type
+    ) {
       if (ws) {
         ws.close();
       }

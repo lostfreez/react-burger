@@ -2,114 +2,91 @@ import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 import { IngredientsState } from "../../services/types/types";
+import { Order } from "../../services/types/types";
+import { formatStatus } from "../../services/format/formatStatus";
+import truncateText from "../../services/format/formatText";
+import formatDate from "../../services/format/formatDate";
+import { Ingredient } from "../../services/types/types";
+import React from "react";
 
-function FeedDetails() {
+interface Props {
+  order: Order;
+}
+
+const FeedDetails: React.FC<Props> = ({ order }) => {
   const ingredientsData = useSelector(
     (state: { getIngredients: IngredientsState }) =>
       state.getIngredients.ingredients?.data
   );
+  const matchedIngredients = order.ingredients
+    .map((ingredientId) =>
+      ingredientsData.find((ingredient) => ingredient._id === ingredientId)
+    )
+    .filter(Boolean) as Ingredient[];
+
+  const groupedIngredients = matchedIngredients.reduce((acc, ingredient) => {
+    if (!acc[ingredient._id]) {
+      acc[ingredient._id] = {
+        ...ingredient,
+        count: 0,
+      };
+    }
+
+    acc[ingredient._id].count += 1;
+
+    return acc;
+  }, {} as Record<string, Ingredient & { count: number }>);
+  const totalCost = Object.values(groupedIngredients).reduce(
+    (acc, ingredient) => acc + ingredient.price * ingredient.count,
+    0
+  );
+
   return (
     <div className={styles.page}>
       <div className={styles.window}>
         <div className={`${styles.head} text text_type_digits-medium`}>
-          #034533
+          #{order.number}
         </div>
         <div className="text text_type_main-medium mt-10">
-          #Black Hole Singularity острый бургер
+          {truncateText(order.name, 50)}
         </div>
-        <div className={`${styles.text} text text_type_main-default mt-3`}>
-          Выполнен
+        <div
+          className={`${styles.text} ${
+            order.status === "done" ? styles.textDone : ""
+          } text text_type_main-default mt-3`}
+        >
+          {formatStatus(order.status)}
         </div>
         <div className="text text_type_main-medium mt-15 mb-6">Состав:</div>
         <div className={`${styles.ingredients} custom-scroll`}>
-          <div className={styles.ingredient}>
-            <div className={styles.imgWrap}>
-              <img
-                className={styles.img}
-                alt={ingredientsData[0].name}
-                src={ingredientsData[0].image_mobile}
-              />
+          {Object.values(groupedIngredients).map((ingredientData) => (
+            <div className={styles.ingredient} key={ingredientData._id}>
+              <div className={styles.imgWrap}>
+                <img
+                  className={styles.img}
+                  alt={ingredientData.name}
+                  src={ingredientData.image_mobile}
+                />
+              </div>
+              <div
+                className={`${styles.name} text text_type_main-default ml-4`}
+              >
+                {ingredientData.name}
+              </div>
+              <div className="text text_type_digits-default ml-4 mr-2">
+                {ingredientData.count}&nbsp;&times;&nbsp;{ingredientData.price}
+              </div>
+              <CurrencyIcon type="primary" />
             </div>
-            <div className={`${styles.name} text text_type_main-default ml-4`}>
-              Флюоресцентная булка R2-D3
-            </div>
-            <div className="text text_type_digits-default ml-4 mr-2">
-              2&nbsp;&times;&nbsp;20
-            </div>
-            <CurrencyIcon type="primary" />
-          </div>
-          <div className={styles.ingredient}>
-            <div className={styles.imgWrap}>
-              <img
-                className={styles.img}
-                alt={ingredientsData[0].name}
-                src={ingredientsData[0].image_mobile}
-              />
-            </div>
-            <div className={`${styles.name} text text_type_main-default ml-4`}>
-              Флюоресцентная булка R2-D3
-            </div>
-            <div className="text text_type_digits-default ml-4 mr-2">
-              2&nbsp;&times;&nbsp;20
-            </div>
-            <CurrencyIcon type="primary" />
-          </div>
-          <div className={styles.ingredient}>
-            <div className={styles.imgWrap}>
-              <img
-                className={styles.img}
-                alt={ingredientsData[0].name}
-                src={ingredientsData[0].image_mobile}
-              />
-            </div>
-            <div className={`${styles.name} text text_type_main-default ml-4`}>
-              Флюоресцентная булка R2-D3
-            </div>
-            <div className="text text_type_digits-default ml-4 mr-2">
-              2&nbsp;&times;&nbsp;20
-            </div>
-            <CurrencyIcon type="primary" />
-          </div>
-          <div className={styles.ingredient}>
-            <div className={styles.imgWrap}>
-              <img
-                className={styles.img}
-                alt={ingredientsData[0].name}
-                src={ingredientsData[0].image_mobile}
-              />
-            </div>
-            <div className={`${styles.name} text text_type_main-default ml-4`}>
-              Флюоресцентная булка R2-D3
-            </div>
-            <div className="text text_type_digits-default ml-4 mr-2">
-              2&nbsp;&times;&nbsp;20
-            </div>
-            <CurrencyIcon type="primary" />
-          </div>
-          <div className={styles.ingredient}>
-            <div className={styles.imgWrap}>
-              <img
-                className={styles.img}
-                alt={ingredientsData[0].name}
-                src={ingredientsData[0].image_mobile}
-              />
-            </div>
-            <div className={`${styles.name} text text_type_main-default ml-4`}>
-              Флюоресцентная булка R2-D3
-            </div>
-            <div className="text text_type_digits-default ml-4 mr-2">
-              2&nbsp;&times;&nbsp;20
-            </div>
-            <CurrencyIcon type="primary" />
-          </div>
+          ))}
         </div>
         <div className={styles.datePrice}>
           <div className={`${styles.date} text text_type_main-default`}>
-            Вчера, 13:50 i-GMT+3
+            {formatDate(order.updatedAt)}
           </div>
           <div className={styles.priceContainer}>
             <div className={`${styles.price} text text_type_digits-default`}>
-              510
+              {totalCost}
             </div>
             <CurrencyIcon type="primary" />
           </div>
@@ -117,6 +94,6 @@ function FeedDetails() {
       </div>
     </div>
   );
-}
+};
 
-export default FeedDetails;
+export default React.memo(FeedDetails);

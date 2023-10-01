@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { IngredientsState } from "../../services/types/types";
 import { fetchIngredients } from "../../services/actions/ingredientsAction";
-import FeedDetails from "../FeedDetails/FeedDetails";
+import OrderPage from "../../pages/OrderPage";
 import MyOrder from "../MyOrder/MyOrder";
 
 const App: React.FC = () => {
@@ -74,7 +74,11 @@ const App: React.FC = () => {
           path="/profile/orders"
           element={<ProtectedRoute element={<MyOrder />} />}
         />
-        <Route path="/feedtest" element={<FeedDetails />} />
+        <Route
+          path="/profile/orders/:id"
+          element={<ProtectedRoute element={<OrderPage />} />}
+        />
+        <Route path="/feed/:id" element={<OrderPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>
