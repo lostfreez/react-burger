@@ -1,12 +1,11 @@
 import styles from "./ProfileNavigate.module.css";
-import { AppDispatch } from "../../services/store";
 import { logoutUser } from "../../services/actions/logoutAction";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 function ProfileNavigate() {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const isActiveRoute = (route: string) => {

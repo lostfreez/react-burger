@@ -1,13 +1,12 @@
-import { FeedState } from "../../services/types/types";
-import { useSelector } from "react-redux";
-import styles from "./LastOrders.module.css"
+import { useAppSelector } from "../../services/types/typedHooks";
+import styles from "./LastOrders.module.css";
 
 function LastOrders() {
-  const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
+  const { orders } = useAppSelector((state) => state.feed);
   const lastDoneOrders = orders
     .filter((order) => order.status === "done")
     .slice(0, 10);
-  
+
   const firstColumnOrders = lastDoneOrders.slice(0, 5);
   const secondColumnOrders = lastDoneOrders.slice(5);
 

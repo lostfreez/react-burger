@@ -7,6 +7,7 @@ import {
   initWebSocketPrivate,
   disconnectWebSocket,
 } from "../reducers/feedReducer";
+import { WEBSOCKET_URL } from "../urls/urls";
 
 let ws: WebSocket | null = null;
 
@@ -19,11 +20,9 @@ export const websocketMiddleware: Middleware =
       if (action.type === initWebSocketPrivate.type) {
         const token = store.getState().authentificate.token;
         const accessToken = token.split(" ")[1];
-        ws = new WebSocket(
-          `wss://norma.nomoreparties.space/orders?token=${accessToken}`
-        );
+        ws = new WebSocket(`${WEBSOCKET_URL}?token=${accessToken}`);
       } else {
-        ws = new WebSocket("wss://norma.nomoreparties.space/orders/all");
+        ws = new WebSocket(`${WEBSOCKET_URL}/all`);
       }
 
       ws.onmessage = (event) => {

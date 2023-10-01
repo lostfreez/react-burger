@@ -1,16 +1,14 @@
 import React from "react";
-
 import styles from "./Registration.module.css";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { register } from "../../services/actions/registerAction";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AppDispatch } from "../../services/store";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 const Registration: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [userName, setName] = React.useState("");
   const [password, setPassword] = React.useState("");

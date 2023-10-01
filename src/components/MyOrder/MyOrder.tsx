@@ -6,16 +6,15 @@ import {
   initWebSocketPrivate,
   clearFeed,
 } from "../../services/reducers/feedReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../services/store";
-import { FeedState } from "../../services/types/types";
 import Loader from "../Loader/Loader";
 import Feed from "../Feed/Feed";
+import { useAppDispatch } from "../../services/types/typedHooks";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 function MyOrder() {
-  const dispatch: AppDispatch = useDispatch();
-  const { connection, isWebSocketInitialized, orders } = useSelector(
-    (state: { feed: FeedState }) => state.feed
+  const dispatch = useAppDispatch();
+  const { connection, isWebSocketInitialized, orders } = useAppSelector(
+    (state) => state.feed
   );
   React.useEffect(() => {
     if (!isWebSocketInitialized) {

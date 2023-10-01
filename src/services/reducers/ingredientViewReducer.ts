@@ -1,16 +1,30 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Ingredient } from '../types/types'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ingredientView } from "../types/types";
 
-const initialState: Ingredient | {} = {};
+const initialState: ingredientView = {
+  _id: null,
+  name: null,
+  type: null,
+  proteins: null,
+  fat: null,
+  carbohydrates: null,
+  calories: null,
+  price: null,
+  image: null,
+  image_mobile: null,
+  image_large: null,
+};
 
 const ingredientViewSlice = createSlice({
-  name: 'ingredientView',
+  name: "ingredientView",
   initialState,
   reducers: {
-    viewIngredient: (state, action: PayloadAction<Ingredient>) => {
-      return action.payload;
+    viewIngredient: (state, action: PayloadAction<ingredientView>) => {
+      Object.assign(state, action.payload);
     },
-    clearIngredient: () => initialState,
+    clearIngredient: () => {
+      return initialState;
+    },
   },
 });
 

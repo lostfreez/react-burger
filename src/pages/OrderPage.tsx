@@ -1,10 +1,6 @@
 import { useParams } from "react-router-dom";
 import FeedDetails from "../components/FeedDetails/FeedDetails";
-import { FeedState } from "../services/types/types";
-import { useSelector } from "react-redux";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../services/store";
 import {
   closeWebSocket,
   initWebSocket,
@@ -13,12 +9,14 @@ import {
 } from "../services/reducers/feedReducer";
 import Loader from "../components/Loader/Loader";
 import { useLocation } from "react-router-dom";
+import { useAppDispatch } from "../services/types/typedHooks";
+import { useAppSelector } from "../services/types/typedHooks";
 
 function OrderPage() {
   const location = useLocation();
-  const dispatch: AppDispatch = useDispatch();
-  const { connection, isWebSocketInitialized, orders } = useSelector(
-    (state: { feed: FeedState }) => state.feed
+  const dispatch = useAppDispatch();
+  const { connection, isWebSocketInitialized, orders } = useAppSelector(
+    (state) => state.feed
   );
   const { id } = useParams<{ id: string }>();
   const isProfileOrdersPath = location.pathname === `/profile/orders/${id}`;

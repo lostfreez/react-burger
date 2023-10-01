@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import IngredientWindow from "../components/IngredientWindow/IngredientWindow";
 import React from "react";
-import { IngredientsState } from "../services/types/types";
 import NotFound404 from "./NotFound404";
+import { useAppSelector } from "../services/types/typedHooks";
 
 const IngredientPage: React.FC = () => {
   const { id } = useParams();
-  const ingredientsData = useSelector(
-    (state: { getIngredients: IngredientsState }) =>
-      state.getIngredients.ingredients?.data
+  const ingredientsData = useAppSelector(
+    (state) => state.getIngredients.ingredients?.data
   );
 
   const ingredient = ingredientsData.find((item) => item._id === id);

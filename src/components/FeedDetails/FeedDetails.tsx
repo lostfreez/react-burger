@@ -1,7 +1,6 @@
 import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
-import { IngredientsState } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 import { Order } from "../../services/types/types";
 import { formatStatus } from "../../services/format/formatStatus";
 import truncateText from "../../services/format/formatText";
@@ -14,9 +13,8 @@ interface Props {
 }
 
 const FeedDetails: React.FC<Props> = ({ order }) => {
-  const ingredientsData = useSelector(
-    (state: { getIngredients: IngredientsState }) =>
-      state.getIngredients.ingredients?.data
+  const ingredientsData = useAppSelector(
+    (state) => state.getIngredients.ingredients?.data
   );
   const matchedIngredients = order.ingredients
     .map((ingredientId) =>

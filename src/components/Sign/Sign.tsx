@@ -2,13 +2,12 @@ import styles from "./Sign.module.css";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import React from "react";
 import { authorisation } from "../../services/actions/authorisationAction";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
-import { AppDispatch } from "../../services/store";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 const Sign: React.FC = () => {
   const location = useLocation();
@@ -16,7 +15,7 @@ const Sign: React.FC = () => {
     redirect: string;
   };
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,7 +25,7 @@ const Sign: React.FC = () => {
   return (
     <div className={styles.sign}>
       <p className={`text text_type_main-medium`}>Вход</p>
-      <form onSubmit={handleSubmit} className={styles.form}> 
+      <form onSubmit={handleSubmit} className={styles.form}>
         <Input
           type={"text"}
           placeholder={"E-mail"}

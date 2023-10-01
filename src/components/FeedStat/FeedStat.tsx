@@ -1,13 +1,11 @@
-import React from "react";
 import styles from "./FeedStat.module.css";
-import { FeedState } from "../../services/types/types";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/types/typedHooks";
 import formatNumber from "../../services/format/formatNumber";
 import LastOrders from "../LastOrders/LastOrders";
 import QueueOrders from "../QueueOrders/QueueOrders";
 
 const FeedStat = () => {
-  const feed = useSelector((state: { feed: FeedState }) => state.feed);
+  const feed = useAppSelector(state => state.feed);
   return (
     <div className={styles.stats}>
       <div className={styles.windowStats}>

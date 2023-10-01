@@ -1,12 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/types/typedHooks";
 import { updateToken } from "../../services/actions/updateTokenAction";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/types/typedHooks";
 import Loader from "../Loader/Loader";
 import { useLocation } from "react-router-dom";
-import { AppDispatch } from "../../services/store";
-import { AuthState } from "../../services/types/types";
 interface Props {
   isAuth?: boolean;
   allowReset?: boolean;
@@ -21,14 +19,10 @@ const ProtectedRoute: React.FC<Props> = ({
   const location = useLocation();
   const [isAuthorized, setIsAuthorized] = React.useState(false);
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
-  const auth = useSelector(
-    (state: { authentificate: AuthState }) => state.authentificate.token
-  );
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.authentificate.token);
   const [isLoading, setLoading] = React.useState(false);
-  const recovery = useSelector(
-    (state: { authentificate: AuthState }) => state.authentificate.recovery
-  );
+  const recovery = useAppSelector((state) => state.authentificate.recovery);
 
   React.useEffect(() => {
     const updateAuth = async () => {

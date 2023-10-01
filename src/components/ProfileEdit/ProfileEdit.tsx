@@ -3,13 +3,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import { useSelector } from "react-redux";
-import { AuthState } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 function ProfileEdit() {
-  const userData = useSelector(
-    (state: { authentificate: AuthState }) => state.authentificate
-  );
+  const userData = useAppSelector((state) => state.authentificate);
   const [name, setName] = React.useState(userData.name);
   const [email, setEmail] = React.useState(userData.email);
   const [password, setPassword] = React.useState("");

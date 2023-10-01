@@ -3,7 +3,6 @@ import Total from "../Total/Total";
 import styles from "./SectionConstructor.module.css";
 import { useDrop, DropTargetMonitor } from "react-dnd";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -19,12 +18,14 @@ import {
   addIngredient,
   addBun,
 } from "../../services/reducers/ingredientsListReducer";
-import { MiddleElement, BurgerState } from "../../services/types/types";
+import { MiddleElement } from "../../services/types/types";
+import { useAppDispatch } from "../../services/types/typedHooks";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 const SectionConstructor: React.FC = () => {
-  const dispatch = useDispatch();
-  const { hasBaseSelected, baseElement, middleElement } = useSelector(
-    (state: { burger: BurgerState }) => state.burger
+  const dispatch = useAppDispatch();
+  const { hasBaseSelected, baseElement, middleElement } = useAppSelector(
+    (state) => state.burger
   );
 
   const dropOption = {
@@ -54,7 +55,7 @@ const SectionConstructor: React.FC = () => {
   const totalPrice = React.useMemo(() => {
     let total = 0;
     if (baseElement) {
-      total += baseElement.ingredient.price*2;
+      total += baseElement.ingredient.price * 2;
     }
     if (middleElement.length) {
       middleElement.forEach((element) => {

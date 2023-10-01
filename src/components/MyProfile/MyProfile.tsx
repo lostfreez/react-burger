@@ -2,18 +2,14 @@ import styles from "./MyProfile.module.css";
 import React from "react";
 import ProfileNavigate from "../ProfileNavigate/ProfileNavigate";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
-import { useSelector } from "react-redux";
-import { AuthState } from "../../services/types/types";
 import Loader from "../Loader/Loader";
-import { AppDispatch } from "../../services/store";
-import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../services/types/typedHooks";
 import { getUserData } from "../../services/actions/getUserDataAction";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 const MyProfile: React.FC<{}> = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const userData = useSelector(
-    (state: { authentificate: AuthState }) => state.authentificate
-  );
+  const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.authentificate);
   React.useEffect(() => {
     const fetchData = async () => {
       await dispatch(getUserData());

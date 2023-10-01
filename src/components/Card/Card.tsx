@@ -1,9 +1,7 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Card.module.css";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, DragSourceMonitor } from "react-dnd";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/types/typedHooks";
 import { viewIngredient } from "../../services/reducers/ingredientViewReducer";
 import { openModal } from "../../services/reducers/modalReducers";
 import { clearIngredient } from "../../services/reducers/ingredientViewReducer";
@@ -14,7 +12,7 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ ingredient }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const dragOptions = {
     type: "card",
     item: { ingredient },
@@ -23,10 +21,7 @@ const Card: React.FC<Props> = ({ ingredient }) => {
     }),
   };
   const [, dragRef] = useDrag(dragOptions);
-  const count = useSelector(
-    (state: { counter: { ingredients: { [key: string]: number } } }) =>
-      state.counter.ingredients[ingredient._id] || 0
-  );
+  const count = useAppSelector(state => state.counter.ingredients[ingredient._id] || 0);
 
   const handleClick = () => {
     dispatch(clearIngredient());

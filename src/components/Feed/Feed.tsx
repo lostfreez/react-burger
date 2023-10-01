@@ -1,10 +1,7 @@
 import styles from "./Feed.module.css";
-import { useSelector } from "react-redux";
-import { FeedState } from "../../services/types/types";
-import { Order } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
+import { Order, Ingredient } from "../../services/types/types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IngredientsState } from "../../services/types/types";
-import { Ingredient } from "../../services/types/types";
 import extraIngredientsImage from "../../image/cheese.svg";
 import truncateText from "../../services/format/formatText";
 import formatDate from "../../services/format/formatDate";
@@ -15,10 +12,9 @@ const Feed: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isProfileOrdersPath = location.pathname === "/profile/orders";
-  const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
-  const ingredientsData = useSelector(
-    (state: { getIngredients: IngredientsState }) =>
-      state.getIngredients.ingredients?.data
+  const { orders } = useAppSelector((state) => state.feed);
+  const ingredientsData = useAppSelector(
+    (state) => state.getIngredients.ingredients?.data
   );
 
   return (

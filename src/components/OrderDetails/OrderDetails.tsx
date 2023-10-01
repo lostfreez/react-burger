@@ -1,12 +1,11 @@
 import styles from "./OrderDetails.module.css";
 import done from "../../image/done.png";
-import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import React from "react";
-import { OrderState } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 const OrderDetails: React.FC = () => {
-  const order = useSelector((state: { order: OrderState }) => state.order);
+  const order = useAppSelector((state) => state.order);
 
   if (!order.orderNumber) {
     return <Loader />;

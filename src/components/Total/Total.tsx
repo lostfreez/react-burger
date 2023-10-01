@@ -1,11 +1,10 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import price from "../../image/price.svg";
-import { useDispatch } from "react-redux";
 import styles from "./Total.module.css";
 import { makeOrder } from "../../services/actions/makeOrderAction";
 import { updateToken } from "../../services/actions/updateTokenAction";
-import { AppDispatch } from "../../services/store";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 interface Props {
   totalPrice: number;
@@ -13,7 +12,7 @@ interface Props {
 
 const Total: React.FC<Props> = ({ totalPrice }) => {
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleClick = async () => {
     const result = await dispatch(updateToken());
     if (result && result.success === true) {

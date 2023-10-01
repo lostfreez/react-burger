@@ -18,7 +18,20 @@ export interface Ingredient {
   proteins: number;
   carbohydrates: number;
   fat: number;
-  image_mobile: string
+  image_mobile: string;
+}
+export interface ingredientView {
+  name: string | null;
+  price: number | null;
+  image: string | null;
+  _id: string | null;
+  type: string | null;
+  calories: number | null;
+  image_large: string | null;
+  proteins: number | null;
+  carbohydrates: number | null;
+  fat: number | null;
+  image_mobile: string | null;
 }
 export interface MiddleElement {
   ingredient: Ingredient;
@@ -74,5 +87,5 @@ export interface FeedState {
   totalToday: number;
   error: string | null;
   isWebSocketInitialized: boolean;
-  connection: boolean,
+  connection: boolean;
 }

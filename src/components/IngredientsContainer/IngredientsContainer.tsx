@@ -1,17 +1,16 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrag, DragSourceMonitor } from "react-dnd";
 import { useDrop } from "react-dnd";
 import { setMiddleElements } from "../../services/reducers/burgerReducer";
 import React from "react";
-import { AppDispatch } from "../../services/store";
+import { useAppDispatch } from "../../services/types/typedHooks";
 import { Ingredient } from "../../services/types/types";
 import {
   swapIngredient,
   removeIngredient,
 } from "../../services/reducers/ingredientsListReducer";
 import { decrementCount } from "../../services/reducers/countReducer";
-import { BurgerState } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 interface DropItem {
   index: number;
@@ -23,10 +22,8 @@ interface Props {
 }
 
 const IngredientsContainer: React.FC<Props> = ({ element, index }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const { middleElement } = useSelector(
-    (state: { burger: BurgerState }) => state.burger
-  );
+  const dispatch = useAppDispatch();
+  const { middleElement } = useAppSelector((state) => state.burger);
   const handleRemove = (indexToRemove: number, ingredientId: string) => {
     dispatch(decrementCount(ingredientId));
     dispatch(removeIngredient(ingredientId));

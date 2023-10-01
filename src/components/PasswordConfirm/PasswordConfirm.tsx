@@ -1,16 +1,15 @@
 import styles from "./PasswordConfirm.module.css";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePassword } from "../../services/actions/savePasswordAction";
 import { Link } from "react-router-dom";
 import React from "react";
-import { AppDispatch } from "../../services/store";
+import { useAppDispatch } from "../../services/types/typedHooks";
 
 const PasswordConfirm: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [password, setPassword] = React.useState("");
   const [token, setToken] = React.useState("");
   const handleSubmit = async (e: React.FormEvent) => {
