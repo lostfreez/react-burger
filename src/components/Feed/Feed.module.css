@@ -1,8 +1,8 @@
 .orders {
-  max-width: 608px;
   width: 100%;
   overflow-y: auto;
   max-height: 75vh;
+  padding-right: 8px;
 }
 .order {
   display: grid;
@@ -24,7 +24,6 @@
 }
 .burgerName {
   grid-area: name;
-
   display: flex;
   align-items: center;
 }

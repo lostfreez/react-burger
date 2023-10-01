@@ -6,6 +6,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { IngredientsState } from "../../services/types/types";
 import { Ingredient } from "../../services/types/types";
 import extraIngredientsImage from "../../image/cheese.svg";
+import truncateText from "../../services/format/formatText";
 
 const Feed: React.FC = () => {
   const { orders } = useSelector((state: { feed: FeedState }) => state.feed);
@@ -40,14 +41,14 @@ const Feed: React.FC = () => {
               Сегодня, 16:20 i-GMT+3
             </div>
             <div className={`${styles.burgerName} text text_type_main-medium `}>
-              {order.name}
+            {truncateText(order.name, 34)}
             </div>
             <div className={styles.components}>
               {displayedIngredients.map((ingredient, index) => (
                 <div
                   style={{ zIndex: displayedIngredients.length - index }}
                   className={styles.imgWrap}
-                  key={ingredient._id}
+                  key={`${order._id}-${ingredient._id}-${index}`}
                 >
                   <img
                     className={styles.img}
