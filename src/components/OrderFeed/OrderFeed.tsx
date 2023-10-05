@@ -10,6 +10,7 @@ import FeedStat from "../FeedStat/FeedStat";
 import Loader from "../Loader/Loader";
 import Feed from "../Feed/Feed";
 import { useAppDispatch } from "../../services/types/typedHooks";
+import { WEBSOCKET_URL } from "../../services/urls/urls";
 
 function OrderFeed() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ function OrderFeed() {
   );
   React.useEffect(() => {
     if (!isWebSocketInitialized) {
-      dispatch(initWebSocket());
+      dispatch(initWebSocket({url: `${WEBSOCKET_URL}/all`}));
     }
 
     return () => {

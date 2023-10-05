@@ -14,10 +14,7 @@ const feedReducer = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    initWebSocket: (state) => {
-      state.isWebSocketInitialized = true;
-    },
-    initWebSocketPrivate: (state) => {
+    initWebSocket: (state, action: PayloadAction<{ url: string }>) => {
       state.isWebSocketInitialized = true;
     },
     closeWebSocket: (state) => {
@@ -44,7 +41,6 @@ export const {
   wsError,
   initWebSocket,
   closeWebSocket,
-  initWebSocketPrivate,
   clearFeed,
   disconnectWebSocket,
 } = feedReducer.actions;

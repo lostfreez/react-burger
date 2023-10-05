@@ -1,31 +1,34 @@
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import FeedDetails from "../components/FeedDetails/FeedDetails";
-import React from "react";
+import Loader from "../components/Loader/Loader";
 import {
   closeWebSocket,
   initWebSocket,
   clearFeed,
-  initWebSocketPrivate,
 } from "../services/reducers/feedReducer";
-import Loader from "../components/Loader/Loader";
-import { useLocation } from "react-router-dom";
-import { useAppDispatch } from "../services/types/typedHooks";
-import { useAppSelector } from "../services/types/typedHooks";
 import { viewOrder } from "../services/reducers/orderViewReducer";
+import { WEBSOCKET_URL } from "../services/urls/urls";
+import { useAppDispatch, useAppSelector } from "../services/types/typedHooks";
 
 function OrderPage() {
   const location = useLocation();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { connection, isWebSocketInitialized, orders } = useAppSelector(
     (state) => state.feed
   );
-  const { id } = useParams<{ id: string }>();
+  const token = useAppSelector((state) => state.authentificate.token);
+  const accessToken = token ? token.split(" ")[1] : null;
   const isProfileOrdersPath = location.pathname === `/profile/orders/${id}`;
-  React.useEffect(() => {
-    if (!isWebSocketInitialized && isProfileOrdersPath) {
-      dispatch(initWebSocketPrivate());
-    } else if (!isWebSocketInitialized) {
-      dispatch(initWebSocket());
+
+  useEffect(() => {
+    if (!isWebSocketInitialized) {
+      const wsUrl =
+        isProfileOrdersPath && accessToken
+          ? `${WEBSOCKET_URL}?token=${accessToken}`
+          : `${WEBSOCKET_URL}/all`;
+      dispatch(initWebSocket({ url: wsUrl }));
     }
     return () => {
       if (isWebSocketInitialized) {
@@ -33,19 +36,19 @@ function OrderPage() {
         dispatch(clearFeed());
       }
     };
-  }, [dispatch, isWebSocketInitialized, isProfileOrdersPath]);
+  }, [dispatch, isWebSocketInitialized, isProfileOrdersPath, accessToken]);
+
   const order = orders.find((order) => order._id === id);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (order) {
       dispatch(viewOrder(order));
     }
   }, [order, dispatch]);
-  
 
   if (!connection) {
     return <Loader />;
   }
-  
 
   if (!order) {
     return (
@@ -53,7 +56,6 @@ function OrderPage() {
     );
   }
 
-  
   return orders.length !== 0 ? (
     <FeedDetails />
   ) : (
