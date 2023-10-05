@@ -11,6 +11,7 @@ import Loader from "../components/Loader/Loader";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch } from "../services/types/typedHooks";
 import { useAppSelector } from "../services/types/typedHooks";
+import { viewOrder } from "../services/reducers/orderViewReducer";
 
 function OrderPage() {
   const location = useLocation();
@@ -33,19 +34,28 @@ function OrderPage() {
       }
     };
   }, [dispatch, isWebSocketInitialized, isProfileOrdersPath]);
+  const order = orders.find((order) => order._id === id);
+  React.useEffect(() => {
+    if (order) {
+      dispatch(viewOrder(order));
+    }
+  }, [order, dispatch]);
+  
 
   if (!connection) {
     return <Loader />;
   }
-  const order = orders.find((order) => order._id === id);
+  
 
   if (!order) {
     return (
       <p className="text_type_main-large">Такого заказа не существует :(</p>
     );
   }
+
+  
   return orders.length !== 0 ? (
-    <FeedDetails order={order} />
+    <FeedDetails />
   ) : (
     <p className="text_type_main-large">Список заказов пуст :(</p>
   );

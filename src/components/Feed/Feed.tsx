@@ -1,21 +1,34 @@
 import styles from "./Feed.module.css";
-import { useAppSelector } from "../../services/types/typedHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../services/types/typedHooks";
 import { Order, Ingredient } from "../../services/types/types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import extraIngredientsImage from "../../image/cheese.svg";
 import truncateText from "../../services/format/formatText";
 import formatDate from "../../services/format/formatDate";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { formatStatus } from "../../services/format/formatStatus";
+import { viewOrder } from "../../services/reducers/orderViewReducer";
+import { openModal } from "../../services/reducers/modalReducers";
 
 const Feed: React.FC = () => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const isProfileOrdersPath = location.pathname === "/profile/orders";
   const { orders } = useAppSelector((state) => state.feed);
   const ingredientsData = useAppSelector(
     (state) => state.getIngredients.ingredients?.data
   );
+  const handleClick = (order: Order) => {
+    dispatch(viewOrder(order));
+    dispatch(openModal("orderId"));
+    const newPath = isProfileOrdersPath
+      ? `/profile/orders/${order._id}`
+      : `/feed/${order._id}`;
+    window.history.pushState(null, "", newPath);
+  };
 
   return (
     <div className={`${styles.orders} custom-scroll`}>
@@ -38,13 +51,7 @@ const Feed: React.FC = () => {
           <div
             className={`${styles.order}`}
             key={order._id}
-            onClick={() =>
-              navigate(
-                isProfileOrdersPath
-                  ? `/profile/orders/${order._id}`
-                  : `/feed/${order._id}`
-              )
-            }
+            onClick={() => handleClick(order)}
           >
             <div className={`${styles.id} text text_type_main-medium `}>
               {order.number}
