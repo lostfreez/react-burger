@@ -20,7 +20,6 @@ const feedReducer = createSlice({
     closeWebSocket: (state) => {
       state.isWebSocketInitialized = false;
     },
-    disconnectWebSocket: () => {},
     setOrders: (state, action: PayloadAction<FeedState>) => {
       state.orders = action.payload.orders;
       state.total = action.payload.total;
@@ -42,7 +41,6 @@ export const {
   initWebSocket,
   closeWebSocket,
   clearFeed,
-  disconnectWebSocket,
 } = feedReducer.actions;
 
 export default feedReducer.reducer;

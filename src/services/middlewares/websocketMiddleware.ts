@@ -48,4 +48,5 @@ export const websocketMiddleware: Middleware =
       default:
         return next(action);
     }
+    return next(action);
   };
