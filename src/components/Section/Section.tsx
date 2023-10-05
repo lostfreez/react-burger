@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Section.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
-import { useSelector } from "react-redux";
 import {
   selectIngredients,
   selectBuns,
@@ -10,13 +9,14 @@ import {
   selectMains,
 } from "../../services/selectors/ingredientsSelectors";
 import { Ingredient } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 const Section: React.FC = () => {
   const [current, setCurrent] = React.useState("one");
-  const ingredients = useSelector(selectIngredients);
-  const buns = useSelector(selectBuns);
-  const sauces = useSelector(selectSauces);
-  const mains = useSelector(selectMains);
+  const ingredients = useAppSelector(selectIngredients);
+  const buns = useAppSelector(selectBuns);
+  const sauces = useAppSelector(selectSauces);
+  const mains = useAppSelector(selectMains);
 
   React.useLayoutEffect(() => {
     const observer = new IntersectionObserver(
