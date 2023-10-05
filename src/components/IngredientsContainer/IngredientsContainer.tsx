@@ -1,4 +1,4 @@
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, DragSourceMonitor } from "react-dnd";
 import { useDrop } from "react-dnd";
 import { setMiddleElements } from "../../services/reducers/burgerReducer";
@@ -11,6 +11,7 @@ import {
 } from "../../services/reducers/ingredientsListReducer";
 import { decrementCount } from "../../services/reducers/countReducer";
 import { useAppSelector } from "../../services/types/typedHooks";
+import styles from "./IngredientsContainer.module.css"
 
 interface DropItem {
   index: number;
@@ -65,7 +66,10 @@ const IngredientsContainer: React.FC<Props> = ({ element, index }) => {
   dropRef(ref);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className={styles.container}>
+      <div className={styles.imgWrapper}>
+      <DragIcon type="primary" />
+      </div>
       <ConstructorElement
         text={element.ingredient.name}
         price={element.ingredient.price}
