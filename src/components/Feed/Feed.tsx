@@ -32,86 +32,89 @@ const Feed: React.FC = () => {
 
   return (
     <div className={`${styles.orders} custom-scroll`}>
-      {orders.map((order: Order) => {
-        const matchedIngredients = order.ingredients
-          .map((ingredientId) =>
-            ingredientsData.find(
-              (ingredient) => ingredient._id === ingredientId
+      {(isProfileOrdersPath ? orders.slice().reverse() : orders).map(
+        (order: Order) => {
+          const matchedIngredients = order.ingredients
+            .map((ingredientId) =>
+              ingredientsData.find(
+                (ingredient) => ingredient._id === ingredientId
+              )
             )
-          )
-          .filter(Boolean) as Ingredient[];
-        const orderTotalPrice = matchedIngredients.reduce(
-          (acc, ingredient) => acc + ingredient.price,
-          0
-        );
-        const displayedIngredients = matchedIngredients.slice(0, 5);
-        const extraIngredientsCount = matchedIngredients.length - 5;
+            .filter(Boolean) as Ingredient[];
+          const orderTotalPrice = matchedIngredients.reduce(
+            (acc, ingredient) => acc + ingredient.price,
+            0
+          );
+          const displayedIngredients = matchedIngredients.slice(0, 5);
+          const extraIngredientsCount = matchedIngredients.length - 5;
 
-        return (
-          <div
-            className={`${styles.order}`}
-            key={order._id}
-            onClick={() => handleClick(order)}
-          >
-            <div className={`${styles.id} text text_type_main-medium `}>
-              {order.number}
-            </div>
-            <div className={`${styles.date} text text_type_main-default  `}>
-              {formatDate(order.updatedAt)}
-            </div>
+          return (
             <div
-              className={`${styles.burgerName} text text_type_main-medium mt-6`}
+              className={`${styles.order}`}
+              key={order._id}
+              onClick={() => handleClick(order)}
             >
-              {truncateText(order.name, 34)}
-            </div>
-            {isProfileOrdersPath && (
-              <div
-                className={`${styles.orderStatus} ${
-                  order.status === "done" ? styles.textDone : ""
-                } text text_type_main-default mt-2`}
-              >
-                {formatStatus(order.status)}
+              <div className={`${styles.id} text text_type_main-medium `}>
+                {order.number}
               </div>
-            )}
-            <div className={`${styles.components} mt-6`}>
-              {displayedIngredients.map((ingredient, index) => (
+              <div className={`${styles.date} text text_type_main-default  `}>
+                {formatDate(order.updatedAt)}
+              </div>
+              <div
+                className={`${styles.burgerName} text text_type_main-medium mt-6`}
+              >
+                {truncateText(order.name, 34)}
+              </div>
+              {isProfileOrdersPath && (
                 <div
-                  style={{ zIndex: displayedIngredients.length - index }}
-                  className={styles.imgWrap}
-                  key={`${order._id}-${ingredient._id}-${index}`}
+                  className={`${styles.orderStatus} ${
+                    order.status === "done" ? styles.textDone : ""
+                  } text text_type_main-default mt-2`}
                 >
-                  <img
-                    className={styles.img}
-                    alt={ingredient.name}
-                    src={ingredient.image_mobile}
-                  />
-                </div>
-              ))}
-
-              {extraIngredientsCount > 0 && (
-                <div className={styles.darkOverlay}>
-                  <img
-                    className={styles.img}
-                    alt="Extra ingredients"
-                    src={extraIngredientsImage}
-                  />
-                  <div
-                    className={`${styles.extraCount} text text_type_digits-default`}
-                  >
-                    +{extraIngredientsCount}
-                  </div>
+                  {formatStatus(order.status)}
                 </div>
               )}
-            </div>
-            <div className={styles.price}>
-              <div className="text text_type_digits-default mr-2">
-                {orderTotalPrice}
+              <div className={`${styles.components} mt-6`}>
+                {extraIngredientsCount > 0 && (
+                  <div className={styles.darkOverlay}>
+                    <img
+                      className={styles.img}
+                      alt="Extra ingredients"
+                      src={extraIngredientsImage}
+                    />
+                    <div
+                      className={`${styles.extraCount} text text_type_digits-default`}
+                    >
+                      +{extraIngredientsCount}
+                    </div>
+                  </div>
+                )}
+                {displayedIngredients
+                  .slice()
+                  .reverse()
+                  .map((ingredient, index) => (
+                    <div
+                      className={styles.imgWrap}
+                      key={`${order._id}-${ingredient._id}-${index}`}
+                    >
+                      <img
+                        className={styles.img}
+                        alt={ingredient.name}
+                        src={ingredient.image_mobile}
+                      />
+                    </div>
+                  ))}
               </div>
-              <CurrencyIcon type="primary" />
+              <div className={styles.price}>
+                <div className="text text_type_digits-default mr-2">
+                  {orderTotalPrice}
+                </div>
+                <CurrencyIcon type="primary" />
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        }
+      )}
     </div>
   );
 };

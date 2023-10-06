@@ -16,9 +16,6 @@ const ingredientsListSlice = createSlice({
     },
     addBun: (state, action: PayloadAction<Ingredient>) => {
       state.bun = action.payload;
-      if (action.payload._id !== state.bun?._id) {
-        state.ingredients.push(action.payload._id);
-      }
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
       state.ingredients = state.ingredients.filter(

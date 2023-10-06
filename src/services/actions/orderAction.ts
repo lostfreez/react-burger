@@ -15,7 +15,7 @@ export const createOrder = () => {
     const state = getState();
     const ingredients =  state.ingredientsList.ingredients;
     const bun = state.ingredientsList.bun!._id;
-    const orderList = [bun, ...ingredients];
+    const orderList = [bun, ...ingredients, bun];
     const token = state.authentificate.token;
     dispatch(createOrderPending());
     fetch(API_URL, {
