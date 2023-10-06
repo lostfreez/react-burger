@@ -6,9 +6,8 @@ import reducer, {
 } from "../../services/reducers/authentificateReducer";
 import { AuthState } from "../../services/types/types";
 
-let initialState: AuthState;
-
 describe("authentication reducer", () => {
+  let initialState: AuthState;
   beforeEach(() => {
     initialState = {
       token: null,

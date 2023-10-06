@@ -7,22 +7,21 @@ import reducer, {
 } from "../../services/reducers/ingredientsListReducer"; // убедитесь, что путь верен
 import { IngredientsListState, Ingredient } from "../../services/types/types";
 
-let initialState: IngredientsListState;
-const testIngredient: Ingredient = {
-  name: "Test Ingredient",
-  price: 100,
-  image: "test_image_url",
-  _id: "test_id",
-  type: "main",
-  calories: 250,
-  image_large: "test_large_image_url",
-  proteins: 5,
-  carbohydrates: 25,
-  fat: 10,
-  image_mobile: "test_mobile_image_url",
-};
-
 describe("ingredientsList reducer", () => {
+  let initialState: IngredientsListState;
+  const testIngredient: Ingredient = {
+    name: "Test Ingredient",
+    price: 100,
+    image: "test_image_url",
+    _id: "test_id",
+    type: "main",
+    calories: 250,
+    image_large: "test_large_image_url",
+    proteins: 5,
+    carbohydrates: 25,
+    fat: 10,
+    image_mobile: "test_mobile_image_url",
+  };
   beforeEach(() => {
     initialState = {
       ingredients: [],

@@ -8,9 +8,8 @@ import reducer, {
 import { FeedState } from "../../services/types/types";
 import { Order } from "../../services/types/types";
 
-let initialState: FeedState;
-
 describe("feed reducer", () => {
+  let initialState: FeedState;
   beforeEach(() => {
     initialState = {
       orders: [],

@@ -10,9 +10,8 @@ import {
   MiddleElement,
 } from "../../services/types/types";
 
-let initialState: BurgerState;
-
 describe("burgerSlice", () => {
+  let initialState: BurgerState;
   beforeEach(() => {
     initialState = {
       hasBaseSelected: false,
@@ -89,18 +88,18 @@ describe("burgerSlice", () => {
       hasBaseSelected: true,
       baseElement: {
         ingredient: {
-            name: "Test Middle Ingredient 1",
-            price: 50,
-            image: "test-image-url-1",
-            _id: "test-id-1",
-            type: "test-type-1",
-            calories: 100,
-            image_large: "test-image-large-url-1",
-            proteins: 5,
-            carbohydrates: 10,
-            fat: 2.5,
-            image_mobile: "test-image-mobile-url-1",
-          }
+          name: "Test Middle Ingredient 1",
+          price: 50,
+          image: "test-image-url-1",
+          _id: "test-id-1",
+          type: "test-type-1",
+          calories: 100,
+          image_large: "test-image-large-url-1",
+          proteins: 5,
+          carbohydrates: 10,
+          fat: 2.5,
+          image_mobile: "test-image-mobile-url-1",
+        },
       },
       middleElement: [
         {
