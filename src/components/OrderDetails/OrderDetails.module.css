@@ -1,19 +1,17 @@
 .modal {
-  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   min-width: 720px;
+  min-height: 720px;
 }
 .order {
   min-height: 120px;
 }
 .loader{
-  position: fixed;
-  transform: translate(-50%, -50%);
   background-color: transparent;
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   background-image: url("../../image/oval.svg");
   background-repeat: no-repeat;
   background-size: cover;

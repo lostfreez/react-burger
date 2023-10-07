@@ -1,6 +1,5 @@
 import styles from "./OrderDetails.module.css";
 import done from "../../image/done.png";
-import Loader from "../Loader/Loader";
 import React from "react";
 import { useAppSelector } from "../../services/types/typedHooks";
 
@@ -15,9 +14,13 @@ const OrderDetails: React.FC = () => {
 
   return (
     <div className={styles.modal}>
-      <p className={`${styles.order} text text_type_digits-large mt-30`}>
-        {Number ? Number : <div className={styles.loader}></div>}
-      </p>
+      {Number ? (
+        <p className={`${styles.order} text text_type_digits-large mt-30`}>
+          {Number ? Number : ""}
+        </p>
+      ) : (
+        <div className={`${styles.loader} mt-30`}></div>
+      )}
       <p className="text text_type_main-medium mt-8 mb-15">
         {Number ? "идентификатор заказа" : "Готовим Ваш заказ, ожидайте..."}
       </p>
