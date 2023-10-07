@@ -1,5 +1,6 @@
 {
   "name": "react-burger-2",
+  "homepage": "https://lostfreez.github.io/react-burger/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,7 +35,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-e2e": "concurrently \"npm run start\" \"npm run cypress:open\""
+    "test-e2e": "concurrently \"npm run start\" \"npm run cypress:open\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
