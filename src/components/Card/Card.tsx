@@ -31,7 +31,7 @@ const Card: React.FC<Props> = ({ ingredient }) => {
   };
 
   return (
-    <li className={`${styles.card}`} onClick={handleClick} ref={dragRef}>
+    <li className={`${styles.cardDrag}`} onClick={handleClick} ref={dragRef}>
       <img src={ingredient.image} alt={ingredient.name} />
       {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
       <div className={styles.cardContainer}>
