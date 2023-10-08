@@ -1,20 +1,13 @@
-// Импортируем наш редьюсер и экшены.
 import reducer, {
   incrementCount,
   incrementBun,
   decrementCount,
   clearCount,
 } from "../../services/reducers/countReducer";
-import { CountState } from "../../services/types/types";
+
+import { initialState } from "./countReducer";
 
 describe("count reducer", () => {
-  let initialState: CountState;
-  beforeEach(() => {
-    initialState = {
-      ingredients: {},
-      bun: null,
-    };
-  });
   it("incrementCount + 1 + 1 = 2 : correct", () => {
     const newState = reducer(initialState, incrementCount("ingredient1"));
     expect(newState.ingredients["ingredient1"]).toEqual(1);
@@ -58,14 +51,14 @@ describe("count reducer", () => {
   });
 
   it("clearCount state(NoEmpty) -> clear : correct", () => {
-    const stateWithIngredient = {
+    const stateWithIngredientAndBun = {
       ...initialState,
       ingredients: {
         ingredient1: 2,
       },
       bun: "bun1",
     };
-    const newState = reducer(stateWithIngredient, clearCount());
+    const newState = reducer(stateWithIngredientAndBun, clearCount());
     expect(newState).toEqual(initialState);
   });
 });

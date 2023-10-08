@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BaseElement, MiddleElement, BurgerState } from "../types/types"
 
-const initialState: BurgerState = {
+export const initialState: BurgerState = {
   hasBaseSelected: false,
   baseElement: null,
   middleElement: [],

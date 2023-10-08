@@ -6,39 +6,35 @@ import reducer, {
 } from "../../services/reducers/authentificateReducer";
 import { AuthState } from "../../services/types/types";
 
-describe("authentication reducer", () => {
-  let initialState: AuthState;
-  beforeEach(() => {
-    initialState = {
-      token: null,
-      name: "",
-      email: "",
-      recovery: false,
-    };
-  });
+import { initialState } from "./authentificateReducer";
 
+const FILLED_STATE: AuthState = {
+  token: "someToken",
+  name: "John",
+  email: "john@example.com",
+  recovery: true,
+};
+
+describe("authentication reducer", () => {
   it("setToken: correct", () => {
     const newState = reducer(initialState, setToken("newToken"));
     expect(newState.token).toEqual("newToken");
   });
+
   it("setUser: correct", () => {
     const userPayload = { name: "John Doe", email: "john.doe@example.com" };
     const newState = reducer(initialState, setUser(userPayload));
     expect(newState.name).toEqual(userPayload.name);
     expect(newState.email).toEqual(userPayload.email);
   });
+
   it("requestRecovery: correct", () => {
     const newState = reducer(initialState, requestRecovery());
     expect(newState.recovery).toEqual(true);
   });
+
   it("logoutSuccess: correct", () => {
-    const filledState: AuthState = {
-      token: "someToken",
-      name: "John",
-      email: "john@example.com",
-      recovery: true,
-    };
-    const newState = reducer(filledState, logoutSuccess());
+    const newState = reducer(FILLED_STATE, logoutSuccess());
     expect(newState).toEqual(initialState);
   });
 });

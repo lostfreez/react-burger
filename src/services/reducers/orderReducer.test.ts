@@ -3,29 +3,25 @@ import reducer, {
   createOrderPending,
   createOrderFulfilled,
   createOrderRejected,
+  initialState,
 } from "../../services/reducers/orderReducer";
 import { OrderState } from "../../services/types/types";
 
+const TEST_PAYLOAD = {
+  number: 1234,
+  name: "Test Order",
+};
+
 describe("order reducer", () => {
-  let initialState: OrderState;
-
-  beforeEach(() => {
-    initialState = {
-      orderName: "",
-      orderNumber: 0,
-      orderFailed: false,
-      isLoading: false,
-    };
-  });
-
   it("clearOrder : correct", () => {
-    const State: OrderState = {
-      orderName: "Test Order",
-      orderNumber: 1234,
+    const stateBeforeClear: OrderState = {
+      ...initialState,
+      orderName: TEST_PAYLOAD.name,
+      orderNumber: TEST_PAYLOAD.number,
       orderFailed: true,
       isLoading: true,
     };
-    const newState = reducer(State, clearOrder());
+    const newState = reducer(stateBeforeClear, clearOrder());
     expect(newState).toEqual(initialState);
   });
 
@@ -36,14 +32,10 @@ describe("order reducer", () => {
   });
 
   it("createOrderFulfilled : correct", () => {
-    const testPayload = {
-      number: 1234,
-      name: "Test Order",
-    };
-    const newState = reducer(initialState, createOrderFulfilled(testPayload));
+    const newState = reducer(initialState, createOrderFulfilled(TEST_PAYLOAD));
     expect(newState.isLoading).toEqual(false);
-    expect(newState.orderName).toEqual(testPayload.name);
-    expect(newState.orderNumber).toEqual(testPayload.number);
+    expect(newState.orderName).toEqual(TEST_PAYLOAD.name);
+    expect(newState.orderNumber).toEqual(TEST_PAYLOAD.number);
     expect(newState.orderFailed).toEqual(false);
   });
 

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { OrderView } from "../types/types";
 import { Order } from "../types/types";
 
-const initialState: OrderView = {
+export const initialState: OrderView = {
     ingredients: [],
     _id: null,
     status: null,
