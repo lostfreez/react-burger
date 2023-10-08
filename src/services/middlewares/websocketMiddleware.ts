@@ -1,32 +1,28 @@
 import { Middleware } from "redux";
-import {
-  wsError,
-  setOrders,
-  closeWebSocket,
-  initWebSocket,
-} from "../reducers/feedReducer";
+import { WSMiddlewareConfig } from "../types/types";
 
 let ws: WebSocket | null = null;
 
-export const websocketMiddleware: Middleware =
-  (store) => (next) => (action) => {
+export const createWebsocketMiddleware = (
+  config: WSMiddlewareConfig
+): Middleware => {
+  return (store) => (next) => (action) => {
     switch (action.type) {
-      case initWebSocket.type: {
+      case config.initActionType: {
         const { url } = action.payload;
 
         ws = new WebSocket(url);
 
         ws.onmessage = (event) => {
           const data = JSON.parse(event.data);
-          if (data.success) {
-            store.dispatch(setOrders(data));
-          } else {
-            store.dispatch(wsError(data.message));
-          }
+          store.dispatch({ type: config.onMessageActionType, payload: data });
         };
 
         ws.onerror = () => {
-          store.dispatch(wsError("WebSocket error"));
+          store.dispatch({
+            type: config.onErrorActionType,
+            payload: "WebSocket error",
+          });
         };
 
         ws.onclose = (event) => {
@@ -39,7 +35,7 @@ export const websocketMiddleware: Middleware =
         };
         break;
       }
-      case closeWebSocket.type: {
+      case config.closeActionType: {
         if (ws) {
           ws.close();
         }
@@ -50,3 +46,4 @@ export const websocketMiddleware: Middleware =
     }
     return next(action);
   };
+};

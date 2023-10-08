@@ -98,3 +98,9 @@ export interface FeedState {
   isWebSocketInitialized: boolean;
   connection: boolean;
 }
+export type WSMiddlewareConfig = {
+  initActionType: string;
+  closeActionType: string;
+  onMessageActionType: string;
+  onErrorActionType: string;
+}

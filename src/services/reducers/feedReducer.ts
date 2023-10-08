@@ -29,7 +29,7 @@ const feedReducer = createSlice({
     wsError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    clearFeed: (state) => {
+    clearFeed: () => {
       return initialState;
     },
   },
