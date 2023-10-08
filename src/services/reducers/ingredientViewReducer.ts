@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ingredientView } from "../types/types";
 
-const initialState: ingredientView = {
+export const initialState: ingredientView = {
   _id: null,
   name: null,
   type: null,

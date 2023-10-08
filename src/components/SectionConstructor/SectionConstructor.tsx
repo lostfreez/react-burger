@@ -68,13 +68,13 @@ const SectionConstructor: React.FC = () => {
   return (
     <div className={`${styles.section} ${dropHighlight}`} ref={ref}>
       {!hasBaseSelected ? (
-        <span className={`${styles.spanElement} text text_type_main-medium`}>
+        <div className={`${styles.spanElement} text text_type_main-medium`}>
           Выберите основу для бургера
-        </span>
+        </div>
       ) : (
         baseElement && (
           <div className={styles.uplist}>
-            <div>
+            <div className={styles.bun}>
               <ConstructorElement
                 type="top"
                 isLocked={true}
@@ -105,7 +105,7 @@ const SectionConstructor: React.FC = () => {
                 ))}
             </div>
             {baseElement && (
-              <div>
+              <div className={styles.bun}>
                 <ConstructorElement
                   type="bottom"
                   isLocked={true}

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CountState } from '../types/types';
 
-const initialState: CountState = {
+export const initialState: CountState = {
   ingredients: {},
   bun: null,
 };

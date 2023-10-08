@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FeedState } from "../types/types";
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
   orders: [],
   total: 0,
   totalToday: 0,
@@ -14,16 +14,12 @@ const feedReducer = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    initWebSocket: (state) => {
-      state.isWebSocketInitialized = true;
-    },
-    initWebSocketPrivate: (state) => {
+    initWebSocket: (state, action: PayloadAction<{ url: string }>) => {
       state.isWebSocketInitialized = true;
     },
     closeWebSocket: (state) => {
       state.isWebSocketInitialized = false;
     },
-    disconnectWebSocket: () => {},
     setOrders: (state, action: PayloadAction<FeedState>) => {
       state.orders = action.payload.orders;
       state.total = action.payload.total;
@@ -33,7 +29,7 @@ const feedReducer = createSlice({
     wsError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    clearFeed: (state) => {
+    clearFeed: () => {
       return initialState;
     },
   },
@@ -44,9 +40,7 @@ export const {
   wsError,
   initWebSocket,
   closeWebSocket,
-  initWebSocketPrivate,
   clearFeed,
-  disconnectWebSocket,
 } = feedReducer.actions;
 
 export default feedReducer.reducer;

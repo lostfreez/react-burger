@@ -3,22 +3,26 @@ import styles from "./MyOrder.module.css";
 import React from "react";
 import {
   closeWebSocket,
-  initWebSocketPrivate,
   clearFeed,
+  initWebSocket,
 } from "../../services/reducers/feedReducer";
 import Loader from "../Loader/Loader";
 import Feed from "../Feed/Feed";
 import { useAppDispatch } from "../../services/types/typedHooks";
 import { useAppSelector } from "../../services/types/typedHooks";
+import { WEBSOCKET_URL } from "../../services/urls/urls";
 
 function MyOrder() {
   const dispatch = useAppDispatch();
   const { connection, isWebSocketInitialized, orders } = useAppSelector(
     (state) => state.feed
   );
+  const token = useAppSelector((state) => state.authentificate.token);
+  const accessToken = token ? token.split(" ")[1] : null;
   React.useEffect(() => {
     if (!isWebSocketInitialized) {
-      dispatch(initWebSocketPrivate());
+      const wsUrl = `${WEBSOCKET_URL}?token=${accessToken}`;
+      dispatch(initWebSocket({ url: wsUrl }));
     }
 
     return () => {
@@ -27,7 +31,7 @@ function MyOrder() {
         dispatch(clearFeed());
       }
     };
-  }, [dispatch, isWebSocketInitialized]);
+  }, [dispatch, isWebSocketInitialized, accessToken]);
 
   if (!connection) {
     return <Loader />;

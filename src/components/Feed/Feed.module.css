@@ -33,6 +33,10 @@
 .components {
   grid-area: components;
   display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  
 }
 .status {
   grid-area: status;
@@ -70,8 +74,9 @@
   background: linear-gradient(#801ab2, #4c4cff);
   border-radius: 50%;
 }
-.components > *:not(:first-child) {
+.components > *:not(:last-child) {
   margin-left: -20px;
+  
 }
 .extraCount {
   position: absolute;

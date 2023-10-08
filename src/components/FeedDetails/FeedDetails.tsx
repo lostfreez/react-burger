@@ -1,18 +1,14 @@
 import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppSelector } from "../../services/types/typedHooks";
-import { Order } from "../../services/types/types";
 import { formatStatus } from "../../services/format/formatStatus";
 import truncateText from "../../services/format/formatText";
 import formatDate from "../../services/format/formatDate";
 import { Ingredient } from "../../services/types/types";
 import React from "react";
 
-interface Props {
-  order: Order;
-}
-
-const FeedDetails: React.FC<Props> = ({ order }) => {
+const FeedDetails: React.FC = () => {
+  const order = useAppSelector((state) => state.orderId);
   const ingredientsData = useAppSelector(
     (state) => state.getIngredients.ingredients?.data
   );
@@ -46,14 +42,14 @@ const FeedDetails: React.FC<Props> = ({ order }) => {
           #{order.number}
         </div>
         <div className="text text_type_main-medium mt-10">
-          {truncateText(order.name, 50)}
+          {order.name && truncateText(order.name, 50)}
         </div>
         <div
           className={`${styles.text} ${
             order.status === "done" ? styles.textDone : ""
           } text text_type_main-default mt-3`}
         >
-          {formatStatus(order.status)}
+          {order.status && formatStatus(order.status)}
         </div>
         <div className="text text_type_main-medium mt-15 mb-6">Состав:</div>
         <div className={`${styles.ingredients} custom-scroll`}>
@@ -80,7 +76,7 @@ const FeedDetails: React.FC<Props> = ({ order }) => {
         </div>
         <div className={styles.datePrice}>
           <div className={`${styles.date} text text_type_main-default`}>
-            {formatDate(order.updatedAt)}
+            {order.updatedAt && formatDate(order.updatedAt)}
           </div>
           <div className={styles.priceContainer}>
             <div className={`${styles.price} text text_type_digits-default`}>
@@ -94,4 +90,4 @@ const FeedDetails: React.FC<Props> = ({ order }) => {
   );
 };
 
-export default React.memo(FeedDetails);
+export default FeedDetails;

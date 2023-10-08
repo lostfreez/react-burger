@@ -3,7 +3,17 @@
   align-items: center;
   flex-direction: column;
   min-width: 720px;
+  min-height: 720px;
 }
 .order {
   min-height: 120px;
+}
+.loader{
+  background-color: transparent;
+  width: 120px;
+  height: 120px;
+  background-image: url("../../image/oval.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
 }

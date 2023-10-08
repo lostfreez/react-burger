@@ -16,6 +16,7 @@ import OrderPage from "../../pages/OrderPage";
 import MyOrder from "../MyOrder/MyOrder";
 import { useAppSelector } from "../../services/types/typedHooks";
 import { useAppDispatch } from "../../services/types/typedHooks";
+import ModalContainer from "../ModalContainer/ModalContainer";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Header />
+      <ModalContainer />
       <Routes>
         <Route path="/" element={<BurgerConstructor />} />
         <Route

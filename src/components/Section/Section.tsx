@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Section.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
-import { useSelector } from "react-redux";
 import {
   selectIngredients,
   selectBuns,
@@ -10,13 +9,14 @@ import {
   selectMains,
 } from "../../services/selectors/ingredientsSelectors";
 import { Ingredient } from "../../services/types/types";
+import { useAppSelector } from "../../services/types/typedHooks";
 
 const Section: React.FC = () => {
   const [current, setCurrent] = React.useState("one");
-  const ingredients = useSelector(selectIngredients);
-  const buns = useSelector(selectBuns);
-  const sauces = useSelector(selectSauces);
-  const mains = useSelector(selectMains);
+  const ingredients = useAppSelector(selectIngredients);
+  const buns = useAppSelector(selectBuns);
+  const sauces = useAppSelector(selectSauces);
+  const mains = useAppSelector(selectMains);
 
   React.useLayoutEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,7 +33,7 @@ const Section: React.FC = () => {
       },
       {
         root: document.getElementById("Scroll"),
-        threshold: 0.3,
+        threshold: 0.2,
       }
     );
     if (ingredients.length) {
@@ -56,7 +56,7 @@ const Section: React.FC = () => {
   const mainsRef = React.useRef(null);
   return (
     <div className={styles.section}>
-      <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
+      <p className={`${styles.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</p>
       <div className={styles.switcher}>
         <Tab
           value="one"
@@ -81,19 +81,19 @@ const Section: React.FC = () => {
         </Tab>
       </div>
       <div className={`${styles.list} custom-scroll`} id="scroll">
-        <p className="text text_type_main-medium mt-10 mb-6">Булки</p>
+        <p className={`${styles.nameCategory} text text_type_main-medium mt-10 mb-6`}>Булки</p>
         <ul ref={bunsRef} className={styles.table}>
           {buns.map((ingredient: Ingredient) => (
             <Card key={ingredient._id} ingredient={ingredient} />
           ))}
         </ul>
-        <p className="text text_type_main-medium mt-10 mb-6">Соусы</p>
+        <p className={`${styles.nameCategory} text text_type_main-medium mt-10 mb-6`}>Соусы</p>
         <ul ref={saucesRef} className={styles.table}>
           {sauces.map((ingredient: Ingredient) => (
             <Card key={ingredient._id} ingredient={ingredient} />
           ))}
         </ul>
-        <p className="text text_type_main-medium mt-10 mb-6">Начинки</p>
+        <p className={`${styles.nameCategory} text text_type_main-medium mt-10 mb-6`}>Начинки</p>
         <ul ref={mainsRef} className={styles.table}>
           {mains.map((ingredient: Ingredient) => (
             <Card key={ingredient._id} ingredient={ingredient} />

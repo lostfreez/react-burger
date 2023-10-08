@@ -6,7 +6,7 @@ type OrderFulfilledPayload = {
   name: string;
 };
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   orderName: "",
   orderNumber: 0,
   orderFailed: false,

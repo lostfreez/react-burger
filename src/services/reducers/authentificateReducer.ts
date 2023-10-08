@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState } from "../types/types";
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   token: null,
   name: "",
   email: "",

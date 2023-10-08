@@ -28,7 +28,7 @@ const Sign: React.FC = () => {
       <form onSubmit={handleSubmit} className={styles.form}>
         <Input
           type={"text"}
-          placeholder={"E-mail"}
+          placeholder={"Email"}
           name={"name"}
           errorText={"Ошибка"}
           size={"default"}

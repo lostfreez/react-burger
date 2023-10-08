@@ -80,6 +80,15 @@ export interface Order {
   updatedAt: string;
   name: string;
 }
+export interface OrderView {
+  ingredients: string[];
+  _id: string | null;
+  status: string | null;
+  number: number | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  name: string | null;
+}
 
 export interface FeedState {
   orders: Order[];
@@ -88,4 +97,10 @@ export interface FeedState {
   error: string | null;
   isWebSocketInitialized: boolean;
   connection: boolean;
+}
+export type WSMiddlewareConfig = {
+  initActionType: string;
+  closeActionType: string;
+  onMessageActionType: string;
+  onErrorActionType: string;
 }
