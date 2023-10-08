@@ -4,10 +4,9 @@ import reducer, {
   initWebSocket,
   closeWebSocket,
   clearFeed,
+  initialState,
 } from "../../services/reducers/feedReducer";
 import { Order } from "../../services/types/types";
-
-import { initialState } from "./feedReducer";
 
 const TEST_ORDER_1: Order = {
   ingredients: ["ingredient1", "ingredient2"],

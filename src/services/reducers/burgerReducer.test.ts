@@ -3,10 +3,9 @@ import reducer, {
   setBaseElement,
   setMiddleElements,
   clearBurger,
+  initialState,
 } from "../../services/reducers/burgerReducer";
 import { BaseElement, MiddleElement } from "../../services/types/types";
-
-import { initialState } from "./burgerReducer";
 
 const BASE_ELEMENT: BaseElement = {
   ingredient: {

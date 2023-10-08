@@ -3,9 +3,9 @@ import reducer, {
   incrementBun,
   decrementCount,
   clearCount,
+  initialState,
 } from "../../services/reducers/countReducer";
 
-import { initialState } from "./countReducer";
 
 describe("count reducer", () => {
   it("incrementCount + 1 + 1 = 2 : correct", () => {

@@ -3,10 +3,10 @@ import reducer, {
   setUser,
   requestRecovery,
   logoutSuccess,
+  initialState,
 } from "../../services/reducers/authentificateReducer";
 import { AuthState } from "../../services/types/types";
 
-import { initialState } from "./authentificateReducer";
 
 const FILLED_STATE: AuthState = {
   token: "someToken",
